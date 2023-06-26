@@ -4,14 +4,12 @@ namespace GameModel.Abstract
 {
     public interface IGameModel
     {
-        /// <summary>
-        /// Is the stage winning for the player
-        /// </summary>
-        /// <param name="symbols">The symbols from the Stage.</param>
-        /// <returns></returns>
-        bool HasStageWin(List<Symbol> symbols);
-        decimal CalculateWinAmount(List<Symbol> symbols, decimal stake);
+        IGameSpin Spin { get; }
 
-        void Rotate(Stage stage);
+        GameSession? CurrentSession { get; }
+
+        void StartSession(decimal balance, decimal stake);
+
+        void RotateSession();
     }
 }

@@ -3,20 +3,30 @@ using SimplifiedSlotMachine.DataModel;
 
 namespace SimplifiedSlotMachine.GameModel
 {
+    /// <summary>
+    /// Responsible class for the game model based on session with stages.
+    /// </summary>
     public class SimplifiedGameModel: IGameModel
     {
         public const int Rotate_Spin_Per_Session = 4;
 
         public List<Symbol> Symbols { get; private set; }
-        protected IGameSpin Spin { get; set; }
+        public GameSession? CurrentSession { get; protected set; }
+        public List<Stage>? SessionStages {  get; protected set; }
+        public int SessionSize { get; protected set; }
+        public IGameSpin Spin { get; protected set; }
 
         public SimplifiedGameModel(IGameSpin spin) {
-            Initialize();
+            SessionSize = Rotate_Spin_Per_Session;
             Spin = spin;
-            Spin.AvailableSymbols = this.Symbols;
+
+            InitializeSymbols();
+
+            CurrentSession = null;
+            SessionStages = null;
         }
 
-        protected void Initialize()
+        protected void InitializeSymbols()
         {
             Symbols = new List<Symbol>()
             {
@@ -25,55 +35,41 @@ namespace SimplifiedSlotMachine.GameModel
                 new Symbol("Pineapple", "P", 0.8M, 0.15M ),
                 new Symbol( "Wildcard", "*", 0, 0.05M, true)
             };
+            Spin.AvailableSymbols = Symbols;
         }
 
-        /// <summary>
-        /// Is the stage winning for the player
-        /// </summary>
-        /// <param name="symbols">The symbols from the Stage.</param>
-        /// <returns></returns>
-        public bool HasStageWin(List<Symbol> symbols)
-        {
-            if (symbols == null || symbols.Count == 0) return false;
-            var firstSymbol = symbols.First();
-            return symbols.All(s => s.Letter == firstSymbol.Letter || s.IsWildcard);
+        public void StartSession(decimal balance, decimal stake) {
+            CurrentSession = new GameSession(balance, stake);
+            CurrentSession.EndBalance = balance - stake;
+            SessionStages = new List<Stage>(SessionSize);
         }
 
-        public decimal CalculateWinAmount(List<Symbol> symbols, decimal stake)
+        public void RotateSession()
         {
-            if (HasStageWin(symbols))
-            {
-                var sumCoefficients = symbols.Sum(s => s.Coefficient);
-                return stake * sumCoefficients;
-            }
-            return 0M;
-        }
+            if (CurrentSession == null)
+                throw new GameException("Session not initialized");
 
-        public void Rotate(Stage stage)
-        {
-            var result = Spin.Rotate(3);
-            stage.SpinResult = result;
-        }
-
-        public List<Stage> RotateMultiple(Stage firstStage, int count = Rotate_Spin_Per_Session)
-        {
             var model = new SimplifiedGameStageModel(this);
-            var result = new List<Stage>();
 
-            var stage = firstStage;
             int i = 0;
             do
             {
-                model.Rotate(stage);
-                model.RecalculateStage(stage);
-                result.Add(stage);
-
-                // Next stage generated.
-                stage = model.NextStart(stage);
+                decimal stake = CurrentSession.Stake;
+                var stage = RotateStage(model, stake);
+                SessionStages.Add(stage);
+                CurrentSession.WinAmount += stage.WinAmount;
+                CurrentSession.EndBalance += stage.WinAmount;
+                
                 i++;
-            } while (i < count);
+            } while (i < SessionSize);
+        }
 
-            return result;
+        protected Stage RotateStage(SimplifiedGameStageModel model, decimal stake)
+        {
+            var stage = new Stage(stake);
+            model.Rotate(stage);
+            model.RecalculateStage(stage);
+            return stage;
         }
     }
 }
