@@ -28,7 +28,7 @@ namespace SimplifiedSlotMachine.Console
         public decimal EnterStake(decimal currentBalance)
         {
             decimal stake = 0;
-            while (stake > 0)
+            while (stake <= 0)
             {
                 System.Console.WriteLine("Enter stake amount:");
                 var enteredStake = System.Console.ReadLine();
@@ -47,20 +47,21 @@ namespace SimplifiedSlotMachine.Console
             foreach(var stage in stages)
             {
                 var symbols = stage.SpinResult;
+                if (symbols == null) continue;
                 foreach(var symbol in symbols)
                 {
                     System.Console.Write(symbol.Letter);
                 }
-
+                System.Console.WriteLine();
             }
         }
 
-        public void PrintTotals(IGameStageModel stageModel, List<Stage> stages)
+        public void PrintTotals(IGameModel gameModel, List<Stage> stages)
         {
-            var won = stages.Sum(s => s.WinAmount);
+            var won = gameModel?.CurrentSession?.WinAmount;
             System.Console.WriteLine($"You have won: {won}");
 
-            var balance = stages.Last().EndBalance;
+            var balance = gameModel?.CurrentSession?.EndBalance;
             System.Console.WriteLine($"Current balance is: {balance}");
         }
 

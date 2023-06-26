@@ -16,14 +16,14 @@ var game = new SimplifiedGameModel(spin);
 while (currentBalance >= 0)
 {
     decimal stake = ui.EnterStake(currentBalance);
-    var stageModel = new SimplifiedGameStageModel(game);
-    var firstStage = stageModel.Start(currentBalance, stake);
-    var results = game.RotateMultiple(firstStage);
+    game?.StartSession(currentBalance, stake);
+    game?.RotateSession();
+    var results = game?.SessionStages ?? new List<SimplifiedSlotMachine.DataModel.Stage>();
 
     ui.PrintStage(results);
-    ui.PrintTotals(stageModel, results);
+    ui.PrintTotals(game, results);
 
-    currentBalance = results.Last().EndBalance;
+    currentBalance = game?.CurrentSession?.EndBalance ?? 0;
 }
 
 Console.WriteLine("End of the game!");

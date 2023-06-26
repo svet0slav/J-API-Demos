@@ -2,7 +2,6 @@
 using Moq;
 using SimplifiedSlotMachine.DataModel;
 using SimplifiedSlotMachine.GameModel;
-using System.Collections.Generic;
 
 namespace SimplifiedSlotMachine.UnitTests
 {
@@ -22,7 +21,7 @@ namespace SimplifiedSlotMachine.UnitTests
         [TestMethod]
         public void HasStageWin_NoSymbols_False()
         {
-            List<Symbol> symbols = null;
+            List<Symbol>? symbols = null;
             Assert.IsFalse(stageModel.HasStageWin(symbols));
 
             List<Symbol> symbols2 = new List<Symbol>();

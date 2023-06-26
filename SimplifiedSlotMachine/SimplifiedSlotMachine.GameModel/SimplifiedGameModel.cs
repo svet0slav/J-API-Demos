@@ -56,7 +56,7 @@ namespace SimplifiedSlotMachine.GameModel
             {
                 decimal stake = CurrentSession.Stake;
                 var stage = RotateStage(model, stake);
-                SessionStages.Add(stage);
+                SessionStages?.Add(stage);
                 CurrentSession.WinAmount += stage.WinAmount;
                 CurrentSession.EndBalance += stage.WinAmount;
                 
