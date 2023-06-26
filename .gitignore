@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/SimplifiedSlotMachine/SimplifiedSlotMachine.GameModel/obj
+/SimplifiedSlotMachine/SimplifiedSlotMachine.DataModel/obj
+/SimplifiedSlotMachine/SimplifiedSlotMachine.DataModel/bin/Debug/net6.0
+/SimplifiedSlotMachine/obj
+/SimplifiedSlotMachine/.vs/SimplifiedSlotMachine/FileContentIndex
+/SimplifiedSlotMachine/GameModel.Abstract/bin/Debug/net6.0
+/SimplifiedSlotMachine/GameModel.Abstract/obj
+/SimplifiedSlotMachine/SimplifiedSlotMachine.GameModel/bin/Debug/net6.0
