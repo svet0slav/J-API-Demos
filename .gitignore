@@ -11,3 +11,5 @@
 /SimplifiedSlotMachine/GameModel.Abstract/obj
 /SimplifiedSlotMachine/SimplifiedSlotMachine.GameModel/bin/Debug/net6.0
 /.vs/J-API-Demos/FileContentIndex
+/SimplifiedSlotMachine.UnitTests/bin
+/SimplifiedSlotMachine.UnitTests/obj

@@ -16,7 +16,7 @@ namespace SimplifiedSlotMachine.GameModel
             var result = new Stage(balance);
             result.Stake = stake;
             result.WinAmount = 0;
-            result.EndBalance = balance + stake;
+            result.EndBalance = balance - stake;
             result.SpinResult = null;
             return result;
         }
@@ -37,7 +37,7 @@ namespace SimplifiedSlotMachine.GameModel
                 throw new GameException("No initialized stage");
             };
             if (stage.SpinResult == null) {
-                throw new GameException("Not prepared ");       // TODO: May show exception.
+                throw new GameException("Not prepared");       // TODO: May show exception.
             }
 
             try
@@ -48,7 +48,7 @@ namespace SimplifiedSlotMachine.GameModel
             }
             catch (Exception e)
             {
-                throw new GameException("Calculation problem ", e);
+                throw new GameException("Calculation problem", e);
             }
         }
 

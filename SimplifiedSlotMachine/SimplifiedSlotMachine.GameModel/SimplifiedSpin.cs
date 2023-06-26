@@ -9,6 +9,17 @@ namespace SimplifiedSlotMachine.GameModel
 
         public List<Symbol> AvailableSymbols {  get; set; }
 
+        public SimplifiedSpin()
+        {
+            AvailableSymbols = new List<Symbol>();
+            // To rely on random numbers, must rotate random generator first.
+            var rotateSpin = 10 + DateTime.Now.Second;
+            for (int i = 0; i < rotateSpin; i++)
+            {
+                random.Next(0, 100);
+            }
+        }
+
         public SimplifiedSpin(List<Symbol> availableSymbols) {
             AvailableSymbols = availableSymbols;
 

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplifiedSlotMachine.GameM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameModel.Abstract", "GameModel.Abstract\GameModel.Abstract.csproj", "{061E214F-0EA6-4AEE-ACD3-384D50AA6B05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplifiedSlotMachine.UnitTests", "..\SimplifiedSlotMachine.UnitTests\SimplifiedSlotMachine.UnitTests.csproj", "{C900E6B8-C46D-476B-94E7-C46CAC48CC7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{061E214F-0EA6-4AEE-ACD3-384D50AA6B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{061E214F-0EA6-4AEE-ACD3-384D50AA6B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{061E214F-0EA6-4AEE-ACD3-384D50AA6B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C900E6B8-C46D-476B-94E7-C46CAC48CC7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C900E6B8-C46D-476B-94E7-C46CAC48CC7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C900E6B8-C46D-476B-94E7-C46CAC48CC7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C900E6B8-C46D-476B-94E7-C46CAC48CC7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

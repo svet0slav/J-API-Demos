@@ -10,6 +10,7 @@ namespace SimplifiedSlotMachine.GameModel
 
         public SimplifiedGameModel(IGameSpin spin) {
             Initialize();
+            Spin = spin;
         }
 
         protected void Initialize()
