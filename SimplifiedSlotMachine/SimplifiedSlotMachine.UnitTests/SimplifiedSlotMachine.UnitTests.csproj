@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimplifiedSlotMachine\SimplifiedSlotMachine.DataModel\SimplifiedSlotMachine.DataModel.csproj" />
-    <ProjectReference Include="..\SimplifiedSlotMachine\SimplifiedSlotMachine.GameModel\SimplifiedSlotMachine.GameModel.csproj" />
+    <ProjectReference Include="..\SimplifiedSlotMachine.DataModel\SimplifiedSlotMachine.DataModel.csproj" />
+    <ProjectReference Include="..\SimplifiedSlotMachine.GameModel\SimplifiedSlotMachine.GameModel.csproj" />
   </ItemGroup>
 
 </Project>
