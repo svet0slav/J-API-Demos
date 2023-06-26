@@ -33,9 +33,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
             };
             Assert.IsFalse(stageModel.HasStageWin(symbols));
         }
@@ -45,9 +45,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true)
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true)
             };
             Assert.IsFalse(stageModel.HasStageWin(symbols));
         }
@@ -57,9 +57,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
             };
             Assert.IsTrue(stageModel.HasStageWin(symbols));
         }
@@ -69,9 +69,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true)
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true)
             };
             Assert.IsTrue(stageModel.HasStageWin(symbols));
         }
@@ -81,9 +81,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
             };
             Assert.IsTrue(stageModel.HasStageWin(symbols));
         }
@@ -93,9 +93,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true),
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
             };
             Assert.IsTrue(stageModel.HasStageWin(symbols));
         }
@@ -105,9 +105,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-               new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-               new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-               new Symbol("Pineapple", "P", 0.8M, 0.15M ),
+               new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+               new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+               new Symbol("Pineapple", "P", 0.8M, 0.15 ),
             };
             Assert.IsTrue(stageModel.HasStageWin(symbols));
         }
@@ -117,9 +117,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
             };
             Assert.IsTrue(stageModel.HasStageWin(symbols));
         }
@@ -138,9 +138,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
             };
             var actual = stageModel.CalculateWinAmount(symbols, 0M);
             Assert.AreEqual(0M, actual);
@@ -151,9 +151,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Banana", "B", 0.8M, 0.15M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
+                new Symbol("Banana", "B", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
             };
             var actual = stageModel.CalculateWinAmount(symbols, 9M);
             Assert.AreEqual(0M, actual);
@@ -164,9 +164,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
             };
             var actual = stageModel.CalculateWinAmount(symbols, 10M);
             Assert.AreEqual(12M, actual);
@@ -177,9 +177,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true),
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
             };
             var actual = stageModel.CalculateWinAmount(symbols, 10M);
             Assert.AreEqual(12M, actual);
@@ -190,9 +190,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
             };
             var actual = stageModel.CalculateWinAmount(symbols, 10M);
             Assert.AreEqual(24M, actual);
@@ -203,9 +203,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             List<Symbol> symbols = new List<Symbol>()
             {
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
             };
             var actual = stageModel.CalculateWinAmount(symbols, 10M);
             Assert.AreEqual(16M, actual);
@@ -287,9 +287,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             return new List<Symbol>()
             {
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
             };
         }
 

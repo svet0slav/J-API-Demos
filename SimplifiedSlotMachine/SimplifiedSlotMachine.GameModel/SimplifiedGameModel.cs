@@ -30,10 +30,10 @@ namespace SimplifiedSlotMachine.GameModel
         {
             Symbols = new List<Symbol>()
             {
-                new Symbol("Apple", "A", 0.4M, 0.45M ),
-                new Symbol( "Banana", "B", 0.6M, 0.35M ),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true)
+                new Symbol("Apple", "A", 0.4M, 0.45),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true)
             };
             Spin.AvailableSymbols = Symbols;
         }

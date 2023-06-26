@@ -13,7 +13,7 @@ namespace SimplifiedSlotMachine.GameModel
         {
             AvailableSymbols = new List<Symbol>();
             // To rely on random numbers, must rotate random generator first.
-            var rotateSpin = 10 + DateTime.Now.Second;
+            var rotateSpin = 5 + DateTime.Now.Second / 3;
             for (int i = 0; i < rotateSpin; i++)
             {
                 random.Next(0, 100);
@@ -24,7 +24,7 @@ namespace SimplifiedSlotMachine.GameModel
             AvailableSymbols = availableSymbols;
 
             // To rely on random numbers, must rotate random generator first.
-            var rotateSpin = 10 + DateTime.Now.Second;
+            var rotateSpin = 5 + DateTime.Now.Second / 3;
             for (int i = 0; i < rotateSpin; i++)
             {
                 random.Next(0, 100);
@@ -36,16 +36,16 @@ namespace SimplifiedSlotMachine.GameModel
             var result = new List<Symbol>();
             for (int i = 0; i < outputCount; i++)
             {
-                decimal coeff = random.Next(0, 100) / 100;
+                double randomProbability = (double)random.Next(0, 100) / (double)100;
                 Symbol? selected = null;
                 foreach (Symbol item in AvailableSymbols)
                 {
-                    if (coeff < item.Coefficient)   // Coefficient is between 0 and 99.
+                    if (randomProbability < item.Probability)   // Probability is between 0 and 99.
                     {
                         selected = item;
                         break;
                     }
-                    coeff -= item.Coefficient;
+                    randomProbability -= item.Probability;
                 }
                 if (selected != null)
                 {

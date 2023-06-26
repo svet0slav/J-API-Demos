@@ -44,9 +44,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             var resultSpin = new List<Symbol>()
             {
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true),
+                new Symbol("Pineapple", "P", 0.8M, 0.15),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
             };
             spin.Setup((s) => s.Rotate(It.IsAny<int>())).Returns(resultSpin).Verifiable();
 
@@ -66,9 +66,9 @@ namespace SimplifiedSlotMachine.UnitTests
         {
             var resultSpin = new List<Symbol>()
             {
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol("Pineapple", "P", 0.8M, 0.15M ),
-                new Symbol( "Wildcard", "*", 0, 0.05M, true),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
             };
             spin.Setup((s) => s.Rotate(It.IsAny<int>())).Returns(resultSpin).Verifiable();
 
