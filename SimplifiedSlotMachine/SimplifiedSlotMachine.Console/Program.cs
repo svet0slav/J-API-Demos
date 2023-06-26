@@ -13,7 +13,7 @@ decimal currentBalance = initialBalance;
 var spin = new SimplifiedSpin();
 var game = new SimplifiedGameModel(spin);
 
-while (currentBalance >= 0)
+while (currentBalance > 0)
 {
     decimal stake = ui.EnterStake(currentBalance);
     game?.StartSession(currentBalance, stake);
@@ -26,5 +26,5 @@ while (currentBalance >= 0)
     currentBalance = game?.CurrentSession?.EndBalance ?? 0;
 }
 
-Console.WriteLine("End of the game!");
+Console.WriteLine("No money left! End of the game!");
 Console.ReadKey();
