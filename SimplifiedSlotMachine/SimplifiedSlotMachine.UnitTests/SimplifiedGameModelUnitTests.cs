@@ -32,12 +32,29 @@ namespace SimplifiedSlotMachine.UnitTests
             gameModel.StartSession(balance, stake);
 
             Assert.IsNotNull(gameModel.CurrentSession);
+            Assert.IsNotNull(gameModel.SessionStages);
+            Assert.IsTrue(gameModel.SessionSize > 0);
             Assert.AreEqual(balance, gameModel.CurrentSession.BeginBalance);
             Assert.AreEqual(stake, gameModel.CurrentSession.Stake);
             Assert.AreEqual(0M, gameModel.CurrentSession.WinAmount);
             Assert.AreEqual(balance - stake, gameModel.CurrentSession.EndBalance);
         }
 
+        [TestMethod, ExpectedException(typeof(GameException))]
+        public void Rotate_NoStart_ThrowsException()
+        {
+            var resultSpin = new List<Symbol>()
+            {
+                new Symbol("Pineapple", "P", 0.8M, 0.15),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true),
+            };
+            spin.Setup((s) => s.Rotate(It.IsAny<int>())).Returns(resultSpin).Verifiable();
+
+            // Skip gameModel.StartSession(20M, 10M);
+            gameModel.RotateSession();
+            spin.Verify(s => s.Rotate(It.IsAny<int>()), Times.Never);
+        }
 
         [TestMethod]
         public void Rotate_CallsSpinRotate_CallsSpinRotate()

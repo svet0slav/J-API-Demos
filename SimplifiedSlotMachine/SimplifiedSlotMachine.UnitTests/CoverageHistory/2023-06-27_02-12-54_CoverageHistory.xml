@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2023-06-27_02-12-54" tag="">
+  <assembly name="GameModel.Abstract" />
+  <assembly name="SimplifiedSlotMachine.DataModel">
+    <class name="SimplifiedSlotMachine.DataModel.GameException" coveredlines="2" coverablelines="2" totallines="17" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="SimplifiedSlotMachine.DataModel.GameSession" coveredlines="12" coverablelines="12" totallines="20" coveredbranches="0" totalbranches="0" coveredcodeelements="6" totalcodeelements="6" />
+    <class name="SimplifiedSlotMachine.DataModel.Stage" coveredlines="7" coverablelines="7" totallines="14" coveredbranches="0" totalbranches="0" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="SimplifiedSlotMachine.DataModel.Symbol" coveredlines="13" coverablelines="13" totallines="20" coveredbranches="0" totalbranches="0" coveredcodeelements="6" totalcodeelements="6" />
+  </assembly>
+  <assembly name="SimplifiedSlotMachine.GameModel">
+    <class name="SimplifiedSlotMachine.GameModel.SimplifiedGameModel" coveredlines="46" coverablelines="47" totallines="75" coveredbranches="4" totalbranches="6" coveredcodeelements="10" totalcodeelements="10" />
+    <class name="SimplifiedSlotMachine.GameModel.SimplifiedGameStageModel" coveredlines="43" coverablelines="43" totallines="83" coveredbranches="14" totalbranches="14" coveredcodeelements="7" totalcodeelements="7" />
+    <class name="SimplifiedSlotMachine.GameModel.SimplifiedSpin" coveredlines="40" coverablelines="43" totallines="68" coveredbranches="11" totalbranches="12" coveredcodeelements="4" totalcodeelements="4" />
+  </assembly>
+</coverage>

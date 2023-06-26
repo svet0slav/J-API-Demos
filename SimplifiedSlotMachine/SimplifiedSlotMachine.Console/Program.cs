@@ -11,17 +11,16 @@ decimal initialBalance = ui.EnterBalance();
 decimal currentBalance = initialBalance;
 
 var spin = new SimplifiedSpin();
-var game = new SimplifiedGameModel(spin);
 
 while (currentBalance > 0)
 {
+    var game = new SimplifiedGameModel(spin);
     decimal stake = ui.EnterStake(currentBalance);
-    game?.StartSession(currentBalance, stake);
-    game?.RotateSession();
-    var results = game?.SessionStages ?? new List<SimplifiedSlotMachine.DataModel.Stage>();
+    game.StartSession(currentBalance, stake);
+    game.RotateSession();
 
-    ui.PrintStage(results);
-    ui.PrintTotals(game, results);
+    ui.PrintStage(game.SessionStages);
+    ui.PrintTotals(game, game.SessionStages);
 
     currentBalance = game?.CurrentSession?.EndBalance ?? 0;
 }

@@ -20,22 +20,22 @@ namespace SimplifiedSlotMachine.GameModel
             SessionSize = Rotate_Spin_Per_Session;
             Spin = spin;
 
-            InitializeSymbols();
+            Symbols = InitializeSymbols();
+            Spin.AvailableSymbols = Symbols;
 
             CurrentSession = null;
             SessionStages = null;
         }
 
-        protected void InitializeSymbols()
+        protected List<Symbol> InitializeSymbols()
         {
-            Symbols = new List<Symbol>()
+            return new List<Symbol>()
             {
                 new Symbol("Apple", "A", 0.4M, 0.45),
                 new Symbol( "Banana", "B", 0.6M, 0.35 ),
                 new Symbol("Pineapple", "P", 0.8M, 0.15 ),
                 new Symbol( "Wildcard", "*", 0, 0.05, true)
             };
-            Spin.AvailableSymbols = Symbols;
         }
 
         public void StartSession(decimal balance, decimal stake) {
