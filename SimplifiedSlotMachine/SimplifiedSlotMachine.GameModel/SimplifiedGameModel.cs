@@ -5,12 +5,15 @@ namespace SimplifiedSlotMachine.GameModel
 {
     public class SimplifiedGameModel: IGameModel
     {
+        public const int Rotate_Spin_Per_Session = 4;
+
         public List<Symbol> Symbols { get; private set; }
         protected IGameSpin Spin { get; set; }
 
         public SimplifiedGameModel(IGameSpin spin) {
             Initialize();
             Spin = spin;
+            Spin.AvailableSymbols = this.Symbols;
         }
 
         protected void Initialize()
@@ -46,10 +49,31 @@ namespace SimplifiedSlotMachine.GameModel
             return 0M;
         }
 
-        public virtual void Rotate(Stage stage)
+        public void Rotate(Stage stage)
         {
             var result = Spin.Rotate(3);
             stage.SpinResult = result;
+        }
+
+        public List<Stage> RotateMultiple(Stage firstStage, int count = Rotate_Spin_Per_Session)
+        {
+            var model = new SimplifiedGameStageModel(this);
+            var result = new List<Stage>();
+
+            var stage = firstStage;
+            int i = 0;
+            do
+            {
+                model.Rotate(stage);
+                model.RecalculateStage(stage);
+                result.Add(stage);
+
+                // Next stage generated.
+                stage = model.NextStart(stage);
+                i++;
+            } while (i < count);
+
+            return result;
         }
     }
 }

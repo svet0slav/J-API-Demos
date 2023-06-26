@@ -3,11 +3,12 @@ using SimplifiedSlotMachine.DataModel;
 
 namespace SimplifiedSlotMachine.GameModel
 {
-    public class SimplifiedGameStageModel: IGameStageModel
+    public class SimplifiedGameStageModel : IGameStageModel
     {
         protected IGameModel Model { get; private set; }
 
-        public SimplifiedGameStageModel(IGameModel model) { 
+        public SimplifiedGameStageModel(IGameModel model)
+        {
             Model = model;
         }
 
@@ -17,6 +18,15 @@ namespace SimplifiedSlotMachine.GameModel
             result.Stake = stake;
             result.WinAmount = 0;
             result.EndBalance = balance - stake;
+            result.SpinResult = null;
+            return result;
+        }
+
+        public Stage NextStart(Stage stage)
+        {
+            var result = Start(stage.EndBalance, stage.Stake);
+            result.WinAmount = 0;
+            result.EndBalance = stage.EndBalance - stage.Stake;
             result.SpinResult = null;
             return result;
         }
@@ -36,7 +46,8 @@ namespace SimplifiedSlotMachine.GameModel
             {
                 throw new GameException("No initialized stage");
             };
-            if (stage.SpinResult == null) {
+            if (stage.SpinResult == null)
+            {
                 throw new GameException("Not prepared");       // TODO: May show exception.
             }
 
