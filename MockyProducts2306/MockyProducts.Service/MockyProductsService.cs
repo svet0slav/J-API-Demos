@@ -1,23 +1,28 @@
 ﻿using MockyProducts.Repository.Data;
 using MockyProducts.Repository.Readers;
 using MockyProducts.Repository.Requests;
+using MockyProducts.Service.Filters;
 using MockyProducts.Service.Mappers;
 using MockyProducts.Shared.Dto;
 using MockyProducts.Shared.ServiceRequests;
+using MockyProducts.Shared.Services;
 
 namespace MockyProducts.Service
 {
-    public class MockyProductsService
+    public class MockyProductsService : IMockyProductsService
     {
         protected IMockyJsonReader _reader;
+        protected IProductServiceFilter _filter;
 
-        public MockyProductsService(IMockyJsonReader reader) {
+        public MockyProductsService(IMockyJsonReader reader, IProductServiceFilter filter)
+        {
             _reader = reader;
+            _filter = filter;
         }
 
-        public async Task<ProductsDto> GetProducts(ProductServiceFilterRequest? filterRequest) 
+        public async Task<ProductsDto> GetProducts(ProductServiceFilterRequest? filterRequest)
         {
-            if (filterRequest == null) 
+            if (filterRequest == null)
                 throw new ArgumentNullException(nameof(filterRequest));
 
             MockyRawDataParams param = new MockyRawDataParams();
@@ -34,46 +39,26 @@ namespace MockyProducts.Service
 
             IEnumerable<Product> filteredData = rawData.Products;
 
-            if (!filterRequest.MinPrice.HasValue && !filterRequest.MaxPrice.HasValue
-                && string.IsNullOrEmpty(filterRequest.Size)
-                && filterRequest.Highlight?.Count == 0)
-            {
-                // Yes, leave all.
-            } else
-            {
-                // Filter step by step.
-                if (filterRequest.MinPrice.HasValue && filterRequest.MaxPrice.HasValue)
-                {
-                    filteredData = filteredData.Where(p => p.Price >= filterRequest.MinPrice.Value && p.Price <= filterRequest.MaxPrice.Value);
-                }
-                else if (filterRequest.MinPrice.HasValue)
-                {
-                    filteredData = filteredData.Where(p => p.Price >= filterRequest.MinPrice.Value);
-                }
-                else if (filterRequest.MaxPrice.HasValue)
-                {
-                    filteredData = filteredData.Where(p => p.Price <= filterRequest.MaxPrice.Value);
-                }
-
-                if (!string.IsNullOrEmpty(filterRequest.Size))
-                {
-                    filteredData = filteredData.Where(p => p.Sizes != null && p.Sizes.Contains(filterRequest.Size));
-                }
-            }
-
+            filteredData = _filter.Filter(filteredData);
+            
             result.Products.AddRange(filteredData.Select(product => product.ConvertToDto()));
+
+
 
             return result;
         }
 
-        public ProductsDto HighlightWords(ProductsDto data, ProductServiceFilterRequest? filterRequest)
+        public ProductsDto HighlightWords(ProductsDto? data, ProductServiceFilterRequest? filterRequest)
         {
+            if (data == null) throw new ArgumentNullException("data");
+
             if (filterRequest == null || filterRequest.Highlight?.Count == 0)
                 return data;
 
             List<string> highlight = filterRequest.Highlight ?? new List<string>();
 
-            data.Products.ForEach(product =>
+            // TODO: In case of large list, consider async processing.
+            data.Products?.ForEach(product =>
                 {
                     highlight.ForEach(word =>
                         {
