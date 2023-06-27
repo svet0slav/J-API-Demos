@@ -21,3 +21,10 @@
 /SimplifiedSlotMachine/SimplifiedSlotMachine.Console/obj
 /MockyProducts2306/obj
 /MockyProducts2306/bin/Debug/net6.0
+/MockyProducts2306/MockyProducts.Common/obj
+/MockyProducts2306/MockyProducts.Common/bin/Debug/net6.0
+/MockyProducts2306/MockyProducts.Repository/bin/Debug/net6.0
+/MockyProducts2306/MockyProducts.Repository/obj
+/MockyProducts2306/MockyProducts.Shared/obj
+/MockyProducts2306/MockyProducts.Shared/bin/Debug/net6.0
+/MockyProducts2306/MockyProducts.Service/obj
