@@ -9,8 +9,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MockyProducts.Common\MockyProducts.Common.csproj" />
+    <ProjectReference Include="..\MockyProducts.Service\MockyProducts.Service.csproj" />
+    <ProjectReference Include="..\MockyProducts.Shared\MockyProducts.Shared.csproj" />
   </ItemGroup>
 
 </Project>
