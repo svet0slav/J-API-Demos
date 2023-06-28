@@ -13,7 +13,8 @@ namespace MockyProducts.Service.Mappers
                 Title = product.Title,
                 Description = product.Description,
                 Price = product.Price,
-                Sizes = product.Sizes,
+                // Make it a copy to not update the original list later.
+                Sizes = product.Sizes == null ? null : new List<string>(product.Sizes),
             };
         }
     }
