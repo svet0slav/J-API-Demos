@@ -20,12 +20,12 @@
 
   <ItemGroup>
     <Folder Include="Api\" />
-    <Folder Include="Service\" />
     <Folder Include="Shared\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MockyProducts.Repository\MockyProducts.Repository.csproj" />
+    <ProjectReference Include="..\MockyProducts.Service\MockyProducts.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

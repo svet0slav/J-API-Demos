@@ -1,17 +1,10 @@
-﻿using MockyProducts.Repository.Readers;
+﻿using Microsoft.Extensions.Logging;
+using MockyProducts.Repository.Readers;
 using MockyProducts.Shared.Settings;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using RichardSzalay.MockHttp;
-using System.Net.Http.Json;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System.Text.Json;
 using MockyProducts.UnitTests.Common;
+using Moq;
+using RichardSzalay.MockHttp;
+using System.Text.Json;
 
 namespace MockyProducts.UnitTests.Repository
 {
