@@ -5,8 +5,8 @@
     /// </summary>
     public class GetProductsRequest
     {
-        public double MinPrice { get; set; }
-        public double MaxPrice { get; set; }
+        public string? MinPrice { get; set; }
+        public string? MaxPrice { get; set; }
         public string? Size { get; set; }
         public string? Highlight { get; set; }
     }

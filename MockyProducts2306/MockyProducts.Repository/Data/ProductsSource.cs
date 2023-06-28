@@ -8,7 +8,7 @@ namespace MockyProducts.Repository.Data
         public List<Product>? Products { get; set; }
 
         [JsonPropertyName("apiKeys")]
-        public ApiKeysData ApiKeys { get; set; }
+        public ApiKeysData? ApiKeys { get; set; }
         
     }
 }
