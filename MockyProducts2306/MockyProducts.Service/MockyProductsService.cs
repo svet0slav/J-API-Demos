@@ -3,6 +3,7 @@ using MockyProducts.Repository.Readers;
 using MockyProducts.Repository.Requests;
 using MockyProducts.Service.Filters;
 using MockyProducts.Service.Mappers;
+using MockyProducts.Service.Processors;
 using MockyProducts.Shared.Dto;
 using MockyProducts.Shared.ServiceRequests;
 using MockyProducts.Shared.Services;
@@ -13,11 +14,13 @@ namespace MockyProducts.Service
     {
         protected IMockyJsonReader _reader;
         protected IProductServiceFilter _filter;
+        protected IProductsDtoProcessor _processor;
 
-        public MockyProductsService(IMockyJsonReader reader, IProductServiceFilter filter)
+        public MockyProductsService(IMockyJsonReader reader, IProductServiceFilter filter, IProductsDtoProcessor processor)
         {
             _reader = reader;
             _filter = filter;
+            _processor = processor;
         }
 
         public async Task<ProductsDto> GetProducts(ProductServiceFilterRequest? filterRequest)
@@ -43,31 +46,15 @@ namespace MockyProducts.Service
             
             result.Products.AddRange(filteredData.Select(product => product.ConvertToDto()));
 
-
+            if (_processor != null && result.Products != null)
+            {
+                foreach (var product in result.Products)
+                {
+                    _processor.Process(product);
+                }
+            }
 
             return result;
-        }
-
-        public ProductsDto HighlightWords(ProductsDto? data, ProductServiceFilterRequest? filterRequest)
-        {
-            if (data == null) throw new ArgumentNullException("data");
-
-            if (filterRequest == null || filterRequest.Highlight?.Count == 0)
-                return data;
-
-            List<string> highlight = filterRequest.Highlight ?? new List<string>();
-
-            // TODO: In case of large list, consider async processing.
-            data.Products?.ForEach(product =>
-                {
-                    highlight.ForEach(word =>
-                        {
-                            if (product.Description?.Contains(word) ?? false)
-                            { product.Description = product.Description?.Replace(word, "<em>" + highlight + "</em>"); }
-                        });
-                });
-
-            return data;
         }
     }
 }
