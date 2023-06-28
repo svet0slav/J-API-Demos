@@ -24,7 +24,7 @@ namespace MockyProducts.Repository.Readers
             _logger = logger;
         }
 
-        public async Task<ProductsSource?> GetRawDataFromSource(MockyRawDataParams param)
+        public async Task<ProductsSource?> GetRawDataFromSource(MockyRawDataParams? param)
         {
             try
             {
