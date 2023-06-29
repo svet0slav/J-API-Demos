@@ -7,11 +7,6 @@ using MockyProducts.Service.Processors;
 using MockyProducts.Shared.Dto;
 using MockyProducts.Shared.ServiceRequests;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MockyProducts.UnitTests.Service
 {

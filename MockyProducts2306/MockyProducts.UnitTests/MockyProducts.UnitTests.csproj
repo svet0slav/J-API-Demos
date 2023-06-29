@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MockyProducts.Api\MockyProducts.Api.csproj" />
     <ProjectReference Include="..\MockyProducts.Repository\MockyProducts.Repository.csproj" />
     <ProjectReference Include="..\MockyProducts.Service\MockyProducts.Service.csproj" />
   </ItemGroup>

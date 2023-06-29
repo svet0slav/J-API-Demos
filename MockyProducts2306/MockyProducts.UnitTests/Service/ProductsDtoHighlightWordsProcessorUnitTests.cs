@@ -1,11 +1,5 @@
-﻿using MockyProducts.Repository.Data;
-using MockyProducts.Service.Processors;
+﻿using MockyProducts.Service.Processors;
 using MockyProducts.Shared.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MockyProducts.UnitTests.Service
 {

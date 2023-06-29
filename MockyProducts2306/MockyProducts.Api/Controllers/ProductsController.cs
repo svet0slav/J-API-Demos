@@ -5,13 +5,13 @@ using MockyProducts.Shared.ServiceRequests;
 using MockyProducts.Shared.Requests;
 using MockyProducts.Shared.ServiceRequests.Mappers;
 
-namespace MockyProducts2306.Controllers
+namespace MockyProducts.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class ProductsController : ControllerBase
     {
-        protected readonly IMockyProductsService _service;
+        private readonly IMockyProductsService _service;
 
         private readonly ILogger<ProductsController> _logger;
 
