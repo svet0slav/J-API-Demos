@@ -42,7 +42,7 @@ namespace MockyProducts.Service
 
             IEnumerable<Product> filteredData = rawData.Products;
 
-            filteredData = _filter.Filter(filteredData);
+            filteredData = _filter.Filter(filteredData, filterRequest);
             
             result.Products.AddRange(filteredData.Select(product => product.ConvertToDto()));
 

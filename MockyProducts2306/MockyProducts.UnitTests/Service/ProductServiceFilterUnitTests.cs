@@ -15,10 +15,10 @@ namespace MockyProducts.UnitTests.Service
         [TestMethod]
         public void Filter_NoRequest_NoFilter()
         {
-            var filter = new ProductServiceFilter(null);
+            var filter = new ProductServiceFilter();
             var products = GetMyProducts();
 
-            var actual = filter.Filter(products);
+            var actual = filter.Filter(products, null);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(products.Count(), actual.Count());
@@ -33,10 +33,10 @@ namespace MockyProducts.UnitTests.Service
         public void Filter_RequestPrice(double? minPrice, double? maxPrice, int result)
         {
             var request = new ProductServiceFilterRequest() { MinPrice = minPrice, MaxPrice = maxPrice };
-            var filter = new ProductServiceFilter(request);
+            var filter = new ProductServiceFilter();
             var products = GetMyProducts();
 
-            var actual = filter.Filter(products);
+            var actual = filter.Filter(products, request);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(result, actual.Count());
@@ -51,10 +51,10 @@ namespace MockyProducts.UnitTests.Service
         public void Filter_RequestSize(string? size, int result)
         {
             var request = new ProductServiceFilterRequest() { Size = size };
-            var filter = new ProductServiceFilter(request);
+            var filter = new ProductServiceFilter();
             var products = GetMyProducts();
 
-            var actual = filter.Filter(products);
+            var actual = filter.Filter(products, request);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(result, actual.Count());
@@ -69,10 +69,10 @@ namespace MockyProducts.UnitTests.Service
         public void Filter_RequestHighlight_NoFilter(string? highlight, int result)
         {
             var request = new ProductServiceFilterRequest() { Highlight = highlight?.Split(',')?.ToList() };
-            var filter = new ProductServiceFilter(request);
+            var filter = new ProductServiceFilter();
             var products = GetMyProducts();
 
-            var actual = filter.Filter(products);
+            var actual = filter.Filter(products, request);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(result, actual.Count());

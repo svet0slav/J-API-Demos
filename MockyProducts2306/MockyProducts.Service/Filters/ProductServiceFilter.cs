@@ -5,47 +5,44 @@ namespace MockyProducts.Service.Filters
 {
     public class ProductServiceFilter : IProductServiceFilter
     {
-        protected readonly ProductServiceFilterRequest? _filterRequest;
-
-        public ProductServiceFilter(ProductServiceFilterRequest? filterRequest)
+        public ProductServiceFilter()
         {
-            _filterRequest = filterRequest;
         }
 
-        public IEnumerable<Product> Filter(IEnumerable<Product> filteredData)
+        public IEnumerable<Product> Filter(IEnumerable<Product> filteredData, ProductServiceFilterRequest? filterRequest)
         {
             // Filter step by step.
-            var result = FilterByPrice(filteredData);
-            result = FilterBySize(result);
+            var result = FilterByPrice(filteredData, filterRequest);
+            result = FilterBySize(result, filterRequest);
             return result;
         }
 
-        public IEnumerable<Product> FilterByPrice(IEnumerable<Product> filteredData)
+        public IEnumerable<Product> FilterByPrice(IEnumerable<Product> filteredData, ProductServiceFilterRequest? filterRequest)
         {
-            if (_filterRequest == null) return filteredData;
-            if (_filterRequest.MinPrice.HasValue && _filterRequest.MaxPrice.HasValue)
+            if (filterRequest == null) return filteredData;
+            if (filterRequest.MinPrice.HasValue && filterRequest.MaxPrice.HasValue)
             {
-                filteredData = filteredData.Where(p => p.Price >= _filterRequest.MinPrice.Value && p.Price <= _filterRequest.MaxPrice.Value);
+                filteredData = filteredData.Where(p => p.Price >= filterRequest.MinPrice.Value && p.Price <= filterRequest.MaxPrice.Value);
             }
-            else if (_filterRequest.MinPrice.HasValue)
+            else if (filterRequest.MinPrice.HasValue)
             {
-                filteredData = filteredData.Where(p => p.Price >= _filterRequest.MinPrice.Value);
+                filteredData = filteredData.Where(p => p.Price >= filterRequest.MinPrice.Value);
             }
-            else if (_filterRequest.MaxPrice.HasValue)
+            else if (filterRequest.MaxPrice.HasValue)
             {
-                filteredData = filteredData.Where(p => p.Price <= _filterRequest.MaxPrice.Value);
+                filteredData = filteredData.Where(p => p.Price <= filterRequest.MaxPrice.Value);
             }
             return filteredData;
         }
 
-        public IEnumerable<Product> FilterBySize(IEnumerable<Product> filteredData)
+        public IEnumerable<Product> FilterBySize(IEnumerable<Product> filteredData, ProductServiceFilterRequest? filterRequest)
         {
-            if (_filterRequest == null) return filteredData;
+            if (filterRequest == null) return filteredData;
 
-            if (string.IsNullOrEmpty(_filterRequest.Size))
+            if (string.IsNullOrEmpty(filterRequest.Size))
                 return filteredData;
 
-            filteredData = filteredData.Where(p => p.Sizes != null && p.Sizes.Contains(_filterRequest.Size));
+            filteredData = filteredData.Where(p => p.Sizes != null && p.Sizes.Contains(filterRequest.Size));
             return filteredData;
         }
     }

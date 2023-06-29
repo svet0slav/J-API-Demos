@@ -42,7 +42,7 @@ namespace MockyProducts.UnitTests.Service
         public async Task Service_FilterWorks()
         {
             var myProducts = GetMyProducts();
-            _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>()))
+            _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()))
                 .Returns(new List<Product>() { myProducts.First() })
                 .Verifiable();
             var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object);
@@ -54,14 +54,14 @@ namespace MockyProducts.UnitTests.Service
             Assert.IsNotNull(actual);
             Assert.IsNotNull(actual.Products);
             Assert.AreEqual(1, actual.Products.Count);
-            _filter.Verify(f => f.Filter(It.IsAny<IEnumerable<Product>>()), Times.Once);
+            _filter.Verify(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()), Times.Once);
         }
 
         [TestMethod]
         public async Task Service_ProcessorWorks()
         {
             var myProducts = GetMyProducts();
-            _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>()))
+            _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()))
                 .Returns(myProducts)
                 .Verifiable();
             _processor.Setup(p => p.Process(It.IsAny<ProductDto>()))

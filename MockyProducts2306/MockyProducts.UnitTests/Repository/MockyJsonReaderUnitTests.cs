@@ -18,7 +18,6 @@ namespace MockyProducts.UnitTests.Repository
         private MockyJsonReader _reader;
         private MockHttpMessageHandler _mockHandler;
         private ConfigReaderSettings _settings;
-        private JsonSerializerOptions _options;
         private Mock<ILogger<MockyJsonReader>> _logger;
 
         public MockyJsonReaderUnitTests()
@@ -26,7 +25,6 @@ namespace MockyProducts.UnitTests.Repository
             _settings = FakeSettings();
             _mockHandler = new MockHttpMessageHandler();
             _logger = new Mock<ILogger<MockyJsonReader>>();
-            _options = new JsonSerializerOptions();
         }
 
         [TestInitialize]
@@ -41,7 +39,7 @@ namespace MockyProducts.UnitTests.Repository
             // Inject the handler or client into your application code
             var httpClient = _mockHandler.ToHttpClient();
 
-            _reader = new MockyJsonReader(_settings, httpClient, _options, _logger.Object);
+            _reader = new MockyJsonReader(_settings, httpClient, _logger.Object);
         }
 
         [TestMethod, ExpectedException(typeof(Exception))]
@@ -92,7 +90,7 @@ namespace MockyProducts.UnitTests.Repository
 
         private ConfigReaderSettings FakeSettings()
         {
-            return new ConfigReaderSettings() { Url = "http://localhost/mocky" };
+            return new ConfigReaderSettings() { Url = "http://localhost/mocky", TimeoutSeconds = 100 };
         }
 
         private string ReadSampleFile(string filename)
