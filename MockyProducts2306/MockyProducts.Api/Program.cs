@@ -24,6 +24,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
 
+builder.Services.AddApiVersioning();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 // Register the Swagger generator, defining 1 or more Swagger documents
@@ -31,7 +32,7 @@ builder.Services.AddEndpointsApiExplorer();
 // used from https://stackoverflow.com/questions/56859604/swagger-not-loading-failed-to-load-api-definition-fetch-error-undefined
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API MockyProducts", Version = "v1.0" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API MockyProducts", Version = "v1" });
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
 });
 
@@ -91,14 +92,13 @@ if (app.Environment.IsDevelopment())
     // used from https://stackoverflow.com/questions/56859604/swagger-not-loading-failed-to-load-api-definition-fetch-error-undefined
     app.UseSwaggerUI(c =>
     {
-        //c.SwaggerEndpoint("v1/swagger.json", "My API V1"); //originally "./swagger/v1/swagger.json"
-        c.SwaggerEndpoint("./swagger/v1/swagger.json", "My API V1");
-        c.RoutePrefix = string.Empty;
+        //c.SwaggerEndpoint("v1/swagger.json", "My API V1");
+        //c.RoutePrefix = string.Empty;
     });
     app.UseDeveloperExceptionPage();
 }
 app.ConfigureCustomExceptionMiddleware();
-
+app.UseApiVersioning();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

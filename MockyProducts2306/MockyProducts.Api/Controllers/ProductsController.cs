@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Mvc.Routing;
 namespace MockyProducts.Controllers
 {
     [ApiController]
+    [ApiVersion("1")]
     [Route("v{version:apiVersion}")]
     [Produces("application/json")]
-    [ApiVersion("1.0")]
     public class ProductsController : ControllerBase
     {
         private readonly IMockyProductsService _service;
@@ -24,9 +24,9 @@ namespace MockyProducts.Controllers
             _logger = logger;
         }
 
-        //[MapToApiVersion("1.0")]
         [HttpGet]
         [Route("filter")]
+        [MapToApiVersion("1")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         public async Task<ActionResult<ProductsDto>> GetQuery(
