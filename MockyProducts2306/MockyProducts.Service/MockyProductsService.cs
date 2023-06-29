@@ -36,7 +36,7 @@ namespace MockyProducts.Service
             // TODO: Setup additional params from the filter
             var rawData = await _reader.GetRawDataFromSource(param);
 
-            if (rawData == null || rawData.Products?.Count == 0)
+            if (rawData == null || rawData?.Products == null)
             {
                 _logger.LogInformation("No records returned");
                 return new ProductsDto();
@@ -47,9 +47,7 @@ namespace MockyProducts.Service
             var result = new ProductsDto();
             result.Products = new List<ProductDto>();
 
-            if (rawData?.Products == null) return result;
-
-            IEnumerable<Product> filteredData = rawData.Products;
+            IEnumerable<Product> filteredData = rawData?.Products;
 
             filteredData = _filter.Filter(filteredData, filterRequest);
             
@@ -59,6 +57,7 @@ namespace MockyProducts.Service
 
             if (_processor != null && result?.Products != null)
             {
+                _processor.Words = filterRequest.Highlight;
                 foreach (var product in result.Products)
                 {
                     _processor.Process(product);

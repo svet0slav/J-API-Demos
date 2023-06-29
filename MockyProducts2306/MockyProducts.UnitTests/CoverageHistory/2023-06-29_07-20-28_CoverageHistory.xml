@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2023-06-29_07-20-28" tag="">
+  <assembly name="MockyProducts.Api">
+    <class name="MockyProducts.Api.ErrorHandling.ConfigureCustomExceptionMiddlewareExtensions" coveredlines="0" coverablelines="3" totallines="10" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="1" />
+    <class name="MockyProducts.Api.ErrorHandling.CustomExceptionMiddleware" coveredlines="0" coverablelines="48" totallines="68" coveredbranches="0" totalbranches="2" coveredcodeelements="0" totalcodeelements="4" />
+    <class name="MockyProducts.Api.ErrorHandling.ErrorDetails" coveredlines="0" coverablelines="5" totallines="17" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="3" />
+    <class name="MockyProducts.Api.ErrorHandling.HttpStatusCodeException" coveredlines="0" coverablelines="15" totallines="33" coveredbranches="0" totalbranches="2" coveredcodeelements="0" totalcodeelements="6" />
+    <class name="MockyProducts.Controllers.ProductsController" coveredlines="20" coverablelines="22" totallines="77" coveredbranches="5" totalbranches="10" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="Program" coveredlines="0" coverablelines="69" totallines="109" coveredbranches="0" totalbranches="12" coveredcodeelements="0" totalcodeelements="1" />
+  </assembly>
+  <assembly name="MockyProducts.Common" />
+  <assembly name="MockyProducts.Repository">
+    <class name="MockyProducts.Repository.Data.ApiKeysData" coveredlines="2" coverablelines="2" totallines="13" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="MockyProducts.Repository.Data.Product" coveredlines="5" coverablelines="5" totallines="21" coveredbranches="0" totalbranches="0" coveredcodeelements="5" totalcodeelements="5" />
+    <class name="MockyProducts.Repository.Data.ProductsSource" coveredlines="2" coverablelines="2" totallines="14" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="MockyProducts.Repository.Readers.MockyJsonReader" coveredlines="25" coverablelines="28" totallines="63" coveredbranches="4" totalbranches="6" coveredcodeelements="2" totalcodeelements="2" />
+  </assembly>
+  <assembly name="MockyProducts.Service">
+    <class name="MockyProducts.Service.Filters.ProductServiceFilter" coveredlines="31" coverablelines="31" totallines="49" coveredbranches="18" totalbranches="18" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="MockyProducts.Service.Mappers.ProductsToProductsDtoMapper" coveredlines="11" coverablelines="11" totallines="21" coveredbranches="2" totalbranches="2" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="MockyProducts.Service.MockyProductsService" coveredlines="32" coverablelines="35" totallines="72" coveredbranches="17" totalbranches="28" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="MockyProducts.Service.Processors.ProductsDtoHighlightWordsProcessor" coveredlines="16" coverablelines="16" totallines="32" coveredbranches="10" totalbranches="14" coveredcodeelements="4" totalcodeelements="4" />
+  </assembly>
+  <assembly name="MockyProducts.Shared">
+    <class name="MockyProducts.Shared.Dto.ProductDto" coveredlines="5" coverablelines="5" totallines="26" coveredbranches="0" totalbranches="0" coveredcodeelements="5" totalcodeelements="5" />
+    <class name="MockyProducts.Shared.Dto.ProductsDto" coveredlines="1" coverablelines="1" totallines="7" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="MockyProducts.Shared.Requests.GetProductsRequest" coveredlines="4" coverablelines="4" totallines="13" coveredbranches="0" totalbranches="0" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="MockyProducts.Shared.ServiceRequests.Mappers.GetProductsRequestToServiceMapper" coveredlines="23" coverablelines="23" totallines="38" coveredbranches="15" totalbranches="22" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="MockyProducts.Shared.ServiceRequests.ProductServiceFilterRequest" coveredlines="4" coverablelines="4" totallines="10" coveredbranches="0" totalbranches="0" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="MockyProducts.Shared.Settings.ConfigReaderSettings" coveredlines="2" coverablelines="2" totallines="8" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+  </assembly>
+</coverage>

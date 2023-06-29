@@ -43,9 +43,58 @@ namespace MockyProducts.UnitTests.Service
         }
 
         [TestMethod]
+        public async Task Service_NullData_FilterWorks()
+        {
+            IEnumerable<Product> myProducts = null;
+            _reader.Setup(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>()))
+                .Returns(Task.FromResult((ProductsSource?)new ProductsSource() { Products = null }))
+                .Verifiable();
+            _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()))
+                .Returns(myProducts)
+                .Verifiable();
+            var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object, _logger.Object);
+
+            ProductServiceFilterRequest? filterRequest = new ProductServiceFilterRequest() { MinPrice = 10 };
+
+            var actual = await service.GetProducts(filterRequest);
+
+            Assert.IsNotNull(actual);
+            Assert.IsNull(actual.Products);
+            //Assert.AreEqual(0, actual.Products.Count);
+            _filter.Verify(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()), Times.Never);
+            _reader.Verify(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>()), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Service_NoData_FilterWorks()
+        {
+            var myProducts = new List<Product>();
+            _reader.Setup(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>()))
+                .Returns(Task.FromResult((ProductsSource?)new ProductsSource() {  Products = new List<Product>()}))
+                .Verifiable();
+            _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()))
+                .Returns(myProducts)
+                .Verifiable();
+            var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object, _logger.Object);
+
+            ProductServiceFilterRequest? filterRequest = new ProductServiceFilterRequest() { MinPrice = 10 };
+
+            var actual = await service.GetProducts(filterRequest);
+
+            Assert.IsNotNull(actual);
+            Assert.IsNotNull(actual.Products);
+            Assert.AreEqual(0, actual.Products.Count);
+            _filter.Verify(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()), Times.Once);
+            _reader.Verify(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>()), Times.Once);
+        }
+
+        [TestMethod]
         public async Task Service_FilterWorks()
         {
             var myProducts = GetMyProducts();
+            _reader.Setup(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>()))
+                .Returns(Task.FromResult((ProductsSource?)new ProductsSource() { Products = new List<Product>(myProducts) }))
+                .Verifiable();
             _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()))
                 .Returns(new List<Product>() { myProducts.First() })
                 .Verifiable();
@@ -59,12 +108,16 @@ namespace MockyProducts.UnitTests.Service
             Assert.IsNotNull(actual.Products);
             Assert.AreEqual(1, actual.Products.Count);
             _filter.Verify(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()), Times.Once);
+            _reader.Verify(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>()), Times.Once);
         }
 
         [TestMethod]
         public async Task Service_ProcessorWorks()
         {
             var myProducts = GetMyProducts();
+            _reader.Setup(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>()))
+                .Returns(Task.FromResult((ProductsSource?)new ProductsSource() { Products = new List<Product>(myProducts) }))
+                .Verifiable();
             _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()))
                 .Returns(myProducts)
                 .Verifiable();
@@ -78,6 +131,7 @@ namespace MockyProducts.UnitTests.Service
 
             Assert.IsNotNull(actual);
             Assert.IsNotNull(actual.Products);
+            _reader.Verify(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>()), Times.Once);
             _processor.Verify(p => p.Process(It.IsAny<ProductDto>()), Times.Exactly(myProducts.Count()));
         }
 
