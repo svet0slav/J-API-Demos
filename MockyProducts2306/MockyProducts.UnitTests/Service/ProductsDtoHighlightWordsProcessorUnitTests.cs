@@ -15,8 +15,8 @@ namespace MockyProducts.UnitTests.Service
 
         [TestMethod]
         public void HighlightWords_NoWords_NoHighlight() {
-            List<string>? words = null;
-            var proc = new ProductsDtoHighlightWordsProcessor(words);
+            var proc = new ProductsDtoHighlightWordsProcessor();
+            proc.Words = null;
 
             var products = GetMyProducts();
             foreach (var product in products)
@@ -32,8 +32,8 @@ namespace MockyProducts.UnitTests.Service
         [TestMethod]
         public void HighlightWords_NoWords2_NoHighlight()
         {
-            List<string>? words = new List<string>();
-            var proc = new ProductsDtoHighlightWordsProcessor(words);
+            var proc = new ProductsDtoHighlightWordsProcessor();
+            proc.Words = new List<string>();
 
             var products = GetMyProducts();
             foreach (var product in products)
@@ -53,8 +53,8 @@ namespace MockyProducts.UnitTests.Service
         [DataRow("blue")]
         public void HighlightWords_Word_Highlight(string word)
         {
-            List<string>? words = new List<string>() { word };
-            var proc = new ProductsDtoHighlightWordsProcessor(words);
+            var proc = new ProductsDtoHighlightWordsProcessor();
+            proc.Words = new List<string>() { word };
 
             var products = GetMyProducts();
             foreach (var product in products)
@@ -74,8 +74,8 @@ namespace MockyProducts.UnitTests.Service
         [DataRow("blue,green,red", "P1 blue in red", "P1 <em>blue</em> in <em>red</em>")]
         public void HighlightWords_Words_Highlight(string sample, string description, string expected)
         {
-            List<string>? words = new List<string>(sample?.Split(',').ToList() ?? new List<string>());
-            var proc = new ProductsDtoHighlightWordsProcessor(words);
+            var proc = new ProductsDtoHighlightWordsProcessor();
+            proc.Words = new List<string>(sample?.Split(',').ToList() ?? new List<string>());
 
             var product = new ProductDto() { Id = 1, Title = "P1", Description = description, Price = 10, Sizes = null };
             proc.Process(product);

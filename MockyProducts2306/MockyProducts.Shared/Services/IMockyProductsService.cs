@@ -5,6 +5,6 @@ namespace MockyProducts.Shared.Services
 {
     public interface IMockyProductsService
     {
-        Task<ProductsDto> GetProducts(ProductServiceFilterRequest? filterRequest);
+        Task<ProductsDto?> GetProducts(ProductServiceFilterRequest? filterRequest);
     }
 }

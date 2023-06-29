@@ -5,6 +5,7 @@ using MockyProducts.Shared.Dto;
 using Moq;
 using MockyProducts.Shared.ServiceRequests;
 using MockyProducts.Shared.Requests;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MockyProducts.UnitTests.Controllers
 {
@@ -27,18 +28,22 @@ namespace MockyProducts.UnitTests.Controllers
 
         [TestMethod]
         public async Task GetProducts_ReturnsExpectedResult() {
-            var getRequest = new GetProductsRequest();
+            GetProductsRequest? getRequest = new GetProductsRequest();
             var filterRequest = new ProductServiceFilterRequest() { };
             _service.Setup(s => s.GetProducts(It.IsAny<ProductServiceFilterRequest>()))
                 .Returns(Task.FromResult(
-                    new ProductsDto() { Products = new List<ProductDto>() }
+                    (ProductsDto?)(
+                        new ProductsDto() { Products = new List<ProductDto>() })
                     ));
 
             var controller = new ProductsController(_service.Object, _logger.Object);
-            var actual = await controller.Get(getRequest);
+            var actual = await controller.GetQuery(getRequest?.MinPrice, getRequest?.MaxPrice,
+                getRequest?.Size, getRequest?.Highlight);
 
             Assert.IsNotNull(actual);
-            Assert.IsNotNull(actual.Products);
+            var value = (ObjectResult)actual.Result;
+            Assert.IsNotNull(value);
+            Assert.IsNotNull((value.Value as ProductsDto)?.Products);
         }
     }
 }

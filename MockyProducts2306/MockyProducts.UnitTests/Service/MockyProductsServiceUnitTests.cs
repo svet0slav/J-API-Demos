@@ -1,4 +1,6 @@
-﻿using MockyProducts.Repository.Data;
+﻿using Castle.Core.Logging;
+using Microsoft.Extensions.Logging;
+using MockyProducts.Repository.Data;
 using MockyProducts.Repository.Readers;
 using MockyProducts.Repository.Requests;
 using MockyProducts.Service;
@@ -16,6 +18,7 @@ namespace MockyProducts.UnitTests.Service
         private Mock<IMockyJsonReader> _reader;
         Mock<IProductServiceFilter> _filter;
         private Mock<IProductsDtoProcessor> _processor;
+        private Mock<ILogger<MockyProductsService>> _logger;
 
         [TestInitialize]
         public void TestInitialize()
@@ -27,12 +30,13 @@ namespace MockyProducts.UnitTests.Service
 
             _filter = new Mock<IProductServiceFilter>();
             _processor = new Mock<IProductsDtoProcessor>();
+            _logger = new Mock<ILogger<MockyProductsService>>();
         }
 
         [TestMethod]
         public void Service_NoFilter()
         {
-            var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object);
+            var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object, _logger.Object);
             ProductServiceFilterRequest? filterRequest = null;
 
             Assert.ThrowsExceptionAsync<ArgumentNullException>(() => service.GetProducts(filterRequest));
@@ -45,7 +49,7 @@ namespace MockyProducts.UnitTests.Service
             _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>()))
                 .Returns(new List<Product>() { myProducts.First() })
                 .Verifiable();
-            var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object);
+            var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object, _logger.Object);
 
             ProductServiceFilterRequest? filterRequest = new ProductServiceFilterRequest() { MinPrice = 10 };
 
@@ -66,7 +70,7 @@ namespace MockyProducts.UnitTests.Service
                 .Verifiable();
             _processor.Setup(p => p.Process(It.IsAny<ProductDto>()))
                 .Verifiable();
-            var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object);
+            var service = new MockyProductsService(_reader.Object, _filter.Object, _processor.Object, _logger.Object);
 
             ProductServiceFilterRequest? filterRequest = new ProductServiceFilterRequest() { Highlight = new List<string>() { "green" } };
 

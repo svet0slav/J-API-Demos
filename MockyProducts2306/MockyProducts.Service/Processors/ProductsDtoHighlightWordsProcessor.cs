@@ -4,16 +4,13 @@ namespace MockyProducts.Service.Processors
 {
     public class ProductsDtoHighlightWordsProcessor : IProductsDtoHighlightWordsProcessor
     {
-        private readonly List<string>? _words;
+        public List<string>? Words { get; set; }
 
-        public ProductsDtoHighlightWordsProcessor(List<string>? words)
-        {
-            _words = words?.Count != 0 ? words : null;
-        }
+        public ProductsDtoHighlightWordsProcessor() { }
 
         public void Process(ProductDto product)
         {
-            if (_words == null) return;
+            if (Words == null || Words.Count == 0) return;
 
             product.Description = HighlightWords(product.Description);
         }
@@ -23,7 +20,7 @@ namespace MockyProducts.Service.Processors
             if (string.IsNullOrEmpty(text)) return text;
 
             var newText = text;
-            _words?.ForEach(word =>
+            Words?.ForEach(word =>
                 {
                     if (newText?.Contains(word) ?? false)
                     { newText = newText?.Replace(word, "<em>" + word + "</em>"); }

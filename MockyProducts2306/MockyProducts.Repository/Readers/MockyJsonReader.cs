@@ -13,14 +13,12 @@ namespace MockyProducts.Repository.Readers
     {
         protected ConfigReaderSettings _settings;
         protected HttpClient _httpClient;
-        protected JsonSerializerOptions _options;
         private readonly ILogger<MockyJsonReader> _logger;
 
-        public MockyJsonReader(ConfigReaderSettings settings, HttpClient httpClient, JsonSerializerOptions options, ILogger<MockyJsonReader> logger)
+        public MockyJsonReader(ConfigReaderSettings settings, HttpClient httpClient, ILogger<MockyJsonReader> logger)
         {
             _settings = settings;
             _httpClient = httpClient;
-            _options = options;
             _logger = logger;
         }
 
@@ -34,14 +32,14 @@ namespace MockyProducts.Repository.Readers
 
                 // TODO: Enable url with addtional params from MockyRawDataParams param
 
-                var responseMessage = await _httpClient.GetAsync(_settings.Url);
+                var responseMessage = await _httpClient.GetAsync(url);
 
                 responseMessage.EnsureSuccessStatusCode();
                 _logger.LogInformation($"Reading json data succeeded.");
 
                 var stream = await responseMessage.Content.ReadAsStreamAsync();
 
-                var result = await JsonSerializer.DeserializeAsync<ProductsSource>(stream, _options);
+                var result = await JsonSerializer.DeserializeAsync<ProductsSource>(stream);
 
                 if (result != null)
                 {
