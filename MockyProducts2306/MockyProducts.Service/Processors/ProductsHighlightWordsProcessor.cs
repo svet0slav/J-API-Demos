@@ -2,11 +2,11 @@
 
 namespace MockyProducts.Service.Processors
 {
-    public class ProductsDtoHighlightWordsProcessor : IProductsDtoHighlightWordsProcessor
+    public class ProductsHighlightWordsProcessor : IProductsHighlightWordsProcessor
     {
         public List<string>? Words { get; set; }
 
-        public ProductsDtoHighlightWordsProcessor() { }
+        public ProductsHighlightWordsProcessor() { }
 
         public void Process(ProductDto product)
         {

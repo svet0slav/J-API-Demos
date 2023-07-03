@@ -63,8 +63,7 @@ builder.Services.Configure<JsonSerializerOptions>(options =>
 // Register the interfaces.
 builder.Services.AddScoped(typeof(IMockyJsonReader), typeof(MockyJsonReader));
 builder.Services.AddTransient<IProductServiceFilter, ProductServiceFilter>();
-builder.Services.AddTransient<IProductsDtoHighlightWordsProcessor, ProductsDtoHighlightWordsProcessor>();
-builder.Services.AddTransient<IProductsDtoProcessor, ProductsDtoHighlightWordsProcessor>();
+builder.Services.AddTransient<IProductsHighlightWordsProcessor, ProductsHighlightWordsProcessor>();
 builder.Services.AddScoped<IMockyProductsService, MockyProductsService>();
 
 builder.Services.AddApiVersioning(options =>

@@ -8,6 +8,7 @@ using MockyProducts.Service.Processors;
 using MockyProducts.Shared.Dto;
 using MockyProducts.Shared.ServiceRequests;
 using MockyProducts.Shared.Services;
+using System.Threading.Tasks;
 
 namespace MockyProducts.Service
 {
@@ -15,15 +16,16 @@ namespace MockyProducts.Service
     {
         protected IMockyJsonReader _reader;
         protected IProductServiceFilter _filter;
-        protected IProductsDtoProcessor _processor;
+        protected IProductsHighlightWordsProcessor _highlighter;
         protected ILogger<MockyProductsService> _logger;
 
-        public MockyProductsService(IMockyJsonReader reader, IProductServiceFilter filter, IProductsDtoProcessor processor,
+        public MockyProductsService(IMockyJsonReader reader, IProductServiceFilter filter, 
+            IProductsHighlightWordsProcessor highlighter,
             ILogger<MockyProductsService> logger)
         {
             _reader = reader;
             _filter = filter;
-            _processor = processor;
+            _highlighter = highlighter;
             _logger = logger;
         }
 
@@ -55,15 +57,14 @@ namespace MockyProducts.Service
 
             _logger.LogInformation($"{result?.Products?.Count} records returned after filtering.");
 
-            if (_processor != null && result?.Products != null)
+            if (_highlighter != null && result?.Products != null)
             {
-                _processor.Words = filterRequest.Highlight;
+                _highlighter.Words = filterRequest.Highlight;
                 foreach (var product in result.Products)
                 {
-                    _processor.Process(product);
+                    _highlighter.Process(product);
                 }
             }
-
             return result;
         }
     }

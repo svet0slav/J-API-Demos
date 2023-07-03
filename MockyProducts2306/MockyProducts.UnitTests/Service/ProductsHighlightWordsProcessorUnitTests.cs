@@ -4,7 +4,7 @@ using MockyProducts.Shared.Dto;
 namespace MockyProducts.UnitTests.Service
 {
     [TestClass]
-    public class ProductsDtoHighlightWordsProcessorUnitTests
+    public class ProductsHighlightWordsProcessorUnitTests
     {
 
         [TestInitialize]
@@ -15,7 +15,7 @@ namespace MockyProducts.UnitTests.Service
 
         [TestMethod]
         public void HighlightWords_NoWords_NoHighlight() {
-            var proc = new ProductsDtoHighlightWordsProcessor();
+            var proc = new ProductsHighlightWordsProcessor();
             proc.Words = null;
 
             var products = GetMyProducts();
@@ -32,7 +32,7 @@ namespace MockyProducts.UnitTests.Service
         [TestMethod]
         public void HighlightWords_NoWords2_NoHighlight()
         {
-            var proc = new ProductsDtoHighlightWordsProcessor();
+            var proc = new ProductsHighlightWordsProcessor();
             proc.Words = new List<string>();
 
             var products = GetMyProducts();
@@ -53,7 +53,7 @@ namespace MockyProducts.UnitTests.Service
         [DataRow("blue")]
         public void HighlightWords_Word_Highlight(string word)
         {
-            var proc = new ProductsDtoHighlightWordsProcessor();
+            var proc = new ProductsHighlightWordsProcessor();
             proc.Words = new List<string>() { word };
 
             var products = GetMyProducts();
@@ -74,7 +74,7 @@ namespace MockyProducts.UnitTests.Service
         [DataRow("blue,green,red", "P1 blue in red", "P1 <em>blue</em> in <em>red</em>")]
         public void HighlightWords_Words_Highlight(string sample, string description, string expected)
         {
-            var proc = new ProductsDtoHighlightWordsProcessor();
+            var proc = new ProductsHighlightWordsProcessor();
             proc.Words = new List<string>(sample?.Split(',').ToList() ?? new List<string>());
 
             var product = new ProductDto() { Id = 1, Title = "P1", Description = description, Price = 10, Sizes = null };

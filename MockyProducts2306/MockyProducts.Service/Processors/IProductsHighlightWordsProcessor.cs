@@ -2,7 +2,7 @@
 
 namespace MockyProducts.Service.Processors
 {
-    public interface IProductsDtoHighlightWordsProcessor: IProductsDtoProcessor
+    public interface IProductsHighlightWordsProcessor: IProductsDtoProcessor
     {
         string? HighlightWords(string? text);
     }
