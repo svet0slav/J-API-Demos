@@ -30,7 +30,7 @@ namespace MockyProducts.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         public async Task<ActionResult<ProductsDto>> GetQuery(
-            string? minPrice, string? maxPrice, string? size, string? highLight)
+            string? minPrice, string? maxPrice, string? size, string? highLight, CancellationToken cancellationToken)
         {
             GetProductsRequest? request = new GetProductsRequest()
             {
@@ -42,7 +42,7 @@ namespace MockyProducts.Controllers
             _logger.LogInformation("Request received", request);
 
             ProductServiceFilterRequest? filterRequest = request?.ToProductServiceFilterRequest();
-            var result = await _service.GetProducts(filterRequest);
+            var result = await _service.GetProducts(filterRequest, cancellationToken);
 
             _logger.LogInformation("Request processed", result?.Products?.Count);
 

@@ -29,14 +29,14 @@ namespace MockyProducts.Service
             _logger = logger;
         }
 
-        public async Task<ProductsDto?> GetProducts(ProductServiceFilterRequest? filterRequest)
+        public async Task<ProductsDto?> GetProducts(ProductServiceFilterRequest? filterRequest, CancellationToken cancellationToken)
         {
             if (filterRequest == null)
                 throw new ArgumentNullException(nameof(filterRequest));
 
             MockyRawDataParams param = new MockyRawDataParams();
             // TODO: Setup additional params from the filter
-            var rawData = await _reader.GetRawDataFromSource(param);
+            var rawData = await _reader.GetRawDataFromSource(param, cancellationToken);
 
             if (rawData == null || rawData?.Products == null)
             {
@@ -51,7 +51,7 @@ namespace MockyProducts.Service
 
             IEnumerable<Product> filteredData = rawData?.Products;
 
-            filteredData = _filter.Filter(filteredData, filterRequest);
+            filteredData = _filter.Filter(filteredData, filterRequest, cancellationToken);
             
             result.Products.AddRange(filteredData.Select(product => product.ConvertToDto()));
 

@@ -22,7 +22,7 @@ namespace MockyProducts.Repository.Readers
             _logger = logger;
         }
 
-        public async Task<ProductsSource?> GetRawDataFromSource(MockyRawDataParams? param)
+        public async Task<ProductsSource?> GetRawDataFromSource(MockyRawDataParams? param, CancellationToken cancellationToken)
         {
             try
             {
@@ -37,9 +37,9 @@ namespace MockyProducts.Repository.Readers
                 responseMessage.EnsureSuccessStatusCode();
                 _logger.LogInformation($"Reading json data succeeded.");
 
-                var stream = await responseMessage.Content.ReadAsStreamAsync();
+                var stream = await responseMessage.Content.ReadAsStreamAsync(cancellationToken);
 
-                var result = await JsonSerializer.DeserializeAsync<ProductsSource>(stream);
+                var result = await JsonSerializer.DeserializeAsync<ProductsSource>(stream, (JsonSerializerOptions)null, cancellationToken);
 
                 if (result != null)
                 {

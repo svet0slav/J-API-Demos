@@ -9,10 +9,15 @@ namespace MockyProducts.Service.Filters
         {
         }
 
-        public IEnumerable<Product> Filter(IEnumerable<Product> filteredData, ProductServiceFilterRequest? filterRequest)
+        public IEnumerable<Product> Filter(IEnumerable<Product> filteredData, ProductServiceFilterRequest? filterRequest, CancellationToken cancellationToken)
         {
-            // Filter step by step.
+            if (cancellationToken.IsCancellationRequested) { return  Enumerable.Empty<Product>(); }
             var result = FilterByPrice(filteredData, filterRequest);
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return result;
+            }
+
             result = FilterBySize(result, filterRequest);
             return result;
         }
