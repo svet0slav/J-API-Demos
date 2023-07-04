@@ -6,6 +6,7 @@ using MockyProducts.Repository.Requests;
 using MockyProducts.Service;
 using MockyProducts.Service.Filters;
 using MockyProducts.Service.Processors;
+using MockyProducts.Shared.Data;
 using MockyProducts.Shared.Dto;
 using MockyProducts.Shared.ServiceRequests;
 using Moq;
@@ -77,6 +78,8 @@ namespace MockyProducts.UnitTests.Service
             _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>(), It.IsAny<CancellationToken>()))
                 .Returns(myProducts)
                 .Verifiable();
+            _highlighter.Setup(h => h.Process(It.IsAny<ProductDto>())).Verifiable();
+            _stats.Setup(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>())).Verifiable();
             var service = new MockyProductsService(_reader.Object, _filter.Object, _highlighter.Object, _stats.Object, _logger.Object);
 
             ProductServiceFilterRequest? filterRequest = new ProductServiceFilterRequest() { MinPrice = 10 };
@@ -88,6 +91,8 @@ namespace MockyProducts.UnitTests.Service
             Assert.AreEqual(0, actual.Products.Count);
             _filter.Verify(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>(), It.IsAny<CancellationToken>()), Times.Once);
             _reader.Verify(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>(), It.IsAny<CancellationToken>()), Times.Once);
+            _highlighter.Verify(h => h.Process(It.IsAny<ProductDto>()), Times.Never);
+            _stats.Verify(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [TestMethod]
@@ -125,6 +130,9 @@ namespace MockyProducts.UnitTests.Service
                 .Verifiable();
             _highlighter.Setup(p => p.Process(It.IsAny<ProductDto>()))
                 .Verifiable();
+            _stats.Setup(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>()))
+                .Verifiable();
+
             var service = new MockyProductsService(_reader.Object, _filter.Object, _highlighter.Object, _stats.Object, _logger.Object);
 
             ProductServiceFilterRequest? filterRequest = new ProductServiceFilterRequest() { Highlight = new List<string>() { "green" } };
@@ -135,6 +143,7 @@ namespace MockyProducts.UnitTests.Service
             Assert.IsNotNull(actual.Products);
             _reader.Verify(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>(), It.IsAny<CancellationToken>()), Times.Once);
             _highlighter.Verify(p => p.Process(It.IsAny<ProductDto>()), Times.Exactly(myProducts.Count()));
+            _stats.Verify(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         private IEnumerable<Product> GetMyProducts()

@@ -1,6 +1,7 @@
 ﻿using MockyProducts.Shared.Data;
 using MockyProducts.Shared.Dto;
 using System.Collections.Concurrent;
+using System.Linq;
 
 namespace MockyProducts.Service.Processors
 {
@@ -20,10 +21,9 @@ namespace MockyProducts.Service.Processors
             if (products == null) return result;
 
             // 3.c.i.The minimum price of all products in the source URL.
-            var taskMinPrice = new Task(() =>
+            var taskMinPrice = new Task<double?>(() =>
             {
-                result.TotalMinPrice = products
-                    .AsParallel()
+                return products
                     .Where(p => p.Price != null)
                     .Min(p => p.Price);
             });
@@ -31,10 +31,9 @@ namespace MockyProducts.Service.Processors
             if (cancellationToken.IsCancellationRequested) return result;
 
             // 3.c.i.The maximum price of all products in the source URL.
-            var taskMaxPrice = new Task(() =>
+            var taskMaxPrice = new Task<double?>(() =>
             {
-                result.TotalMaxPrice = products
-                .AsParallel()
+                return products
                 .Where(p => p.Price != null)
                 .Max(p => p.Price);
             }, cancellationToken);
@@ -42,10 +41,10 @@ namespace MockyProducts.Service.Processors
             if (cancellationToken.IsCancellationRequested) return result;
 
             // 3.c.ii.An array of strings to contain all sizes of all products in the source URL.
-            var taskSizes = new Task(() =>
+            var taskSizes = new Task<List<string>>(() =>
             {
                 var sizesAgg = new ConcurrentDictionary<string, int>();
-                products.AsParallel().ForAll(p =>
+                foreach(var p in products)
                 {
                     if (p.Sizes?.Count > 0)
                     {
@@ -54,12 +53,19 @@ namespace MockyProducts.Service.Processors
                             if (!sizesAgg.ContainsKey(size)) sizesAgg.TryAdd(size, 0);
                         });
                     }
-                });
-                result.AllSizes = sizesAgg.Keys.ToList();
+                };
+                return sizesAgg.Keys.ToList();
             });
 
-            await Task.WhenAll(taskMinPrice, taskMaxPrice, taskSizes);
+            //does not work await Task.WhenAll(taskMinPrice, taskMaxPrice, taskSizes);
+            taskMinPrice.Start();
+            taskMaxPrice.Start();
+            taskSizes.Start();
+            Task.WaitAll(taskMinPrice, taskMaxPrice , taskSizes);
 
+            result.TotalMinPrice = taskMinPrice.Result;
+            result.TotalMaxPrice = taskMaxPrice.Result;
+            result.AllSizes = taskSizes.Result;
             return result;
         }
     }
