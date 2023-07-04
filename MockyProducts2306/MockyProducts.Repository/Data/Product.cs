@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using MockyProducts.Shared.Data;
+using System.Text.Json.Serialization;
 
 namespace MockyProducts.Repository.Data
 {
-    public class Product
+    public class Product: IProduct
     {
         public int Id { get; set; }
 

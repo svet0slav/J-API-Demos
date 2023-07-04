@@ -5,10 +5,10 @@ using MockyProducts.Repository.Requests;
 using MockyProducts.Service.Filters;
 using MockyProducts.Service.Mappers;
 using MockyProducts.Service.Processors;
+using MockyProducts.Shared.Data;
 using MockyProducts.Shared.Dto;
 using MockyProducts.Shared.ServiceRequests;
 using MockyProducts.Shared.Services;
-using System.Threading.Tasks;
 
 namespace MockyProducts.Service
 {
@@ -17,15 +17,18 @@ namespace MockyProducts.Service
         protected IMockyJsonReader _reader;
         protected IProductServiceFilter _filter;
         protected IProductsHighlightWordsProcessor _highlighter;
+        protected IProductsStatsProcessor _statProcessor;
         protected ILogger<MockyProductsService> _logger;
 
         public MockyProductsService(IMockyJsonReader reader, IProductServiceFilter filter, 
             IProductsHighlightWordsProcessor highlighter,
+            IProductsStatsProcessor statProcessor,
             ILogger<MockyProductsService> logger)
         {
             _reader = reader;
             _filter = filter;
             _highlighter = highlighter;
+            _statProcessor = statProcessor;
             _logger = logger;
         }
 
@@ -57,15 +60,35 @@ namespace MockyProducts.Service
 
             _logger.LogInformation($"{result?.Products?.Count} records returned after filtering.");
 
-            if (_highlighter != null && result?.Products != null)
+            var highlightTask = new Task(() => Highlight(result?.Products, filterRequest), cancellationToken);
+            var productData = (IEnumerable<Product>?)rawData?.Products;
+            var statsTask = GetProductsStat(productData, cancellationToken);
+            await Task.WhenAll(highlightTask, statsTask);
+            result.Stat = statsTask.Result;
+            return result;
+        }
+
+        protected void Highlight(List<ProductDto>? products, ProductServiceFilterRequest? filterRequest)
+        {
+            if (_highlighter != null && products != null)
             {
                 _highlighter.Words = filterRequest.Highlight;
-                foreach (var product in result.Products)
+                foreach (var product in products)
                 {
                     _highlighter.Process(product);
                 }
             }
-            return result;
+            _logger.LogInformation("Products highlighted");
+        }
+
+        public async Task<ProductStatDto?> GetProductsStat(IEnumerable<Product>? products, CancellationToken cancellationToken)
+        {
+            if (_statProcessor == null)
+                throw new NullReferenceException("The stat processor is not available.");
+            _logger.LogInformation("Statistics computation started");
+            var statDto = await _statProcessor.Summarize(products, cancellationToken);
+
+            return statDto;
         }
     }
 }
