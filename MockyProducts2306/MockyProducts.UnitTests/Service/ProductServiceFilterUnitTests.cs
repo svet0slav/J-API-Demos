@@ -18,7 +18,7 @@ namespace MockyProducts.UnitTests.Service
             var filter = new ProductServiceFilter();
             var products = GetMyProducts();
 
-            var actual = filter.Filter(products, null);
+            var actual = filter.Filter(products, null, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(products.Count(), actual.Count());
@@ -36,7 +36,7 @@ namespace MockyProducts.UnitTests.Service
             var filter = new ProductServiceFilter();
             var products = GetMyProducts();
 
-            var actual = filter.Filter(products, request);
+            var actual = filter.Filter(products, request, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(result, actual.Count());
@@ -54,7 +54,7 @@ namespace MockyProducts.UnitTests.Service
             var filter = new ProductServiceFilter();
             var products = GetMyProducts();
 
-            var actual = filter.Filter(products, request);
+            var actual = filter.Filter(products, request, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(result, actual.Count());
@@ -72,7 +72,7 @@ namespace MockyProducts.UnitTests.Service
             var filter = new ProductServiceFilter();
             var products = GetMyProducts();
 
-            var actual = filter.Filter(products, request);
+            var actual = filter.Filter(products, request, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(result, actual.Count());

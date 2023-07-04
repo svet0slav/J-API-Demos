@@ -13,7 +13,6 @@ namespace MockyProducts.UnitTests.Controllers
     public class ProductsControllerUnitTests
     {
         private Mock<IMockyProductsService> _service;
-
         private readonly Mock<ILogger<ProductsController>> _logger;
 
         public ProductsControllerUnitTests() { 
@@ -30,7 +29,7 @@ namespace MockyProducts.UnitTests.Controllers
         public async Task GetProducts_ReturnsExpectedResult() {
             GetProductsRequest? getRequest = new GetProductsRequest();
             var filterRequest = new ProductServiceFilterRequest() { };
-            _service.Setup(s => s.GetProducts(It.IsAny<ProductServiceFilterRequest>()))
+            _service.Setup(s => s.GetProducts(It.IsAny<ProductServiceFilterRequest>(), CancellationToken.None))
                 .Returns(Task.FromResult(
                     (ProductsDto?)(
                         new ProductsDto() { Products = new List<ProductDto>() })
@@ -38,7 +37,7 @@ namespace MockyProducts.UnitTests.Controllers
 
             var controller = new ProductsController(_service.Object, _logger.Object);
             var actual = await controller.GetQuery(getRequest?.MinPrice, getRequest?.MaxPrice,
-                getRequest?.Size, getRequest?.Highlight);
+                getRequest?.Size, getRequest?.Highlight, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             var value = (ObjectResult)actual.Result;

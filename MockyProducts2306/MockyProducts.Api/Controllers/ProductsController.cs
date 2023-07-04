@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using MockyProducts.Shared.Dto;
-using MockyProducts.Shared.Services;
-using MockyProducts.Shared.ServiceRequests;
 using MockyProducts.Shared.Requests;
+using MockyProducts.Shared.Responses;
+using MockyProducts.Shared.ServiceRequests;
 using MockyProducts.Shared.ServiceRequests.Mappers;
-using Microsoft.AspNetCore.Mvc.Routing;
+using MockyProducts.Shared.Services;
 
 namespace MockyProducts.Controllers
 {
@@ -29,7 +28,7 @@ namespace MockyProducts.Controllers
         [MapToApiVersion("1")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<ProductsDto>> GetQuery(
+        public async Task<ActionResult<ProductsDtoResponse>> GetQuery(
             string? minPrice, string? maxPrice, string? size, string? highLight, CancellationToken cancellationToken)
         {
             GetProductsRequest? request = new GetProductsRequest()
@@ -50,7 +49,13 @@ namespace MockyProducts.Controllers
             {
                 return NotFound(result);
             }
-            return Ok(result);
+
+            return Ok(new ProductsDtoResponse()
+            {
+                Products = result.Products,
+                Stat = result.Stat,
+            });
+
         }
 
         //[HttpGet(Name = "filterBody")]

@@ -49,7 +49,7 @@ namespace MockyProducts.UnitTests.Repository
             _mockHandler.When(_settings.Url)
                     .Respond("application/json", jsonContent); // Respond with JSON
 
-            var actual = await _reader.GetRawDataFromSource(null);
+            var actual = await _reader.GetRawDataFromSource(null, CancellationToken.None);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace MockyProducts.UnitTests.Repository
             _mockHandler.When(_settings.Url)
                     .Respond("application/json", jsonContent); // Respond with JSON
 
-            var actual = await _reader.GetRawDataFromSource(null);
+            var actual = await _reader.GetRawDataFromSource(null, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.IsNull(actual.Products);
@@ -73,7 +73,7 @@ namespace MockyProducts.UnitTests.Repository
             _mockHandler.When(_settings.Url)
                     .Respond("application/json", jsonContent); // Respond with JSON
 
-            var actual = await _reader.GetRawDataFromSource(null);
+            var actual = await _reader.GetRawDataFromSource(null, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.IsNotNull(actual.Products);
