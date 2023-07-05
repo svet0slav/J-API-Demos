@@ -7,6 +7,6 @@ namespace MockyProducts.Shared.Services
     public interface IMockyProductsService
     {
         Task<ProductsDto?> GetProducts(ProductServiceFilterRequest? filterRequest, CancellationToken cancellationToken);
-        Task<ProductStatDto?> GetProductsStat(IEnumerable<IProduct>? products, CancellationToken cancellationToken);
+        Task<ProductStatDto?> GetProductsStat(IEnumerable<IProduct>? products, ProductServiceFilterRequest? filterRequest, CancellationToken cancellationToken);
     }
 }

@@ -64,6 +64,7 @@ builder.Services.Configure<JsonSerializerOptions>(options =>
 builder.Services.AddScoped(typeof(IMockyJsonReader), typeof(MockyJsonReader));
 builder.Services.AddTransient<IProductServiceFilter, ProductServiceFilter>();
 builder.Services.AddTransient<IProductsHighlightWordsProcessor, ProductsHighlightWordsProcessor>();
+builder.Services.AddTransient<IProductsStatsProcessor, ProductsStatsProcessor>();
 builder.Services.AddScoped<IMockyProductsService, MockyProductsService>();
 
 builder.Services.AddApiVersioning(options =>
@@ -72,9 +73,9 @@ builder.Services.AddApiVersioning(options =>
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.ReportApiVersions = true;
     options.ApiVersionReader = ApiVersionReader.Combine(
+       new QueryStringApiVersionReader("version"),
        new HeaderApiVersionReader("X-Api-Version"),
-       new MediaTypeApiVersionReader("v"),
-       new QueryStringApiVersionReader("version"));
+       new MediaTypeApiVersionReader("v"));
 });
 
 // The Microsoft.Extensions.Logging package provides this one-liner to add logging services.

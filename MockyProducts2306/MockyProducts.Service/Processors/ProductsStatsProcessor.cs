@@ -1,7 +1,6 @@
 ﻿using MockyProducts.Shared.Data;
 using MockyProducts.Shared.Dto;
 using System.Collections.Concurrent;
-using System.Linq;
 
 namespace MockyProducts.Service.Processors
 {
@@ -57,16 +56,55 @@ namespace MockyProducts.Service.Processors
                 return sizesAgg.Keys.ToList();
             });
 
-            //does not work await Task.WhenAll(taskMinPrice, taskMaxPrice, taskSizes);
-            taskMinPrice.Start();
-            taskMaxPrice.Start();
-            taskSizes.Start();
-            Task.WaitAll(taskMinPrice, taskMaxPrice , taskSizes);
+            // 3.c.iii. An string array of size ten to contain most common words in the product descriptions, excluding the most common five in source URL
+            var taskWords = new Task<List<string>>(() =>
+            {
+                var wordsAgg = new ConcurrentDictionary<string, int>();
+                foreach (var p in products)
+                {
+                    var words = GetWords(p.Description);
+                    if (words.Count() > 0)
+                    {
+                        foreach(var word in words)
+                        {
+                            if (!wordsAgg.ContainsKey(word)) {
+                                wordsAgg.TryAdd(word, 1);
+                            }
+                            else
+                            {
+                                wordsAgg[word] += 1;
+                            }
+                        }
+                    }
+                };
+
+                var sorted = wordsAgg.OrderByDescending(x => x.Value);
+                return sorted.Select(x => x.Key).ToList();
+            });
+
+            Task[] tasks = { taskMinPrice, taskMaxPrice, taskSizes, taskWords };
+            foreach(Task t in tasks) { t.Start(); }
+            Task.WaitAll(tasks, cancellationToken);
 
             result.TotalMinPrice = taskMinPrice.Result;
             result.TotalMaxPrice = taskMaxPrice.Result;
             result.AllSizes = taskSizes.Result;
+            result.MostCommonWords = taskWords.Result;
             return result;
+        }
+
+        public IEnumerable<string> GetWords(string? description)
+        {
+            if (string.IsNullOrWhiteSpace(description))
+                return Enumerable.Empty<string>();
+
+            var wordsRaw = description.Trim().Split(' ');
+            var words = wordsRaw.Where(w => !string.IsNullOrWhiteSpace(w)).Select(w =>
+                w.Replace(".", "").Replace("!", "").Replace(";", "").Replace(",", ""));
+            words = words.Where(w => !string.IsNullOrWhiteSpace(w)).Select(w =>
+                w.Replace("?", "").Replace(")", "").Replace("(", "").Replace(":", ""));
+            words = words.Where(w => !string.IsNullOrWhiteSpace(w));
+            return words ?? Enumerable.Empty<string>();
         }
     }
 }

@@ -141,9 +141,44 @@ namespace MockyProducts.UnitTests.Service
 
             Assert.IsNotNull(actual);
             Assert.IsNotNull(actual.Products);
+            Assert.IsNotNull(actual.Stat);
             _reader.Verify(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>(), It.IsAny<CancellationToken>()), Times.Once);
             _highlighter.Verify(p => p.Process(It.IsAny<ProductDto>()), Times.Exactly(myProducts.Count()));
             _stats.Verify(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task Service_ProcessorFiltersWords()
+        {
+            var myProducts = GetMyProducts();
+            _reader.Setup(r => r.GetRawDataFromSource(It.IsAny<MockyRawDataParams>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult((ProductsSource?)new ProductsSource() { Products = new List<Product>(myProducts) }))
+                .Verifiable();
+            _filter.Setup(f => f.Filter(It.IsAny<IEnumerable<Product>>(), It.IsAny<ProductServiceFilterRequest>(), It.IsAny<CancellationToken>()))
+                .Returns(myProducts)
+                .Verifiable();
+            _highlighter.Setup(p => p.Process(It.IsAny<ProductDto>()))
+                .Verifiable();
+            _stats.Setup(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>()))
+                .Verifiable();
+
+            var service = new MockyProductsService(_reader.Object, _filter.Object, _highlighter.Object, _stats.Object, _logger.Object);
+
+            ProductServiceFilterRequest? filterRequest = new ProductServiceFilterRequest() 
+            { Highlight = new List<string>() { "green", "red", "blue", "red2", "red3", "red4", "red5" } };
+
+            var actual = await service.GetProducts(filterRequest, CancellationToken.None);
+
+            Assert.IsNotNull(actual);
+            Assert.IsNotNull(actual.Products);
+            _stats.Verify(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>()), Times.Once);
+            Assert.IsNotNull(actual.Stat?.MostCommonWords);
+            // Limited to 10 and does not contain words in highlight.
+            Assert.AreEqual(10, actual.Stat?.MostCommonWords?.Count);
+            foreach (var word in filterRequest.Highlight)
+            {
+                Assert.IsFalse(actual.Stat?.MostCommonWords?.Contains(word));
+            }
         }
 
         private IEnumerable<Product> GetMyProducts()

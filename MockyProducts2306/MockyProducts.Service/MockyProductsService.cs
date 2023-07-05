@@ -63,7 +63,7 @@ namespace MockyProducts.Service
             Highlight(result?.Products, filterRequest);
 
             var productData = (IEnumerable<Product>?)rawData?.Products;
-            result.Stat = await GetProductsStat(productData, cancellationToken);
+            result.Stat = await GetProductsStat(productData, filterRequest, cancellationToken);
             return result;
         }
 
@@ -79,12 +79,21 @@ namespace MockyProducts.Service
             return false;
         }
 
-        public async Task<ProductStatDto?> GetProductsStat(IEnumerable<IProduct>? products, CancellationToken cancellationToken)
+        public async Task<ProductStatDto?> GetProductsStat(IEnumerable<IProduct>? products, ProductServiceFilterRequest? filterRequest, CancellationToken cancellationToken)
         {
             if (_statProcessor == null)
                 throw new NullReferenceException("The stat processor is not available.");
             _logger.LogInformation("Statistics computation started");
             var statDto = await _statProcessor.Summarize(products, cancellationToken);
+            if (statDto == null) return null;
+
+            // Common words - array of size ten to contain most common words in the product descriptions, excluding the most common five in source URL
+            var exclude = filterRequest?.Highlight?.Take(5);
+            IEnumerable<string>? common = exclude != null 
+                ? statDto?.MostCommonWords?.Where(x => !exclude.Contains(x))
+                : statDto?.MostCommonWords;
+            common = common?.Take(10);
+            statDto.MostCommonWords = common?.ToList();
             _logger.LogInformation("Statistics computation finished");
             return statDto;
         }

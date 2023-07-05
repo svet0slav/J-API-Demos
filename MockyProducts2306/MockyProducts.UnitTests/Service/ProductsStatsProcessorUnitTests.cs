@@ -1,11 +1,5 @@
-﻿using MockyProducts.Service.Processors;
-using MockyProducts.Shared.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MockyProducts.Repository.Data;
 using MockyProducts.Service.Processors;
-using MockyProducts.Shared.Dto;
-using MockyProducts.Repository.Data;
 
 namespace MockyProducts.UnitTests.Service
 {
@@ -47,9 +41,15 @@ namespace MockyProducts.UnitTests.Service
             Assert.AreEqual(10, stats.TotalMaxPrice);
             Assert.IsNotNull(stats.AllSizes);
             Assert.AreEqual(3, stats.AllSizes?.Count);
-            Assert.IsTrue(stats.AllSizes.Contains("one"));
-            Assert.IsTrue(stats.AllSizes.Contains("two"));
-            Assert.IsTrue(stats.AllSizes.Contains("three"));
+            Assert.IsTrue(stats.AllSizes?.Contains("one"));
+            Assert.IsTrue(stats.AllSizes?.Contains("two"));
+            Assert.IsTrue(stats.AllSizes?.Contains("three"));
+            
+            Assert.IsNotNull(stats.MostCommonWords);
+            Assert.AreEqual(7, stats.MostCommonWords?.Count);
+            Assert.AreEqual("green", stats.MostCommonWords?[0]);
+            Assert.IsTrue(stats.MostCommonWords?.Take(3).Contains("P1"));
+            Assert.IsTrue(stats.MostCommonWords?.Take(3).Contains("blue1"));
         }
 
         private IEnumerable<Product> GetMyProducts()
