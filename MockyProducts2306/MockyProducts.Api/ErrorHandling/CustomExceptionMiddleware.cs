@@ -37,11 +37,14 @@ namespace MockyProducts.Api.ErrorHandling
             {
                 result = new ErrorDetails()
                 {
+                    // TODO: Could write own message and hide the original one to not share detailed information or make app vulnerable.
                     Message = exception.Message,
                     StatusCode = (int)exception.StatusCode
                 }.ToString();
                 context.Response.StatusCode = (int)exception.StatusCode;
             }
+            //TODO: May develop other verifications for Polly-specific or library specific exceptions how to translate them to a general error response.
+            // I have done this in the past, but because it is a test task I would not invest time.
             else
             {
                 result = new ErrorDetails()
@@ -56,11 +59,20 @@ namespace MockyProducts.Api.ErrorHandling
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            //TODO: May develop other verifications for Polly-specific or library specific exceptions how to translate them to a general error response.
+            // I have done this in the past, but because it is a test task I would not invest time.
+
+            //TODO: Log the original error
+            //TODO: Revial the message to the log, not to the client of the API exception.Message
+
             string result = new ErrorDetails()
             {
-                Message = exception.Message,
+                // it is not a good practice to share the details about the error. Better log the source.
+                Message = "Error happened during execution",
                 StatusCode = (int)HttpStatusCode.InternalServerError
             }.ToString();
+
+
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             return context.Response.WriteAsync(result);
         }

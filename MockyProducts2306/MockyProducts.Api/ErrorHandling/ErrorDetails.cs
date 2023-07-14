@@ -4,9 +4,19 @@
 
 namespace MockyProducts.Api.ErrorHandling
 {
+    /// <summary>
+    /// General API error response details.
+    /// </summary>
     public class ErrorDetails
     {
+        /// <summary>
+        /// The status code (HTTP status codes).
+        /// </summary>
         public int StatusCode { get; set; }
+
+        /// <summary>
+        /// Basic message for the kind of error.
+        /// </summary>
         public string? Message { get; set; }
 
         public override string ToString()

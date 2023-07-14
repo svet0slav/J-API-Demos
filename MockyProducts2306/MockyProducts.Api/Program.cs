@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using MockyProducts.Api.ErrorHandling;
 using Microsoft.OpenApi.Models;
+using Polly;
+using MockyProducts.Api.Polly;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +42,17 @@ var configSettings = builder.Configuration.GetSection("ConfigReaderSettings").Ge
 if (configSettings == null) throw new Exception("The application is not configured properly with ConfigReaderSettings");
 builder.Services.AddScoped<ConfigReaderSettings>((provider) => configSettings);
 
+// Define the Http Handler and the Polly Policies
+
+using var pollyLoggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.SetMinimumLevel(LogLevel.Information);
+    builder.AddEventSourceLogger();
+});
+var loggerPolicies = pollyLoggerFactory.CreateLogger<PollyPolicies>();
+
+var pollyPolicies = new PollyPolicies(loggerPolicies);
+
 builder.Services.AddHttpClient<IMockyJsonReader>(client =>
 {
     client.BaseAddress = new Uri(configSettings?.Url ?? string.Empty);
@@ -49,7 +62,8 @@ builder.Services.AddHttpClient<IMockyJsonReader>(client =>
         MaxAge = TimeSpan.FromSeconds(360),
         NoTransform = true
     };
-});
+}).AddPolicyHandler(pollyPolicies.RetryPolicy())
+.AddPolicyHandler(pollyPolicies.CircuitBreakerPolicy());
 
 // Set the JSON serializer options.
 builder.Services.Configure<JsonSerializerOptions>(options =>

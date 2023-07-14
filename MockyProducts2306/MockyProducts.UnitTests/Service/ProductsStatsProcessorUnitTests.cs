@@ -49,7 +49,7 @@ namespace MockyProducts.UnitTests.Service
             Assert.AreEqual(7, stats.MostCommonWords?.Count);
             Assert.AreEqual("green", stats.MostCommonWords?[0]);
             Assert.IsTrue(stats.MostCommonWords?.Take(3).Contains("P1"));
-            Assert.IsTrue(stats.MostCommonWords?.Take(3).Contains("blue1"));
+            Assert.IsTrue(stats.MostCommonWords?.Take(3).Contains("blue"));
         }
 
         private IEnumerable<Product> GetMyProducts()

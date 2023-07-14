@@ -131,6 +131,8 @@ namespace MockyProducts.UnitTests.Service
             _highlighter.Setup(p => p.Process(It.IsAny<ProductDto>()))
                 .Verifiable();
             _stats.Setup(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new ProductStatDto()
+                { MostCommonWords = new List<string>() { "green", "P1" } })
                 .Verifiable();
 
             var service = new MockyProductsService(_reader.Object, _filter.Object, _highlighter.Object, _stats.Object, _logger.Object);
@@ -160,6 +162,9 @@ namespace MockyProducts.UnitTests.Service
             _highlighter.Setup(p => p.Process(It.IsAny<ProductDto>()))
                 .Verifiable();
             _stats.Setup(s => s.Summarize(It.IsAny<IEnumerable<IProduct>?>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new ProductStatDto() { MostCommonWords = new List<string>() 
+                { "P1", "P2", "green", "P3", "red", "blue", "red3", "red2", "P20", "P19", "P18", "P17", "P16", 
+                    "P15", "P14", "P13", "P12", "P10", "P11", } })
                 .Verifiable();
 
             var service = new MockyProductsService(_reader.Object, _filter.Object, _highlighter.Object, _stats.Object, _logger.Object);
@@ -186,10 +191,10 @@ namespace MockyProducts.UnitTests.Service
             return new List<Product>()
             {
                 new Product() { Id = 1, Title = "P1", Description = "P1 green", Price = 10, Sizes = null },
-                new Product() { Id = 2, Title = "P1", Description = "P1 green", Price = 1, Sizes = { } },
-                new Product() { Id = 3, Title = "P1", Description = "P1 green", Price = 5, Sizes = new List<string> { "one" } },
-                new Product() { Id = 4, Title = "P1", Description = "P1 green", Price = 0, Sizes = new List<string> { "one","two","three" } },
-                new Product() { Id = 5, Title = "P2", Description = "P1 green", Price = null, Sizes = new List<string> { "three" } }
+                new Product() { Id = 2, Title = "P1", Description = "P2 red", Price = 1, Sizes = { } },
+                new Product() { Id = 3, Title = "P1", Description = "P1 blue", Price = 5, Sizes = new List<string> { "one" } },
+                new Product() { Id = 4, Title = "P1", Description = "P3 green", Price = 0, Sizes = new List<string> { "one","two","three" } },
+                new Product() { Id = 5, Title = "P2", Description = "P1 red", Price = null, Sizes = new List<string> { "three" } }
             };
         }
     }
