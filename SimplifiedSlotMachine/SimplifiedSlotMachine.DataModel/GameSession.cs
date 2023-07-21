@@ -2,19 +2,37 @@
 {
     public class GameSession
     {
-        public decimal BeginBalance { get; set; }
-        public decimal Stake { get; set; }
-        public decimal WinAmount { get; set; }
-        public decimal EndBalance { get; set; }
+        public decimal BeginBalance { get; protected set; }
+        public decimal Stake { get; protected set; }
+        public decimal WinAmount { get; protected set; }
+        public decimal EndBalance { get; protected set; }
 
         public List<Stage> Stages { get; set; }
 
-        public GameSession(decimal beginBalance, decimal stake) { 
+        public GameSession(decimal beginBalance) { 
             Stages = new List<Stage>();
             BeginBalance = beginBalance;
-            Stake = stake;
+            Stake = 0;
             WinAmount = 0;
             EndBalance = beginBalance;
+        }
+
+        public void SetStake(decimal stake)
+        {
+            Stake = stake;
+            EndBalance = BeginBalance - Stake + WinAmount; 
+        }
+
+        public void SetWinAmount(decimal winAmount)
+        {
+            WinAmount = winAmount;
+            EndBalance = BeginBalance - Stake + WinAmount;
+        }
+
+        public void AddWinAmount(decimal winAmount)
+        {
+            WinAmount += winAmount;
+            EndBalance = BeginBalance - Stake + WinAmount;
         }
     }
 }

@@ -39,8 +39,8 @@ namespace SimplifiedSlotMachine.GameModel
         }
 
         public void StartSession(decimal balance, decimal stake) {
-            CurrentSession = new GameSession(balance, stake);
-            CurrentSession.EndBalance = balance - stake;
+            CurrentSession = new GameSession(balance);
+            CurrentSession.SetStake(stake);
             SessionStages = new List<Stage>(SessionSize);
         }
 
@@ -57,8 +57,7 @@ namespace SimplifiedSlotMachine.GameModel
                 decimal stake = CurrentSession.Stake;
                 var stage = RotateStage(model, stake);
                 SessionStages?.Add(stage);
-                CurrentSession.WinAmount += stage.WinAmount;
-                CurrentSession.EndBalance += stage.WinAmount;
+                CurrentSession.AddWinAmount(stage.WinAmount);
                 
                 i++;
             } while (i < SessionSize);
