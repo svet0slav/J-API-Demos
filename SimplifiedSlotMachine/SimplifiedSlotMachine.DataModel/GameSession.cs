@@ -25,12 +25,20 @@
 
         public void SetWinAmount(decimal winAmount)
         {
+            if (winAmount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(winAmount));
+            }
             WinAmount = winAmount;
             EndBalance = BeginBalance - Stake + WinAmount;
         }
 
         public void AddWinAmount(decimal winAmount)
         {
+            if (winAmount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(winAmount));
+            }
             WinAmount += winAmount;
             EndBalance = BeginBalance - Stake + WinAmount;
         }

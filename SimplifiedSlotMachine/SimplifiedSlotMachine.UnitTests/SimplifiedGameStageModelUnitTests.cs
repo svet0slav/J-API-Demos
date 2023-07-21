@@ -242,6 +242,35 @@ namespace SimplifiedSlotMachine.UnitTests
         }
 
         [DataTestMethod]
+        [DataRow("*P*P*", 10.0, 22.60)]
+        [DataRow("AAAAA", 10.0, 32.69)]
+        [DataRow("BBBBB", 10.0, 42.69)]
+        [DataRow("PPPPP", 10.0, 52.69)]
+        [DataRow("ABPAB", 10.0, 0.0)]
+        [DataRow("*AB*AB", 10.0, 0.0)]
+        [DataRow("BAA*A", 10.0, 0.0)]
+        [DataRow("A*B*A", 10.0, 0.0)]
+        [DataRow("*AAAA", 10.0, 26.15)]
+        [DataRow("BBBB*", 10.0, 31.11)]
+        [DataRow("*PPPP", 10.0, 42.15)]
+        public void CalculateWinAmount_RoundingData_Ok(string combinationString, double stakeDouble, double winDouble)
+        {
+            List<Symbol> symbols = new List<Symbol>(combinationString.Length);
+            var chars = combinationString.ToCharArray();
+            var availableSymbols = AvailableSymbols();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                var symbol = availableSymbols.Single(x => x.Letter[0] == chars[i]);
+                symbol.Coefficient += (decimal)0.0253789 * (decimal)i;
+                symbols.Add(symbol);
+            }
+
+            var actual = stageModel.CalculateWinAmount(symbols, (decimal)stakeDouble);
+
+            Assert.AreEqual((decimal)winDouble, actual);
+        }
+
+        [DataTestMethod]
         [DataRow(10.0)]
         [DataRow(0.0)]
         public void Start_CreatesStage_LoadsData(double stakeDouble)

@@ -51,7 +51,7 @@ namespace SimplifiedSlotMachine.GameModel
             if (HasStageWin(symbols))
             {
                 var sumCoefficients = symbols.Sum(s => s.Coefficient);
-                return stake * sumCoefficients;
+                return Math.Round(stake * sumCoefficients, 2);
             }
             return 0M;
         }
