@@ -39,7 +39,10 @@ namespace SimplifiedSlotMachine.GameModel
         public bool HasStageWin(List<Symbol> symbols)
         {
             if (symbols == null || symbols.Count == 0) return false;
-            var firstSymbol = symbols.First();
+            // Find first symbol that is not * (wildcard).
+            var firstSymbol = symbols.FirstOrDefault(x => !x.IsWildcard);
+            // We assume that three *** is not a win combination.
+            if (firstSymbol == null) return false;
             return symbols.All(s => s.Letter == firstSymbol.Letter || s.IsWildcard);
         }
 

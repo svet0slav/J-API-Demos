@@ -2,6 +2,7 @@
 using Moq;
 using SimplifiedSlotMachine.DataModel;
 using SimplifiedSlotMachine.GameModel;
+using System.Linq;
 
 namespace SimplifiedSlotMachine.UnitTests
 {
@@ -211,6 +212,34 @@ namespace SimplifiedSlotMachine.UnitTests
             Assert.AreEqual(16M, actual);
         }
 
+        [DataTestMethod]
+        [DataRow("*P*", 10.0, 8.0)]
+        [DataRow("AAA", 10.0, 12.0)]
+        [DataRow("BBB", 10.0, 18.0)]
+        [DataRow("PPP", 10.0, 24.0)]
+        [DataRow("ABP", 10.0, 0.0)]
+        [DataRow("*AB", 10.0, 0.0)]
+        [DataRow("BAA", 10.0, 0.0)]
+        [DataRow("AAA", 10.0, 12.0)]
+        [DataRow("A*B", 10.0, 0.0)]
+        [DataRow("*AA", 10.0, 8.0)]
+        // We assume that three *** is not a win combination.
+        [DataRow("***", 10.0, 0.0)]
+        public void CalculateWinAmount_GivenTaskSamples_Ok(string combinationString, double stakeDouble, double winDouble)
+        {
+            List<Symbol> symbols = new List<Symbol>(combinationString.Length);
+            var chars = combinationString.ToCharArray();
+            var availableSymbols = AvailableSymbols();
+            for (int i=0; i < chars.Length; i++)
+            {
+                var symbol = availableSymbols.Single(x => x.Letter[0] == chars[i]);
+                symbols.Add(symbol);
+            }
+
+            var actual = stageModel.CalculateWinAmount(symbols, (decimal)stakeDouble);
+
+            Assert.AreEqual((decimal)winDouble, actual);
+        }
 
         [DataTestMethod]
         [DataRow(10.0)]
@@ -293,6 +322,15 @@ namespace SimplifiedSlotMachine.UnitTests
             };
         }
 
-
+        protected List<Symbol> AvailableSymbols()
+        {
+            return new List<Symbol>()
+            {
+                new Symbol("Apple", "A", 0.4M, 0.45 ),
+                new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                new Symbol( "Wildcard", "*", 0, 0.05, true)
+            };
+        }
     }
 }
