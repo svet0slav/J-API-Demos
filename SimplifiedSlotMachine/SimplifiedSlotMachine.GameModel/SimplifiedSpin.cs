@@ -5,42 +5,32 @@ namespace SimplifiedSlotMachine.GameModel
 {
     public class SimplifiedSpin : IGameSpin
     {
-        protected Random random = new Random();
+        private readonly IGameRandomNumberGenerator _spinRotator;
 
         public List<Symbol> AvailableSymbols {  get; set; }
 
-        public SimplifiedSpin()
-        {
-            AvailableSymbols = new List<Symbol>();
-            // To rely on random numbers, must rotate random generator first.
-            var rotateSpin = 5 + DateTime.Now.Second / 3;
-            for (int i = 0; i < rotateSpin; i++)
+        public SimplifiedSpin(List<Symbol> availableSymbols, IGameRandomNumberGenerator spinRotator) {
+            if (availableSymbols == null || availableSymbols.Count == 0)
             {
-                random.Next(0, 100);
+                throw new ArgumentNullException(nameof(availableSymbols));
             }
-        }
-
-        public SimplifiedSpin(List<Symbol> availableSymbols) {
             AvailableSymbols = availableSymbols;
-
-            // To rely on random numbers, must rotate random generator first.
-            var rotateSpin = 5 + DateTime.Now.Second / 3;
-            for (int i = 0; i < rotateSpin; i++)
-            {
-                random.Next(0, 100);
-            }
+            _spinRotator = spinRotator;
         }
 
         public virtual List<Symbol> Rotate(int outputCount)
         {
+            int antiFreezeCounter = 0;
+
             var result = new List<Symbol>();
             for (int i = 0; i < outputCount; i++)
             {
-                double randomProbability = (double)random.Next(0, 100) / (double)100;
+                double randomProbability = _spinRotator.GetRandom();
+                
                 Symbol? selected = null;
                 foreach (Symbol item in AvailableSymbols)
                 {
-                    if (randomProbability < item.Probability)   // Probability is between 0 and 99.
+                    if (randomProbability < item.Probability)   // Probability is between 0.00 and 1.00, excluding 1.00
                     {
                         selected = item;
                         break;
@@ -55,9 +45,16 @@ namespace SimplifiedSlotMachine.GameModel
                 {
                     // This case may be the generator is not well or sum of coefficients does not cover 100%.
                     // It is not recommended to return * wildcard.
-                    // Best to retry and 
-                    // TODO: protect agains freezing this algorithm.
-                    i--;
+                    // Best retry the chance to find a symbol.
+                    antiFreezeCounter++;
+                    if (antiFreezeCounter > 100)
+                    {
+                        result.Add(AvailableSymbols.First());
+                    }
+                    else
+                    {
+                        i--;
+                    }
                 }
             }
 

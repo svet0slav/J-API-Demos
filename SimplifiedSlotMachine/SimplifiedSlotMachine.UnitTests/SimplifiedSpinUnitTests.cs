@@ -1,35 +1,61 @@
+using GameModel.Abstract;
+using Moq;
 using SimplifiedSlotMachine.DataModel;
 using SimplifiedSlotMachine.GameModel;
-using System.Threading.Tasks.Dataflow;
 
 namespace SimplifiedSlotMachine.UnitTests
 {
     [TestClass]
     public class SimplifiedSpinUnitTests
     {
+        private Mock<IGameRandomNumberGenerator> _gameRng;
+        
+        public SimplifiedSpinUnitTests() {
+            _gameRng = new Mock<IGameRandomNumberGenerator>();
+            _gameRng.Setup(r => r.GetRandom()).Returns(0.5).Verifiable();
+        }
+
         [TestMethod]
         public void Rotate_ReturnsSymbols()
         {
-            var spin = new SimplifiedSpin(AvailableSymbols());
+            var spin = new SimplifiedSpin(AvailableSymbols(), _gameRng.Object);
 
             var actual = spin.Rotate(3);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(3, actual.Count());
+            _gameRng.Verify(r => r.GetRandom(), Times.Exactly(3));
+        }
+
+        [TestMethod]
+        public void Rotate_UsesRng()
+        {
+            var spin = new SimplifiedSpin(AvailableSymbols(), _gameRng.Object);
+
+            var actual = spin.Rotate(3);
+
+            Assert.IsNotNull(actual);
+            _gameRng.Verify(r => r.GetRandom(), Times.Exactly(3));
         }
 
         [TestMethod]
         public void Rotate_NoAvailableSymbols_ReturnsException_()
         {
-            var spin = new SimplifiedSpin(null);
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var spin = new SimplifiedSpin(null, _gameRng.Object);
 
-            Assert.ThrowsException<NullReferenceException>(() => spin.Rotate(3));
+                var actual = spin.Rotate(3);
+            });
+            
+            _gameRng.Verify(r => r.GetRandom(), Times.Never);
         }
 
         [TestMethod]
         public void Rotate_AvailableSymbols_CloseToProbabilities()
         {
-            var spin = new SimplifiedSpin(AvailableSymbols());
+            var spinRotator = new SimplifiedGameSpinRng();
+            var spin = new SimplifiedSpin(AvailableSymbols(), spinRotator);
 
             var prob = new List<Tuple<Symbol, double>>(spin.AvailableSymbols.Count);
             spin.AvailableSymbols.ForEach(x => prob.Add(new Tuple<Symbol, double>(x, 0.0)));
