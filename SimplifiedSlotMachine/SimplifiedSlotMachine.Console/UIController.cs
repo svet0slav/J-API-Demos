@@ -1,6 +1,5 @@
 ﻿using GameModel.Abstract;
 using SimplifiedSlotMachine.DataModel;
-using System;
 
 namespace SimplifiedSlotMachine.Console
 {
