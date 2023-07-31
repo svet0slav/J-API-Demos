@@ -9,12 +9,12 @@ namespace SimplifiedSlotMachine.GameModel
 
         public List<Symbol> AvailableSymbols {  get; set; }
 
-        public SimplifiedSpin(List<Symbol> availableSymbols, IGameRandomNumberGenerator spinRotator) {
-            if (availableSymbols == null || availableSymbols.Count == 0)
+        public SimplifiedSpin(IEnumerable<Symbol> availableSymbols, IGameRandomNumberGenerator spinRotator) {
+            if (availableSymbols == null || availableSymbols.Count() == 0)
             {
                 throw new ArgumentNullException(nameof(availableSymbols));
             }
-            AvailableSymbols = availableSymbols;
+            AvailableSymbols = availableSymbols.ToList();
             _spinRotator = spinRotator;
         }
 

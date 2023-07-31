@@ -13,13 +13,14 @@ namespace SimplifiedSlotMachine.UnitTests
         [TestInitialize] 
         public void Initialize() {
             spin = new Mock<SimplifiedSpin>();
-            gameModel = new SimplifiedGameModel(spin.Object);
+            var configuration = GetGameConfiguration();
+            gameModel = new SimplifiedGameModel(configuration, spin.Object);
         }
 
         [TestMethod]
         public void HasSymbols()
         {
-            Assert.IsTrue(gameModel.Symbols.Count > 0);
+            Assert.IsTrue(gameModel.Spin.AvailableSymbols.Count > 0);
         }
 
         [DataTestMethod]
@@ -98,6 +99,22 @@ namespace SimplifiedSlotMachine.UnitTests
             Assert.AreEqual(64M, gameModel.CurrentSession.WinAmount);
             Assert.AreEqual(254M, gameModel.CurrentSession.EndBalance);
             spin.Verify(s => s.Rotate(It.IsAny<int>()), Times.Exactly(4));
+        }
+
+        private GameConfiguration GetGameConfiguration()
+        {
+            return new GameConfiguration()
+            {
+                SessionSize = 4,
+                SlotSymbolsCount = 3,
+                Symbols = new Symbol[]
+                {
+                    new Symbol("Apple", "A", 0.4M, 0.45),
+                    new Symbol( "Banana", "B", 0.6M, 0.35 ),
+                    new Symbol("Pineapple", "P", 0.8M, 0.15 ),
+                    new Symbol( "Wildcard", "*", 0, 0.05, true)
+                }
+            };
         }
     }
 }

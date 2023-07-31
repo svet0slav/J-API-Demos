@@ -8,34 +8,34 @@ namespace SimplifiedSlotMachine.GameModel
     /// </summary>
     public class SimplifiedGameModel: IGameModel
     {
-        public const int Rotate_Spin_Per_Session = 4;
-
-        public List<Symbol> Symbols { get; private set; }
         public GameSession? CurrentSession { get; protected set; }
         public List<Stage>? SessionStages {  get; protected set; }
         public int SessionSize { get; protected set; }
         public IGameSpin Spin { get; protected set; }
 
-        public SimplifiedGameModel(IGameSpin spin) {
-            SessionSize = Rotate_Spin_Per_Session;
+        public SimplifiedGameModel(GameConfiguration configuration, IGameSpin spin) {
+
+            if (configuration.SessionSize <= 0 || configuration.SessionSize > 100)
+            {
+                throw new ArgumentOutOfRangeException("Session Size between 1 and 100");
+            }
+            SessionSize = configuration.SessionSize;
+
+            if (spin == null)
+            {
+                throw new ArgumentNullException("Spin not configured");
+            }
             Spin = spin;
 
-            Symbols = InitializeSymbols();
-            Spin.AvailableSymbols = Symbols;
+            if (configuration.Symbols == null || configuration.Symbols?.Count() <= 2 || configuration.Symbols?.Count() > 100)
+            {
+                throw new ArgumentOutOfRangeException("Symbols should be set between 3 and 100.");
+            }
+
+            Spin.AvailableSymbols = configuration.Symbols.ToList();
 
             CurrentSession = null;
             SessionStages = null;
-        }
-
-        protected List<Symbol> InitializeSymbols()
-        {
-            return new List<Symbol>()
-            {
-                new Symbol("Apple", "A", 0.4M, 0.45),
-                new Symbol( "Banana", "B", 0.6M, 0.35 ),
-                new Symbol("Pineapple", "P", 0.8M, 0.15 ),
-                new Symbol( "Wildcard", "*", 0, 0.05, true)
-            };
         }
 
         public void StartSession(decimal balance, decimal stake) {
