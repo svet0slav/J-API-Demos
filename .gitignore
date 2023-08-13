@@ -36,3 +36,8 @@
 /RockPapSciApi/obj
 /RockPapSciApi/RockPapSci.Api/obj
 /RockPapSciApi/RockPapSci.Abstract/obj
+/RockPapSciApi/RockPapSci.Data/obj
+/RockPapSciApi/RockPapSci.Dtos/obj
+/RockPapSciApi/RockPapSci.Interfaces/obj
+/RockPapSciApi/RockPapSci.Service/obj
+/RockPapSciApi/RockPapSci.Service.Common/obj
