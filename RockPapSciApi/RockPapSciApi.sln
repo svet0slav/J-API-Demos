@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.Api", "RockPapSci.Api/RockPapSci.Api.csproj", "{32F0B9FB-8B5B-4AED-9DA5-8B6C968E1BC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RockPapSci.Api", "RockPapSci.Api\RockPapSci.Api.csproj", "{32F0B9FB-8B5B-4AED-9DA5-8B6C968E1BC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.Data", "RockPapSci.Data\RockPapSci.Data.csproj", "{85F4797D-4B5A-40CB-AA75-E9437BFBEA4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.Dtos", "RockPapSci.Dtos\RockPapSci.Dtos.csproj", "{4CDD9707-1A64-4749-99C3-6F4B556BA5A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.Service", "RockPapSci.Service\RockPapSci.Service.csproj", "{6480227E-15C4-4B7D-B1B8-ED677676B47C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.Service.Common", "RockPapSci.Service.Common\RockPapSci.Service.Common.csproj", "{62ADDB7B-AD11-4297-B889-856457079D65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{32F0B9FB-8B5B-4AED-9DA5-8B6C968E1BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32F0B9FB-8B5B-4AED-9DA5-8B6C968E1BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32F0B9FB-8B5B-4AED-9DA5-8B6C968E1BC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85F4797D-4B5A-40CB-AA75-E9437BFBEA4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85F4797D-4B5A-40CB-AA75-E9437BFBEA4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85F4797D-4B5A-40CB-AA75-E9437BFBEA4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85F4797D-4B5A-40CB-AA75-E9437BFBEA4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CDD9707-1A64-4749-99C3-6F4B556BA5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CDD9707-1A64-4749-99C3-6F4B556BA5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CDD9707-1A64-4749-99C3-6F4B556BA5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CDD9707-1A64-4749-99C3-6F4B556BA5A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6480227E-15C4-4B7D-B1B8-ED677676B47C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6480227E-15C4-4B7D-B1B8-ED677676B47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6480227E-15C4-4B7D-B1B8-ED677676B47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6480227E-15C4-4B7D-B1B8-ED677676B47C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62ADDB7B-AD11-4297-B889-856457079D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62ADDB7B-AD11-4297-B889-856457079D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62ADDB7B-AD11-4297-B889-856457079D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62ADDB7B-AD11-4297-B889-856457079D65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
