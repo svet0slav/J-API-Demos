@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSciApi", "RockPapSciApi.csproj", "{32F0B9FB-8B5B-4AED-9DA5-8B6C968E1BC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.Api", "RockPapSci.Api/RockPapSci.Api.csproj", "{32F0B9FB-8B5B-4AED-9DA5-8B6C968E1BC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

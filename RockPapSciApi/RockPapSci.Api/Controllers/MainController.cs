@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace RockPapSciApi.Controllers
+namespace RockPapSci.Api.Controllers
 {
     [ApiController]
     [Route("")]
