@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using RockPapSci.Data.Interfaces;
 using RockPapSci.Dtos.Choices;
+using RockPapSci.Dtos.Play;
 using RockPapSci.Service.Common;
 using RockPapSci.Service.Mappers;
 
@@ -9,13 +10,17 @@ namespace RockPapSci.Service
     public class GameService : IGameService
     {
         private readonly IGameModel _gameModel;
+        private readonly IGameModelRules _gameModelRules;
         private readonly IRandomGeneratorService _randomGeneratorService;
         private readonly ILogger<GameService> _logger;
 
-        public GameService(IGameModel gameModel, IRandomGeneratorService randomGeneratorService,
+        public GameService(IGameModel gameModel, 
+            IGameModelRules gameModelRules,
+            IRandomGeneratorService randomGeneratorService,
             ILogger<GameService> logger)
         {
             _gameModel = gameModel;
+            _gameModelRules = gameModelRules;
             _randomGeneratorService = randomGeneratorService;
             _logger = logger;
         }
@@ -51,6 +56,30 @@ namespace RockPapSci.Service
             var selected = _gameModel.ChoiceItems.ElementAtOrDefault(choiceNumber);
 
             return selected?.ToDto();
+        }
+
+        public async Task<PlayResponse?> BotPlayOne(ChoiceDto playerChoice, CancellationToken cancellationToken)
+        {
+            if (playerChoice == null)
+                throw new Exception("Missing choice");
+
+            var firstChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Id == playerChoice.Id);
+            if (firstChoice != null)
+                firstChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Name.ToUpper() == playerChoice.Name.ToUpper());
+            if (firstChoice == null)
+                return null;
+
+            var botChoice = await GetRandomChoice(cancellationToken);
+            var secondChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Id == botChoice?.Id);
+
+            var result = _gameModelRules.GetWinner(firstChoice, secondChoice);
+            var response = new PlayResponse() {
+                PlayerChoice = firstChoice.Id,
+                BotChoice = botChoice == null ? -1 : botChoice.Id,
+                Result = result.ToText(),
+            };
+
+            return response;
         }
     }
 }

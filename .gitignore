@@ -41,3 +41,8 @@
 /RockPapSciApi/RockPapSci.Interfaces/obj
 /RockPapSciApi/RockPapSci.Service/obj
 /RockPapSciApi/RockPapSci.Service.Common/obj
+/RockPapSciApi/RockPapSci.Api/bin/Debug/net6.0
+/RockPapSciApi/RockPapSci.Data/bin/Debug/net6.0
+/RockPapSciApi/RockPapSci.Dtos/bin/Debug/net6.0
+/RockPapSciApi/RockPapSci.Service/bin/Debug/net6.0
+/RockPapSciApi/RockPapSci.Service.Common/bin/Debug/net6.0

@@ -7,6 +7,6 @@
     {
         IGameModel GameModel { get; }
 
-        WinnerResult GetWinner(ChoiceItem Item1,  ChoiceItem Item2);
+        WinnerResult GetWinner(ChoiceItem? Item1,  ChoiceItem? Item2);
     }
 }

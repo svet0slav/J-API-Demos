@@ -17,10 +17,10 @@ namespace RockPapSci.Data
             _gameModel = model;
         }
 
-        public WinnerResult GetWinner(ChoiceItem item1, ChoiceItem item2)
+        public WinnerResult GetWinner(ChoiceItem? item1, ChoiceItem? item2)
         {
             if (item1 == null || item2 == null)
-                throw new ArgumentNullException("Choice 1 or 2 not made");
+                return WinnerResult.NotAvailable;
 
             var definition = _gameModel.Strengths.FirstOrDefault(s => s.Item1.Equals(item1) && s.Item2.Equals(item2));
             if (definition != null)

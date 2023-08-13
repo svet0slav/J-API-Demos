@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RockPapSci.Dtos.Choices;
+using RockPapSci.Dtos.Play;
 using RockPapSci.Service.Common;
 using System.Threading;
 
@@ -23,6 +24,7 @@ namespace RockPapSci.Api.Controllers
         [HttpGet("choices", Name = "GetChoices")]
         [ProducesResponseType(statusCode: 200, type: typeof(ChoicesResponse))]
         [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<ActionResult<ChoicesResponse>> GetChoices(CancellationToken cancellationToken)
         {
             var result = await _gameService.GetChoices(cancellationToken);
@@ -36,9 +38,10 @@ namespace RockPapSci.Api.Controllers
         }
 
 
-        [HttpGet("/choice", Name = "GetChoice")]
+        [HttpGet("choice", Name = "GetChoice")]
         [ProducesResponseType(statusCode: 200, type: typeof(ChoiceDto))]
         [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<ActionResult<ChoiceDto>> GetChoice(CancellationToken cancellationToken)
         {
             var result = await _gameService.GetRandomChoice(cancellationToken);
@@ -51,10 +54,28 @@ namespace RockPapSci.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("/play", Name = "Play")]
-        public IEnumerable<string> Play()
+        [HttpPost("play", Name = "Play")]
+        [ProducesResponseType(statusCode: 200, type: typeof(PlayResponse))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<ActionResult<PlayResponse>> PlayOne([FromBody]PlayRequest playRequest, CancellationToken cancellationToken)
         {
-            return Enumerable.Empty<string>();
+            if (playRequest == null || string.IsNullOrWhiteSpace(playRequest.PlayerChoice))
+                return BadRequest("No player choice");
+
+            var playerChoice = 
+                (int.TryParse(playRequest.PlayerChoice, out int choiceId))
+                ? new ChoiceDto() { Id = choiceId, Name = playRequest.PlayerChoice }
+                : new ChoiceDto() {  Name = playRequest.PlayerChoice };
+
+            var result = await _gameService.BotPlayOne(playerChoice, cancellationToken);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
     }
 }
