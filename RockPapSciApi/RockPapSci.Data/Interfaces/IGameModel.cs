@@ -2,12 +2,12 @@
 {
     public interface IGameModel
     {
-        IEnumerable<ChoiceItem> ChoiceItems { get; }
+        List<ChoiceItem> ChoiceItems { get; }
 
         /// <summary>
         /// List of choices, where Item1 is stronger than Item2.
         /// </summary>
-        IEnumerable<ChoicePair> Strengths { get; }
+        List<ChoicePair> Strengths { get; }
 
         void Initialize();
     }

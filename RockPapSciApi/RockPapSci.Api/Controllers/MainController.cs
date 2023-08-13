@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using RockPapSci.Dtos.Choices;
 using RockPapSci.Dtos.Play;
 using RockPapSci.Service.Common;
-using System.Threading;
 
 namespace RockPapSci.Api.Controllers
 {
     [ApiController]
-    [Route("")]
+    [ApiVersion("1")]
+    [Route("v{version:apiVersion}")]
+    [Produces("application/json")]
     public class MainController : ControllerBase
     {
         private readonly IGameService _gameService;
@@ -21,6 +22,7 @@ namespace RockPapSci.Api.Controllers
             _logger = logger;
         }
 
+        [MapToApiVersion("1")]
         [HttpGet("choices", Name = "GetChoices")]
         [ProducesResponseType(statusCode: 200, type: typeof(ChoicesResponse))]
         [ProducesResponseType(404)]
@@ -37,7 +39,7 @@ namespace RockPapSci.Api.Controllers
             return Ok(result);
         }
 
-
+        [MapToApiVersion("1")]
         [HttpGet("choice", Name = "GetChoice")]
         [ProducesResponseType(statusCode: 200, type: typeof(ChoiceDto))]
         [ProducesResponseType(404)]
@@ -54,6 +56,7 @@ namespace RockPapSci.Api.Controllers
             return Ok(result);
         }
 
+        [MapToApiVersion("1")]
         [HttpPost("play", Name = "Play")]
         [ProducesResponseType(statusCode: 200, type: typeof(PlayResponse))]
         [ProducesResponseType(404)]

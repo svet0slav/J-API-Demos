@@ -64,7 +64,7 @@ namespace RockPapSci.Service
                 throw new Exception("Missing choice");
 
             var firstChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Id == playerChoice.Id);
-            if (firstChoice != null)
+            if (firstChoice == null)
                 firstChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Name.ToUpper() == playerChoice.Name.ToUpper());
             if (firstChoice == null)
                 return null;

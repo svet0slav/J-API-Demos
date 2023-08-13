@@ -8,14 +8,16 @@ namespace RockPapSci.Data
     /// </summary>
     public class GameModel: IGameModel
     {
-        public IEnumerable<ChoiceItem> ChoiceItems { get; protected set; }
+        public List<ChoiceItem> ChoiceItems { get; protected set; }
 
         /// <summary>
         /// List of choices, where Item1 is stronger than Item2.
         /// </summary>
-        public IEnumerable<ChoicePair> Strengths { get; protected set; }
+        public List<ChoicePair> Strengths { get; protected set; }
 
-        public GameModel() { }
+        public GameModel() {
+            Initialize();
+        }
 
         public void Initialize()
         {
@@ -60,7 +62,7 @@ namespace RockPapSci.Data
             var item2 = ChoiceItems.Single(x => x.Letter.ToUpper() == letter2.ToUpper());
             if (item2 == null)
                 throw new Exception("Invalid symbol");
-            Strengths.Append(new ChoicePair(item1, item2));
+            Strengths.Add(new ChoicePair(item1, item2));
         }
     }
 }
