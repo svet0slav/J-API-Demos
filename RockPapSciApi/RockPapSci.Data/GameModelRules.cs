@@ -22,6 +22,8 @@ namespace RockPapSci.Data
             if (item1 == null || item2 == null)
                 return WinnerResult.NotAvailable;
 
+            if (item1.Equals(item2)) return WinnerResult.Equal;
+
             var definition = _gameModel.Strengths.FirstOrDefault(s => s.Item1.Equals(item1) && s.Item2.Equals(item2));
             if (definition != null)
             {
