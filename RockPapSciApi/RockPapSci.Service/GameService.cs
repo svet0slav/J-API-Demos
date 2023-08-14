@@ -58,19 +58,32 @@ namespace RockPapSci.Service
             return selected?.ToDto();
         }
 
+        /// <summary>
+        /// Selects a choice for the bot and returns the result agains player choice.
+        /// The Player is counted first.
+        /// </summary>
+        /// <param name="playerChoice">The player choice</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>The response for the game play between player and the bot.
+        ///     ArgumentNullException - if player choice is null.
+        ///     ArgumentOutOfRangeException - if player choice not found in the list.
+        ///     Other if bot choice can not be made.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<PlayResponse?> BotPlayOne(ChoiceDto playerChoice, CancellationToken cancellationToken)
         {
             if (playerChoice == null)
-                throw new Exception("Missing choice");
+                throw new ArgumentNullException("Missing choice");
 
             var firstChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Id == playerChoice.Id);
             if (firstChoice == null)
-                firstChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Name.ToUpper() == playerChoice.Name.ToUpper());
+                firstChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Name.ToUpper() == playerChoice.Name?.ToUpper());
             if (firstChoice == null)
-                return null;
+                throw new ArgumentOutOfRangeException($"The choice {playerChoice.Id} - {playerChoice.Name} is invalid");
 
             var botChoice = await GetRandomChoice(cancellationToken);
             var secondChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Id == botChoice?.Id);
+            if (secondChoice == null)
+                throw new ServiceException("The bot does not make choice");
 
             var result = _gameModelRules.GetWinner(firstChoice, secondChoice);
             var response = new PlayResponse() {

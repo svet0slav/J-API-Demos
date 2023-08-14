@@ -23,5 +23,14 @@
 
             return this.Id == other.Id || this.Name.ToUpper() == other.Name.ToUpper();
         }
+
+        /// <summary>
+        /// Show easier in debugging.
+        /// </summary>
+        /// <returns>Format {Letter} ({Id}) {Name}, like R (1) Rock</returns>
+        public override string ToString()
+        {
+            return $"{Letter} ({Id}) {Name}";
+        }
     }
 }

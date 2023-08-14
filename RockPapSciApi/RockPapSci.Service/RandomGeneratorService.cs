@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using RockPapSci.Service.Common;
 using RockPapSci.Service.Https;
+using System.Net.NetworkInformation;
 using System.Text.Json;
 
 namespace RockPapSci.Service
@@ -53,11 +54,13 @@ namespace RockPapSci.Service
                     return -1;
                 }
             }
+            // TODO: Implementing Polly policies, you need to implement specific exceptions or wrap such methods with Polly-specific handling of exceptions.
+            //  This we do to handle better the cases where third party service does not work well.
             catch (Exception ex)
             {
                 var msg = $"Failed reading json data.";
                 _logger.LogError(ex, msg);
-                throw new Exception(msg, ex);
+                throw new ThirdServiceException(msg, ex);
             }
         }
 

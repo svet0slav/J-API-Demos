@@ -58,10 +58,10 @@ namespace RockPapSci.Data
         {
             var item1 = ChoiceItems.Single(x => x.Letter.ToUpper() == letter1.ToUpper());
             if (item1 == null)
-                throw new Exception("Invalid symbol");
+                throw new DataException("Invalid symbol");
             var item2 = ChoiceItems.Single(x => x.Letter.ToUpper() == letter2.ToUpper());
             if (item2 == null)
-                throw new Exception("Invalid symbol");
+                throw new DataException("Invalid symbol");
             Strengths.Add(new ChoicePair(item1, item2));
         }
     }
