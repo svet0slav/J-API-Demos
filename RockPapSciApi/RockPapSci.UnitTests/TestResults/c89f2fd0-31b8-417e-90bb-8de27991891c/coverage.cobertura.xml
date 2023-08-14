@@ -1,99 +1,99 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0.6937000000000001" branch-rate="0.7037" version="1.9" timestamp="1692009494" lines-covered="145" lines-valid="209" branches-covered="38" branches-valid="54">
+<coverage line-rate="0.9047" branch-rate="0.8392000000000001" version="1.9" timestamp="1692016782" lines-covered="190" lines-valid="210" branches-covered="47" branches-valid="56">
   <sources>
     <source>D:\P\S0GITHUB\J-API-Demos\RockPapSciApi\</source>
   </sources>
   <packages>
-    <package name="RockPapSci.Data" line-rate="0.847" branch-rate="0.8332999999999999" complexity="40">
+    <package name="RockPapSci.Data" line-rate="0.8941" branch-rate="0.9166" complexity="40">
       <classes>
-        <class name="RockPapSci.Data.ChoiceItem" filename="RockPapSci.Data\ChoiceItem.cs" line-rate="0.7777" branch-rate="0.6666" complexity="11">
+        <class name="RockPapSci.Data.ChoiceItem" filename="RockPapSci.Data\ChoiceItem.cs" line-rate="1" branch-rate="1" complexity="11">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="5" hits="1329" branch="False" />
+                <line number="5" hits="1360" branch="False" />
               </lines>
             </method>
             <method name="get_Name" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="7" hits="1317" branch="False" />
+                <line number="7" hits="1345" branch="False" />
               </lines>
             </method>
             <method name="get_Letter" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="9" hits="4471" branch="False" />
+                <line number="9" hits="4493" branch="False" />
               </lines>
             </method>
-            <method name="Equals" signature="(RockPapSci.Data.ChoiceItem)" line-rate="0.8332999999999999" branch-rate="0.6666" complexity="6">
+            <method name="Equals" signature="(RockPapSci.Data.ChoiceItem)" line-rate="1" branch-rate="1" complexity="6">
               <lines>
-                <line number="19" hits="712" branch="False" />
-                <line number="20" hits="712" branch="True" condition-coverage="50% (1/2)">
+                <line number="19" hits="719" branch="False" />
+                <line number="20" hits="719" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="7" type="jump" coverage="50%" />
+                    <condition number="7" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="21" hits="0" branch="False" />
-                <line number="22" hits="885" branch="True" condition-coverage="100% (2/2)">
+                <line number="21" hits="1" branch="False" />
+                <line number="22" hits="891" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
                     <condition number="19" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="24" hits="539" branch="True" condition-coverage="50% (1/2)">
+                <line number="24" hits="545" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="37" type="jump" coverage="50%" />
+                    <condition number="37" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="25" hits="712" branch="False" />
+                <line number="25" hits="719" branch="False" />
               </lines>
             </method>
-            <method name="ToString" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="32" hits="0" branch="False" />
-                <line number="33" hits="0" branch="False" />
-                <line number="34" hits="0" branch="False" />
+                <line number="32" hits="3" branch="False" />
+                <line number="33" hits="3" branch="False" />
+                <line number="34" hits="3" branch="False" />
               </lines>
             </method>
             <method name=".ctor" signature="(System.Int32,System.String,System.String)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="11" hits="211" branch="False" />
-                <line number="12" hits="211" branch="False" />
-                <line number="13" hits="211" branch="False" />
-                <line number="14" hits="211" branch="False" />
-                <line number="15" hits="211" branch="False" />
-                <line number="16" hits="211" branch="False" />
+                <line number="11" hits="229" branch="False" />
+                <line number="12" hits="229" branch="False" />
+                <line number="13" hits="229" branch="False" />
+                <line number="14" hits="229" branch="False" />
+                <line number="15" hits="229" branch="False" />
+                <line number="16" hits="229" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="5" hits="1329" branch="False" />
-            <line number="7" hits="1317" branch="False" />
-            <line number="9" hits="4471" branch="False" />
-            <line number="19" hits="712" branch="False" />
-            <line number="20" hits="712" branch="True" condition-coverage="50% (1/2)">
+            <line number="5" hits="1360" branch="False" />
+            <line number="7" hits="1345" branch="False" />
+            <line number="9" hits="4493" branch="False" />
+            <line number="19" hits="719" branch="False" />
+            <line number="20" hits="719" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="7" type="jump" coverage="50%" />
+                <condition number="7" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="21" hits="0" branch="False" />
-            <line number="22" hits="885" branch="True" condition-coverage="100% (2/2)">
+            <line number="21" hits="1" branch="False" />
+            <line number="22" hits="891" branch="True" condition-coverage="100% (2/2)">
               <conditions>
                 <condition number="19" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="24" hits="539" branch="True" condition-coverage="50% (1/2)">
+            <line number="24" hits="545" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="37" type="jump" coverage="50%" />
+                <condition number="37" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="25" hits="712" branch="False" />
-            <line number="32" hits="0" branch="False" />
-            <line number="33" hits="0" branch="False" />
-            <line number="34" hits="0" branch="False" />
-            <line number="11" hits="211" branch="False" />
-            <line number="12" hits="211" branch="False" />
-            <line number="13" hits="211" branch="False" />
-            <line number="14" hits="211" branch="False" />
-            <line number="15" hits="211" branch="False" />
-            <line number="16" hits="211" branch="False" />
+            <line number="25" hits="719" branch="False" />
+            <line number="32" hits="3" branch="False" />
+            <line number="33" hits="3" branch="False" />
+            <line number="34" hits="3" branch="False" />
+            <line number="11" hits="229" branch="False" />
+            <line number="12" hits="229" branch="False" />
+            <line number="13" hits="229" branch="False" />
+            <line number="14" hits="229" branch="False" />
+            <line number="15" hits="229" branch="False" />
+            <line number="16" hits="229" branch="False" />
           </lines>
         </class>
         <class name="RockPapSci.Data.ChoicePair" filename="RockPapSci.Data\ChoicePair.cs" line-rate="1" branch-rate="1" complexity="3">
@@ -374,7 +374,7 @@
         </class>
       </classes>
     </package>
-    <package name="RockPapSci.Dtos" line-rate="0.6" branch-rate="0" complexity="9">
+    <package name="RockPapSci.Dtos" line-rate="0.9" branch-rate="1" complexity="9">
       <classes>
         <class name="RockPapSci.Dtos.Play.PlayRequest" filename="RockPapSci.Dtos\Play\PlayRequest.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
@@ -412,40 +412,40 @@
             <line number="17" hits="4" branch="False" />
           </lines>
         </class>
-        <class name="RockPapSci.Dtos.Choices.ChoiceDto" filename="RockPapSci.Dtos\Choices\ChoiceDto.cs" line-rate="0.4" branch-rate="0" complexity="4">
+        <class name="RockPapSci.Dtos.Choices.ChoiceDto" filename="RockPapSci.Dtos\Choices\ChoiceDto.cs" line-rate="1" branch-rate="1" complexity="4">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="11" hits="47" branch="False" />
+                <line number="11" hits="49" branch="False" />
               </lines>
             </method>
             <method name="get_Name" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="14" hits="35" branch="False" />
+                <line number="14" hits="43" branch="False" />
               </lines>
             </method>
-            <method name="ToString" signature="()" line-rate="0" branch-rate="0" complexity="2">
+            <method name="ToString" signature="()" line-rate="1" branch-rate="1" complexity="2">
               <lines>
-                <line number="21" hits="0" branch="False" />
-                <line number="22" hits="0" branch="True" condition-coverage="0% (0/2)">
+                <line number="21" hits="3" branch="False" />
+                <line number="22" hits="3" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="19" type="jump" coverage="0%" />
+                    <condition number="19" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="23" hits="0" branch="False" />
+                <line number="23" hits="3" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="11" hits="47" branch="False" />
-            <line number="14" hits="35" branch="False" />
-            <line number="21" hits="0" branch="False" />
-            <line number="22" hits="0" branch="True" condition-coverage="0% (0/2)">
+            <line number="11" hits="49" branch="False" />
+            <line number="14" hits="43" branch="False" />
+            <line number="21" hits="3" branch="False" />
+            <line number="22" hits="3" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="19" type="jump" coverage="0%" />
+                <condition number="19" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="23" hits="0" branch="False" />
+            <line number="23" hits="3" branch="False" />
           </lines>
         </class>
         <class name="RockPapSci.Dtos.Choices.ChoicesResponse" filename="RockPapSci.Dtos\Choices\ChoicesResponse.cs" line-rate="1" branch-rate="1" complexity="1">
@@ -462,24 +462,24 @@
         </class>
       </classes>
     </package>
-    <package name="RockPapSci.Service.Common" line-rate="0" branch-rate="1" complexity="6">
+    <package name="RockPapSci.Service.Common" line-rate="0.5714" branch-rate="1" complexity="6">
       <classes>
-        <class name="RockPapSci.Service.Common.ConfigReaderSettings" filename="RockPapSci.Service.Common\ConfigReaderSettings.cs" line-rate="0" branch-rate="1" complexity="2">
+        <class name="RockPapSci.Service.Common.ConfigReaderSettings" filename="RockPapSci.Service.Common\ConfigReaderSettings.cs" line-rate="1" branch-rate="1" complexity="2">
           <methods>
-            <method name="get_RandomUrl" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_RandomUrl" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="5" hits="0" branch="False" />
+                <line number="5" hits="84" branch="False" />
               </lines>
             </method>
-            <method name="get_TimeoutSeconds" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_TimeoutSeconds" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="6" hits="0" branch="False" />
+                <line number="6" hits="58" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="5" hits="0" branch="False" />
-            <line number="6" hits="0" branch="False" />
+            <line number="5" hits="84" branch="False" />
+            <line number="6" hits="58" branch="False" />
           </lines>
         </class>
         <class name="RockPapSci.Service.Common.ServiceException" filename="RockPapSci.Service.Common\ServiceException.cs" line-rate="0" branch-rate="1" complexity="2">
@@ -508,35 +508,35 @@
             <line number="14" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="RockPapSci.Service.Common.ThirdServiceException" filename="RockPapSci.Service.Common\ThirdServiceException.cs" line-rate="0" branch-rate="1" complexity="2">
+        <class name="RockPapSci.Service.Common.ThirdServiceException" filename="RockPapSci.Service.Common\ThirdServiceException.cs" line-rate="1" branch-rate="1" complexity="2">
           <methods>
-            <method name=".ctor" signature="(System.String)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="(System.String)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="8" hits="0" branch="False" />
-                <line number="9" hits="0" branch="False" />
-                <line number="10" hits="0" branch="False" />
+                <line number="8" hits="1" branch="False" />
+                <line number="9" hits="1" branch="False" />
+                <line number="10" hits="1" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="(System.String,System.Exception)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="(System.String,System.Exception)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="12" hits="0" branch="False" />
-                <line number="13" hits="0" branch="False" />
-                <line number="14" hits="0" branch="False" />
+                <line number="12" hits="19" branch="False" />
+                <line number="13" hits="19" branch="False" />
+                <line number="14" hits="19" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="8" hits="0" branch="False" />
-            <line number="9" hits="0" branch="False" />
-            <line number="10" hits="0" branch="False" />
-            <line number="12" hits="0" branch="False" />
-            <line number="13" hits="0" branch="False" />
-            <line number="14" hits="0" branch="False" />
+            <line number="8" hits="1" branch="False" />
+            <line number="9" hits="1" branch="False" />
+            <line number="10" hits="1" branch="False" />
+            <line number="12" hits="19" branch="False" />
+            <line number="13" hits="19" branch="False" />
+            <line number="14" hits="19" branch="False" />
           </lines>
         </class>
       </classes>
     </package>
-    <package name="RockPapSci.Service" line-rate="0.67" branch-rate="0.6428" complexity="34">
+    <package name="RockPapSci.Service" line-rate="0.9603" branch-rate="0.7666" complexity="36">
       <classes>
         <class name="RockPapSci.Dtos.Play.WinnerResultsMapper" filename="RockPapSci.Service\Mappers\WinnerResultsMapper.cs" line-rate="1" branch-rate="1" complexity="2">
           <methods>
@@ -654,7 +654,7 @@
             </method>
             <method name="&lt;BotPlayOne&gt;b__2" signature="(RockPapSci.Data.ChoiceItem)" line-rate="1" branch-rate="0.5" complexity="2">
               <lines>
-                <line number="84" hits="10" branch="True" condition-coverage="50% (1/2)">
+                <line number="84" hits="7" branch="True" condition-coverage="50% (1/2)">
                   <conditions>
                     <condition number="13" type="jump" coverage="50%" />
                   </conditions>
@@ -669,7 +669,7 @@
                 <condition number="23" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="84" hits="10" branch="True" condition-coverage="50% (1/2)">
+            <line number="84" hits="7" branch="True" condition-coverage="50% (1/2)">
               <conditions>
                 <condition number="13" type="jump" coverage="50%" />
               </conditions>
@@ -818,90 +818,100 @@
             <line number="59" hits="3" branch="False" />
           </lines>
         </class>
-        <class name="RockPapSci.Service.RandomGeneratorService" filename="RockPapSci.Service\RandomGeneratorService.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="RockPapSci.Service.RandomGeneratorService" filename="RockPapSci.Service\RandomGeneratorService.cs" line-rate="1" branch-rate="1" complexity="1">
           <methods>
-            <method name=".ctor" signature="(RockPapSci.Service.Common.ConfigReaderSettings,System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILogger`1&lt;RockPapSci.Service.RandomGeneratorService&gt;)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="(RockPapSci.Service.Common.ConfigReaderSettings,System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILogger`1&lt;RockPapSci.Service.RandomGeneratorService&gt;)" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="15" hits="0" branch="False" />
-                <line number="16" hits="0" branch="False" />
-                <line number="17" hits="0" branch="False" />
-                <line number="18" hits="0" branch="False" />
-                <line number="19" hits="0" branch="False" />
-                <line number="20" hits="0" branch="False" />
+                <line number="14" hits="29" branch="False" />
+                <line number="15" hits="29" branch="False" />
+                <line number="16" hits="29" branch="False" />
+                <line number="17" hits="29" branch="False" />
+                <line number="18" hits="29" branch="False" />
+                <line number="19" hits="29" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="15" hits="0" branch="False" />
-            <line number="16" hits="0" branch="False" />
-            <line number="17" hits="0" branch="False" />
-            <line number="18" hits="0" branch="False" />
-            <line number="19" hits="0" branch="False" />
-            <line number="20" hits="0" branch="False" />
+            <line number="14" hits="29" branch="False" />
+            <line number="15" hits="29" branch="False" />
+            <line number="16" hits="29" branch="False" />
+            <line number="17" hits="29" branch="False" />
+            <line number="18" hits="29" branch="False" />
+            <line number="19" hits="29" branch="False" />
           </lines>
         </class>
-        <class name="RockPapSci.Service.RandomGeneratorService/&lt;GetRandom&gt;d__4" filename="RockPapSci.Service\RandomGeneratorService.cs" line-rate="0" branch-rate="0" complexity="4">
+        <class name="RockPapSci.Service.RandomGeneratorService/&lt;GetRandom&gt;d__4" filename="RockPapSci.Service\RandomGeneratorService.cs" line-rate="1" branch-rate="0.8332999999999999" complexity="6">
           <methods>
-            <method name="MoveNext" signature="()" line-rate="0" branch-rate="0" complexity="4">
+            <method name="MoveNext" signature="()" line-rate="1" branch-rate="0.8332999999999999" complexity="6">
               <lines>
-                <line number="31" hits="0" branch="False" />
-                <line number="33" hits="0" branch="False" />
-                <line number="34" hits="0" branch="False" />
-                <line number="36" hits="0" branch="False" />
-                <line number="38" hits="0" branch="False" />
-                <line number="39" hits="0" branch="False" />
-                <line number="41" hits="0" branch="False" />
-                <line number="43" hits="0" branch="False" />
-                <line number="45" hits="0" branch="True" condition-coverage="0% (0/4)">
+                <line number="30" hits="29" branch="False" />
+                <line number="31" hits="32" branch="True" condition-coverage="100% (2/2)">
                   <conditions>
-                    <condition number="531" type="jump" coverage="0%" />
-                    <condition number="560" type="jump" coverage="0%" />
+                    <condition number="27" type="jump" coverage="100%" />
                   </conditions>
                 </line>
-                <line number="46" hits="0" branch="False" />
-                <line number="47" hits="0" branch="False" />
-                <line number="48" hits="0" branch="False" />
-                <line number="49" hits="0" branch="False" />
-                <line number="52" hits="0" branch="False" />
-                <line number="53" hits="0" branch="False" />
-                <line number="54" hits="0" branch="False" />
-                <line number="59" hits="0" branch="False" />
-                <line number="60" hits="0" branch="False" />
-                <line number="61" hits="0" branch="False" />
-                <line number="62" hits="0" branch="False" />
-                <line number="63" hits="0" branch="False" />
-                <line number="65" hits="0" branch="False" />
+                <line number="34" hits="26" branch="False" />
+                <line number="35" hits="26" branch="False" />
+                <line number="37" hits="26" branch="False" />
+                <line number="39" hits="26" branch="False" />
+                <line number="40" hits="7" branch="False" />
+                <line number="42" hits="7" branch="False" />
+                <line number="44" hits="7" branch="False" />
+                <line number="46" hits="7" branch="True" condition-coverage="75% (3/4)">
+                  <conditions>
+                    <condition number="574" type="jump" coverage="50%" />
+                    <condition number="603" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="47" hits="6" branch="False" />
+                <line number="48" hits="6" branch="False" />
+                <line number="49" hits="6" branch="False" />
+                <line number="50" hits="6" branch="False" />
+                <line number="53" hits="1" branch="False" />
+                <line number="57" hits="1" branch="False" />
+                <line number="58" hits="1" branch="False" />
+                <line number="63" hits="20" branch="False" />
+                <line number="64" hits="19" branch="False" />
+                <line number="65" hits="19" branch="False" />
+                <line number="66" hits="19" branch="False" />
+                <line number="67" hits="19" branch="False" />
+                <line number="69" hits="6" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="31" hits="0" branch="False" />
-            <line number="33" hits="0" branch="False" />
-            <line number="34" hits="0" branch="False" />
-            <line number="36" hits="0" branch="False" />
-            <line number="38" hits="0" branch="False" />
-            <line number="39" hits="0" branch="False" />
-            <line number="41" hits="0" branch="False" />
-            <line number="43" hits="0" branch="False" />
-            <line number="45" hits="0" branch="True" condition-coverage="0% (0/4)">
+            <line number="30" hits="29" branch="False" />
+            <line number="31" hits="32" branch="True" condition-coverage="100% (2/2)">
               <conditions>
-                <condition number="531" type="jump" coverage="0%" />
-                <condition number="560" type="jump" coverage="0%" />
+                <condition number="27" type="jump" coverage="100%" />
               </conditions>
             </line>
-            <line number="46" hits="0" branch="False" />
-            <line number="47" hits="0" branch="False" />
-            <line number="48" hits="0" branch="False" />
-            <line number="49" hits="0" branch="False" />
-            <line number="52" hits="0" branch="False" />
-            <line number="53" hits="0" branch="False" />
-            <line number="54" hits="0" branch="False" />
-            <line number="59" hits="0" branch="False" />
-            <line number="60" hits="0" branch="False" />
-            <line number="61" hits="0" branch="False" />
-            <line number="62" hits="0" branch="False" />
-            <line number="63" hits="0" branch="False" />
-            <line number="65" hits="0" branch="False" />
+            <line number="34" hits="26" branch="False" />
+            <line number="35" hits="26" branch="False" />
+            <line number="37" hits="26" branch="False" />
+            <line number="39" hits="26" branch="False" />
+            <line number="40" hits="7" branch="False" />
+            <line number="42" hits="7" branch="False" />
+            <line number="44" hits="7" branch="False" />
+            <line number="46" hits="7" branch="True" condition-coverage="75% (3/4)">
+              <conditions>
+                <condition number="574" type="jump" coverage="50%" />
+                <condition number="603" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="47" hits="6" branch="False" />
+            <line number="48" hits="6" branch="False" />
+            <line number="49" hits="6" branch="False" />
+            <line number="50" hits="6" branch="False" />
+            <line number="53" hits="1" branch="False" />
+            <line number="57" hits="1" branch="False" />
+            <line number="58" hits="1" branch="False" />
+            <line number="63" hits="20" branch="False" />
+            <line number="64" hits="19" branch="False" />
+            <line number="65" hits="19" branch="False" />
+            <line number="66" hits="19" branch="False" />
+            <line number="67" hits="19" branch="False" />
+            <line number="69" hits="6" branch="False" />
           </lines>
         </class>
         <class name="RockPapSci.Service.Mappers.ChoiceMappersExtensions" filename="RockPapSci.Service\Mappers\ChoiceMappersExtensions.cs" line-rate="1" branch-rate="0.5" complexity="2">
@@ -938,16 +948,16 @@
             <line number="16" hits="4" branch="False" />
           </lines>
         </class>
-        <class name="RockPapSci.Service.Https.RandomResponseObject" filename="RockPapSci.Service\Https\RandomResponseObject.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="RockPapSci.Service.Https.RandomResponseObject" filename="RockPapSci.Service\Https\RandomResponseObject.cs" line-rate="1" branch-rate="1" complexity="1">
           <methods>
-            <method name="get_Random" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Random" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="8" hits="0" branch="False" />
+                <line number="8" hits="19" branch="False" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="8" hits="0" branch="False" />
+            <line number="8" hits="19" branch="False" />
           </lines>
         </class>
       </classes>

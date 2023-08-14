@@ -1,13 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
+using Moq;
 using RockPapSci.Data;
 using RockPapSci.Data.Interfaces;
+using RockPapSci.Dtos.Choices;
+using RockPapSci.Dtos.Play;
 using RockPapSci.Service;
 using RockPapSci.Service.Common;
-using RockPapSci.Dtos.Choices;
-using Moq;
-using Castle.Core.Logging;
-using RockPapSci.Service.Https;
-using RockPapSci.Dtos.Play;
 
 namespace RockPapSci.UnitTests.Service
 {

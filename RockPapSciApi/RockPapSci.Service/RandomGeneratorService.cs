@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using RockPapSci.Service.Common;
 using RockPapSci.Service.Https;
-using System.Net.NetworkInformation;
 using System.Text.Json;
 
 namespace RockPapSci.Service
@@ -29,6 +28,8 @@ namespace RockPapSci.Service
         /// <exception cref="Exception"></exception>
         public async Task<int> GetRandom(int N, CancellationToken cancellationToken)
         {
+            if (N < 2) throw new ArgumentOutOfRangeException(nameof(N), N, "GetRandom works with count > 2.");
+
             try
             {
                 var url = _settings.RandomUrl;
@@ -50,13 +51,16 @@ namespace RockPapSci.Service
                 }
                 else
                 {
-                    _logger.LogInformation($"Parsing json data failed.");
-                    return -1;
+                    // TODO: Think over whether is needed to add content to the logger, because it is vulnerability
+                    // var text = responseMessage.Content.ReadAsStringAsync(cancellationToken);
+                    // _logger.LogInformation($"Parsing json data failed.", text);
+                    _logger.LogError("Parsing json data failed. May be invalid format or no data.");
+                    throw new ThirdServiceException("Parsing json data failed. May be invalid format or no data.");
                 }
             }
             // TODO: Implementing Polly policies, you need to implement specific exceptions or wrap such methods with Polly-specific handling of exceptions.
             //  This we do to handle better the cases where third party service does not work well.
-            catch (Exception ex)
+            catch (Exception ex) when (!(ex is ThirdServiceException))
             {
                 var msg = $"Failed reading json data.";
                 _logger.LogError(ex, msg);
