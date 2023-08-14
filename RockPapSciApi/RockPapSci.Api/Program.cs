@@ -73,7 +73,13 @@ builder.Services.Configure<JsonSerializerOptions>(options =>
 
 // Register the interfaces.
 builder.Services.AddScoped(typeof(IRandomGeneratorService), typeof(RandomGeneratorService));
-builder.Services.AddScoped<IGameModel, GameModel>();
+builder.Services.AddScoped<IGameModel, GameModel>(provider =>
+{
+    var model = new GameModel();
+    model.Initialize();
+    return model;
+});
+
 builder.Services.AddScoped<IGameModelRules, GameModelRules>();
 builder.Services.AddTransient<IGameService, GameService>();
 

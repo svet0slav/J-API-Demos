@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.Service.Common",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.UnitTests", "RockPapSci.UnitTests\RockPapSci.UnitTests.csproj", "{AC7B8FB3-95BF-4AD1-8D7B-FA24F11DF7B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPapSci.Api.UnitTests", "RockPapSci.Api.UnitTests\RockPapSci.Api.UnitTests.csproj", "{0633722F-F0FF-411D-87E9-D0EAC817EE6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{AC7B8FB3-95BF-4AD1-8D7B-FA24F11DF7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC7B8FB3-95BF-4AD1-8D7B-FA24F11DF7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC7B8FB3-95BF-4AD1-8D7B-FA24F11DF7B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0633722F-F0FF-411D-87E9-D0EAC817EE6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0633722F-F0FF-411D-87E9-D0EAC817EE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0633722F-F0FF-411D-87E9-D0EAC817EE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0633722F-F0FF-411D-87E9-D0EAC817EE6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

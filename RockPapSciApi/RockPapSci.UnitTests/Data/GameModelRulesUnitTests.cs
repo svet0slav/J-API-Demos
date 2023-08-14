@@ -13,7 +13,7 @@ namespace RockPapSci.UnitTests.Data
         {
             _gameModel = new Mock<IGameModel>();
 
-            var testModel = new GameModel();
+            var testModel = FakeGameModel();
             testModel.Initialize();
 
             _gameModel.SetupGet(m => m.ChoiceItems).Returns(testModel.ChoiceItems);
@@ -91,6 +91,13 @@ namespace RockPapSci.UnitTests.Data
 
             var result = rules.GetWinner(last.Item1, last.Item2);
             Assert.AreEqual(WinnerResult.NotAvailable, result);
+        }
+
+        private IGameModel FakeGameModel()
+        {
+            var model = new GameModel();
+            model.Initialize();
+            return model;
         }
     }
 }

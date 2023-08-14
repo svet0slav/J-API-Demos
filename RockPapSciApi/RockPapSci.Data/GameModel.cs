@@ -16,7 +16,9 @@ namespace RockPapSci.Data
         public List<ChoicePair> Strengths { get; protected set; }
 
         public GameModel() {
-            Initialize();
+            // Do not initialize with data in constructor. This will allow to find bugs in initialization.
+            ChoiceItems = new List<ChoiceItem>();
+            Strengths = new List<ChoicePair>();
         }
 
         public void Initialize()
