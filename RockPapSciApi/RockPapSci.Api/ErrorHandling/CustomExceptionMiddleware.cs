@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using RockPapSci.Service.Common;
+using System.Net;
 
 //used from https://stackoverflow.com/questions/38630076/asp-net-core-web-api-exception-handling
 
@@ -19,6 +20,12 @@ namespace RockPapSci.Api.ErrorHandling
             {
                 await next(context);
             }
+            catch (ServiceException svex) 
+            {
+                await HandleExceptionAsync(context, svex);
+            }
+            //TODO: May develop other verifications for Polly-specific or library specific exceptions how to translate them to a general error response.
+            // I have done this in the past, but because it is a test task I would not invest time.
             catch (HttpStatusCodeException ex)
             {
                 await HandleExceptionAsync(context, ex);
@@ -56,6 +63,24 @@ namespace RockPapSci.Api.ErrorHandling
             }
             return context.Response.WriteAsync(result);
         }
+
+        private Task HandleExceptionAsync(HttpContext context, ServiceException exception)
+        {
+            string result = null;
+            context.Response.ContentType = "application/json";
+            result = new ErrorDetails()
+            {
+                // TODO: Could write own message and hide the original one to not share detailed information or make app vulnerable.
+                Message = exception.Message,
+                StatusCode = (int)HttpStatusCode.InternalServerError
+            }.ToString();
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            return context.Response.WriteAsync(result);
+        }
+
+        //TODO: May develop other verifications for Polly-specific or library specific exceptions how to translate them to a general error response.
+        // I have done this in the past, but because it is a test task I would not invest time.
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
