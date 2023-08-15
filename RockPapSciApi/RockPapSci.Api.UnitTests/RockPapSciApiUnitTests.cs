@@ -56,7 +56,6 @@ namespace RockPapSci.Api.UnitTests
         [TestMethod]
         public async Task MainController_Choice_Ok()
         {
-            var testModel = FakeGameModel();
             var testChoice = new ChoiceDto()
             {
                 Id = 2, Name = "Scissors"
@@ -81,11 +80,9 @@ namespace RockPapSci.Api.UnitTests
             Assert.AreEqual("Scissors", value.Name);
         }
 
-
         [TestMethod]
         public async Task MainController_Play_Ok()
         {
-            var testModel = FakeGameModel();
             var playChoice = new ChoiceDto()
             {
                 Id = 1,
@@ -96,8 +93,6 @@ namespace RockPapSci.Api.UnitTests
                 Id = 2,
                 Name = "Scissors"
             };
-            _gameService.Setup(gs => gs.GetRandomChoice(It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult<ChoiceDto?>(testChoice));
 
             var playRequest = new PlayRequest() { PlayerChoice = playChoice.Name };
             var playResponse = new PlayResponse()

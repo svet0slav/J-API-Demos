@@ -78,7 +78,7 @@ namespace RockPapSci.Service
             if (firstChoice == null)
                 firstChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Name.ToUpper() == playerChoice.Name?.ToUpper());
             if (firstChoice == null)
-                throw new ArgumentOutOfRangeException($"The choice {playerChoice.Id} - {playerChoice.Name} is invalid");
+                throw new ArgumentOutOfRangeException(nameof(playerChoice), $"The choice {playerChoice.Id} - {playerChoice.Name} is invalid");
 
             var botChoice = await GetRandomChoice(cancellationToken);
             var secondChoice = _gameModel.ChoiceItems.FirstOrDefault(c => c.Id == botChoice?.Id);

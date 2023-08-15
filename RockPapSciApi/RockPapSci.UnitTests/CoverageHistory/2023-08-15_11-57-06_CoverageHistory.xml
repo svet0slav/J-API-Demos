@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2023-08-15_11-57-06" tag="">
+  <assembly name="RockPapSci.Data">
+    <class name="RockPapSci.Data.ChoiceItem" coveredlines="18" coverablelines="18" totallines="36" coveredbranches="6" totalbranches="6" coveredcodeelements="6" totalcodeelements="6" />
+    <class name="RockPapSci.Data.ChoicePair" coveredlines="6" coverablelines="6" totallines="14" coveredbranches="0" totalbranches="0" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="RockPapSci.Data.DataException" coveredlines="0" coverablelines="6" totallines="16" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="2" />
+    <class name="RockPapSci.Data.GameModel" coveredlines="33" coverablelines="35" totallines="70" coveredbranches="2" totalbranches="4" coveredcodeelements="5" totalcodeelements="5" />
+    <class name="RockPapSci.Data.GameModelRules" coveredlines="20" coverablelines="21" totallines="47" coveredbranches="14" totalbranches="14" coveredcodeelements="2" totalcodeelements="3" />
+  </assembly>
+  <assembly name="RockPapSci.Dtos">
+    <class name="RockPapSci.Dtos.Choices.ChoiceDto" coveredlines="5" coverablelines="5" totallines="25" coveredbranches="2" totalbranches="2" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="RockPapSci.Dtos.Choices.ChoicesResponse" coveredlines="1" coverablelines="1" totallines="7" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="RockPapSci.Dtos.Play.PlayRequest" coveredlines="0" coverablelines="1" totallines="16" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="1" />
+    <class name="RockPapSci.Dtos.Play.PlayResponse" coveredlines="3" coverablelines="3" totallines="19" coveredbranches="0" totalbranches="0" coveredcodeelements="3" totalcodeelements="3" />
+  </assembly>
+  <assembly name="RockPapSci.Service">
+    <class name="RockPapSci.Dtos.Play.WinnerResultsMapper" coveredlines="10" coverablelines="10" totallines="20" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="RockPapSci.Service.GameService" coveredlines="49" coverablelines="53" totallines="98" coveredbranches="17" totalbranches="22" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="RockPapSci.Service.Https.RandomResponseObject" coveredlines="1" coverablelines="1" totallines="10" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="RockPapSci.Service.Mappers.ChoiceMappersExtensions" coveredlines="8" coverablelines="8" totallines="18" coveredbranches="1" totalbranches="2" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="RockPapSci.Service.RandomGeneratorService" coveredlines="29" coverablelines="29" totallines="73" coveredbranches="5" totalbranches="6" coveredcodeelements="2" totalcodeelements="2" />
+  </assembly>
+  <assembly name="RockPapSci.Service.Common">
+    <class name="RockPapSci.Service.Common.ConfigReaderSettings" coveredlines="2" coverablelines="2" totallines="8" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="RockPapSci.Service.Common.ServiceException" coveredlines="0" coverablelines="6" totallines="16" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="2" />
+    <class name="RockPapSci.Service.Common.ThirdServiceException" coveredlines="6" coverablelines="6" totallines="16" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+  </assembly>
+</coverage>

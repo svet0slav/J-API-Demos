@@ -126,6 +126,30 @@ namespace RockPapSci.UnitTests.Service
         }
 
         [TestMethod]
+        public void Service_AllSetupBotNoChoice_Fails()
+        {
+            var service = new GameService(_gameModel.Object, _gameModelRules.Object, _randomGeneratorService.Object, _logger.Object);
+            // Setup the result, so it is NA
+            _gameModelRules.Setup(s => s.GetWinner(It.IsAny<ChoiceItem>(), It.IsAny<ChoiceItem>()))
+                .Returns(WinnerResult.NotAvailable).Verifiable();
+            _randomGeneratorService.Setup(r => r.GetRandom(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(-1))
+                .Verifiable();
+
+            var actualEx = Assert.ThrowsExceptionAsync<ServiceException>(() =>
+                service.BotPlayOne(new ChoiceDto() { Id = 3, Name = "Lizard" }, CancellationToken.None));
+
+            Assert.IsNotNull(actualEx.Result);
+            Assert.AreEqual("The bot does not make choice", actualEx.Result?.Message);
+            Assert.IsNull(actualEx.Result?.InnerException);
+
+            _gameModel.Verify(m => m.ChoiceItems, Times.AtLeast(2));
+            _gameModelRules.Verify(r => r.GetWinner(It.IsAny<ChoiceItem>(), It.IsAny<ChoiceItem>()),
+                Times.Never);
+            _randomGeneratorService.Verify(rgs => rgs.GetRandom(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [TestMethod]
         public void Service_AllSetupPlayerChoiceInvalidId_FindByName() {
             var service = new GameService(_gameModel.Object, _gameModelRules.Object, _randomGeneratorService.Object, _logger.Object);
             // Setup the result, so it is NA
@@ -146,6 +170,28 @@ namespace RockPapSci.UnitTests.Service
             _gameModelRules.Verify(r => r.GetWinner(It.IsAny<ChoiceItem>(), It.IsAny<ChoiceItem>()),
                 Times.Once);
             _randomGeneratorService.Verify(rgs => rgs.GetRandom(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [TestMethod]
+        public void Service_AllSetupPlayerChoiceInvalidIdAndName_Fails()
+        {
+            var service = new GameService(_gameModel.Object, _gameModelRules.Object, _randomGeneratorService.Object, _logger.Object);
+            // Setup the result, so it is NA
+            _gameModelRules.Setup(s => s.GetWinner(It.IsAny<ChoiceItem>(), It.IsAny<ChoiceItem>()))
+                .Returns(WinnerResult.SecondWins).Verifiable();
+
+            var actualEx = Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(() =>
+                    service.BotPlayOne(new ChoiceDto() { Id = 9999, Name = "NA" }, CancellationToken.None));
+
+            Assert.IsNotNull(actualEx);
+            Assert.AreEqual("The choice 9999 - NA is invalid (Parameter 'playerChoice')", actualEx.Result.Message);
+            Assert.AreEqual("playerChoice", actualEx.Result.ParamName);
+            Assert.IsNull(actualEx.Result.InnerException);
+
+            _gameModel.Verify(m => m.ChoiceItems, Times.AtLeast(2));
+            _gameModelRules.Verify(r => r.GetWinner(It.IsAny<ChoiceItem>(), It.IsAny<ChoiceItem>()),
+                Times.Never);
+            _randomGeneratorService.Verify(rgs => rgs.GetRandom(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Never);
         }
 
         private int GetRandomServiceResult(int n)
