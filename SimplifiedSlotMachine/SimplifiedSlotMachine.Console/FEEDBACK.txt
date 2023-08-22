@@ -1,14 +1,15 @@
-﻿FEEDBACK +/- and FIXES
+﻿FEEDBACK
+Feedback from reviewer after first presented version, * +/- and FIXES
 
 + uses decimal for monetary amounts
 + UI abstracted
 + has tests
 
-DONE - GameSession properties are manipulated from outside
-DONE RANDOM- random and console not abstracted
-DONE - win logic does not work if first symbol is wildcard
-PROPOSED - no configuration, hard-coded size of slot and symbols
-NO TIME NOW - no DI, interfaces not really used
+- GameSession properties are manipulated from outside. (DONE)
+- random and console not abstracted. (DONE)
+- win logic does not work if first symbol is wildcard. (DONE)
+- no configuration, hard-coded size of slot and symbols (PROPOSED)
+- no DI, interfaces not really used. (NO TIME NOW)
 
 and
 (+) There is some input validation
@@ -17,19 +18,19 @@ and
 (+) There are unit tests in the solution
 (+) Testing probabilities are met
 
+(~) Code is protected with inline checks but it's unnecessary at most places. It's causing clutter. (TODO)
 
-(~) Code is protected with inline checks but it's unnecessary at most places. It's causing clutter
+(-) Amounts are not rounded. (DONE)
+(-) RNG is odd. Instead of it being built better there are comments explaining why it's done that way. (DONE)
+(-) Symbols are hard-coded. (PROPOSED)
+(-) RNG is not abstracted. (DONE)
+(-) No DI. Although there are interfaces, they are weirdly put in another project and not fully utilized. (NO TIME NOW)
+(-) Not configurable. (PROPOSED)
+(-) Mix use of DTO and DomainModel design. (NO TIME NOW)
+(-) There are unnecessary tests to the unnecessary exceptions. (NO TIME NOW)
 
-DONE (-) Amounts are not rounded
-DONE (-) RNG is odd. Instead of it being built better there are comments explaining why it's done that way
-PROPOSED (-) Symbols are hard-coded
-DONE (-) RNG is not abstracted
-NO TIME NOW (-) No DI. Although there are interfaces, they are weirdly put in another project and not fully utilized
-PROPOSED (-) Not configurable
-NO TIME NOW (-) Mix use of DTO and DomainModel design
-NO TIME NOW (-) There are unnecessary tests to the unnecessary exceptions
+* You could see other examples of DI and configuration and another two similar test tasks:
+https://github.com/svet0slav/J-API-Demos/tree/main/MockyProducts2306 
+https://github.com/svet0slav/J-API-Demos/tree/main/RockPapSciApi 
 
-See for examples of DI and configuration and another test task:
-https://github.com/svet0slav/J-API-Demos/tree/main/MockyProducts2306
-
-* Task descriptions is not published, because it is intelectual property of the companies that give the tasks.
+* Task description is not published, because it is intelectual property of the companies that give the tasks.
