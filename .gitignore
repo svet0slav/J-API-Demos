@@ -52,3 +52,8 @@
 /RockPapSciApi/RockPapSci.Api.UnitTests/bin/Debug/net6.0
 /RockPapSciApi/RockPapSci.Api.UnitTests/obj
 /RockPapSciApi/RockPapSci.Api.UnitTests/TestResults
+/TaxCalc/TaxCalc.Api/bin/Debug/net6.0
+/TaxCalc/TaxCalc.Api/obj
+/TaxCalc/TaxCalc.Domain/bin/Debug/net6.0
+/TaxCalc/TaxCalc.Domain/obj
+/TaxCalc/TaxCalc.Interfaces/bin/Debug/net6.0
