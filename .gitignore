@@ -57,3 +57,8 @@
 /TaxCalc/TaxCalc.Domain/bin/Debug/net6.0
 /TaxCalc/TaxCalc.Domain/obj
 /TaxCalc/TaxCalc.Interfaces/bin/Debug/net6.0
+/TaxCalc/TaxCalc.Interfaces/obj
+/TaxCalc/TaxCalc.Service/bin/Debug/net6.0
+/TaxCalc/TaxCalc.Service/obj
+/TaxCalc/TaxCalc.Services.Common/bin/Debug/net6.0
+/TaxCalc/TaxCalc.Services.Common/obj
