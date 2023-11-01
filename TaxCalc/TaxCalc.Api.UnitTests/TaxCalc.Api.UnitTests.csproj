@@ -22,7 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\TaxCalc.Api\TaxCalc.Api.csproj" />
     <ProjectReference Include="..\TaxCalc.Services.Common\TaxCalc.Services.Common.csproj" />
-    <ProjectReference Include="..\TaxCalc.Service\TaxCalc.Service.csproj" />
   </ItemGroup>
 
 </Project>

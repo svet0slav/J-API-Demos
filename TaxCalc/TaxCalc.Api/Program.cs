@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Text.Json;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -45,7 +44,6 @@ builder.Services.AddControllers()
 
 // Configure the validaiton.
 builder.Services.AddFluentValidationAutoValidation();
-// Manually setup your validators
 builder.Services.AddTransient<IValidator<TaxPayerRequest>, TaxPayerRequestValidator>();
 
 builder.Services.AddApiVersioning();

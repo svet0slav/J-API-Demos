@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2023-11-02_00-27-18" tag="">
+  <assembly name="TaxCalc.Domain">
+    <class name="TaxCalc.Domain.Calculate.TaxesCalculator" coveredlines="32" coverablelines="34" totallines="64" coveredbranches="3" totalbranches="4" coveredcodeelements="5" totalcodeelements="5" />
+    <class name="TaxCalc.Domain.Data.TaxesData" coveredlines="7" coverablelines="7" totallines="22" coveredbranches="0" totalbranches="0" coveredcodeelements="7" totalcodeelements="7" />
+    <class name="TaxCalc.Domain.Data.TaxPayer" coveredlines="10" coverablelines="10" totallines="21" coveredbranches="0" totalbranches="0" coveredcodeelements="6" totalcodeelements="6" />
+    <class name="TaxCalc.Domain.TaxRules.CharitySpentTaxPercent" coveredlines="16" coverablelines="16" totallines="43" coveredbranches="2" totalbranches="2" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="TaxCalc.Domain.TaxRules.IncomeTaxRangePercent" coveredlines="17" coverablelines="17" totallines="51" coveredbranches="4" totalbranches="4" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="TaxCalc.Domain.TaxRules.NoTaxBelow" coveredlines="11" coverablelines="11" totallines="28" coveredbranches="2" totalbranches="2" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="TaxCalc.Domain.TaxRules.SocialTaxRangePercent" coveredlines="18" coverablelines="18" totallines="51" coveredbranches="4" totalbranches="4" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="TaxCalc.Domain.TaxRules.TaxesComplete" coveredlines="8" coverablelines="8" totallines="23" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="TaxCalc.Domain.TaxRules.TaxesCreate" coveredlines="11" coverablelines="11" totallines="26" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="TaxCalc.Domain.TaxRules.TaxRuleBase" coveredlines="2" coverablelines="2" totallines="12" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+  </assembly>
+  <assembly name="TaxCalc.Domain.Common">
+    <class name="TaxCalc.Domain.Common.Config.TaxJurisdictionConfiguration" coveredlines="19" coverablelines="19" totallines="27" coveredbranches="0" totalbranches="0" coveredcodeelements="9" totalcodeelements="9" />
+    <class name="TaxCalc.Domain.Common.Config.TaxJurisdictionConfigurationBase" coveredlines="5" coverablelines="5" totallines="12" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+  </assembly>
+  <assembly name="TaxCalc.Service">
+    <class name="TaxCalc.Service.CalculatorService" coveredlines="21" coverablelines="27" totallines="61" coveredbranches="2" totalbranches="4" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="TaxCalc.Service.Mappers.MappersConfiguration" coveredlines="10" coverablelines="10" totallines="28" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+  </assembly>
+  <assembly name="TaxCalc.Services.Common">
+    <class name="TaxCalc.Service.Common.ServiceException" coveredlines="0" coverablelines="6" totallines="16" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="2" />
+    <class name="TaxCalc.Services.Common.Dtos.TaxesDto" coveredlines="6" coverablelines="6" totallines="19" coveredbranches="0" totalbranches="0" coveredcodeelements="6" totalcodeelements="6" />
+    <class name="TaxCalc.Services.Common.Dtos.TaxPayerDto" coveredlines="5" coverablelines="5" totallines="17" coveredbranches="0" totalbranches="0" coveredcodeelements="5" totalcodeelements="5" />
+  </assembly>
+</coverage>

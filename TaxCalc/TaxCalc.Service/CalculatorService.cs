@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using TaxCalc.Domain.Calculate;
 using TaxCalc.Domain.Common.Config;
 using TaxCalc.Domain.Data;
+using TaxCalc.Service.Common;
 using TaxCalc.Services.Common.Dtos;
 using TaxCalc.Services.Common.Interfaces;
 
@@ -27,19 +28,34 @@ namespace TaxCalc.Service
 
         public async Task<TaxesDto> Calculate(TaxPayerDto taxPayer, CancellationToken cancellationToken)
         {
-            var payer = _mapper.Map<TaxPayerDto, TaxPayer>(taxPayer);
+            if (taxPayer == null)
+                throw new ArgumentNullException(nameof(taxPayer), "Missing tax payer");
 
             _logger.LogInformation($"TaxPayer {taxPayer.FullName} calculation with income {taxPayer.GrossIncome}");
 
-            _taxCalculator.LoadRules(_jurisdictionConfiguration);
+            try
+            {
+                var payer = _mapper.Map<TaxPayerDto, TaxPayer>(taxPayer);
 
-            var taxesData = await _taxCalculator.Calculate(payer, cancellationToken);
+                _taxCalculator.LoadRules(_jurisdictionConfiguration);
 
-            var result = _mapper.Map<TaxesData, TaxesDto>(taxesData);
+                var taxesData = await _taxCalculator.Calculate(payer, cancellationToken);
 
-            _logger.LogInformation($"TaxPayer {taxPayer.FullName} total tax {result.TotalTax}");
+                if (taxesData == null)
+                {
+                    throw new ServiceException("No tax calculated");
+                }
 
-            return result;
+                var result = _mapper.Map<TaxesData, TaxesDto>(taxesData);
+
+                _logger.LogInformation($"TaxPayer {taxPayer.FullName} total tax {result.TotalTax}");
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ServiceException("Failed to calculate tax", ex);
+            }
         }
     }
 }
