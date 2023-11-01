@@ -2,6 +2,9 @@ using System.Reflection;
 using System.Text.Json;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
+using StackExchange.Redis;
+using StackExchange.Redis.Configuration;
 using TaxCalc.Api.Extensions;
 using TaxCalc.Api.Validators;
 using TaxCalc.Domain.Calculate;
@@ -12,6 +15,21 @@ using TaxCalc.Services.Common.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Add Idempotency.
+// Code reused from https://github.com/ikyriak/IdempotentAPI and samples.
+// Register an implementation of IDistributedCache such as Memory Cache, SQL Server cache, Redis cache, etc.).
+// For this example, we are using a Memory Cache.
+builder.Services.AddDistributedMemoryCache(options =>
+{
+    options.ExpirationScanFrequency = new TimeSpan(0, 30, 0);
+});
+// Using Redis caching
+//builder.Services.AddStackExchangeRedisCache(options =>
+//{
+//    options.Configuration = builder.Configuration.GetConnectionString("MyRedisConStr");
+//    options.InstanceName = "MyInstance";
+//});
 
 // Setup the services, controllers, Json reading options.
 
