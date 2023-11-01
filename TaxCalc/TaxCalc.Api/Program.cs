@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using StackExchange.Redis;
 using StackExchange.Redis.Configuration;
+using TaxCalc.Api.ErrorHandling;
 using TaxCalc.Api.Extensions;
 using TaxCalc.Api.Validators;
 using TaxCalc.Domain.Calculate;
@@ -99,7 +100,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// TODO: app.ConfigureCustomExceptionMiddleware();
+// Exception handling
+app.ConfigureCustomExceptionMiddleware();
 
 app.UseApiVersioning();
 
