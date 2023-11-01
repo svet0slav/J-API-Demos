@@ -28,7 +28,12 @@ namespace TaxCalc.Domain.TaxRules
 
             if (input.CharitySpent > 0)
             {
-                var maxDiscount = Math.Round(input.CharitySpent * _percent, 2);
+                // Either charity amount or 10% of the Gross Income Tax.
+                var maxDiscount = Math.Min(
+                    input.CharitySpent,
+                    Math.Round(input.GrossIncome * _percent, 2)
+                );
+
                 result.WorkingTaxIncome = Math.Max(input.WorkingTaxIncome - maxDiscount, 0);
             }
 

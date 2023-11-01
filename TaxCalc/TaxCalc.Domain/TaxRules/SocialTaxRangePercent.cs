@@ -43,7 +43,7 @@ namespace TaxCalc.Domain.TaxRules
                 ? _maxAmount - _minAmountIncl
                 : input.WorkingTaxIncome - _minAmountIncl;
 
-            result.IncomeTax += Math.Round(amount * _percent, 2);
+            result.SocialTax += Math.Round(amount * _percent, 2);
 
             return result;
         }

@@ -62,3 +62,5 @@
 /TaxCalc/TaxCalc.Service/obj
 /TaxCalc/TaxCalc.Services.Common/bin/Debug/net6.0
 /TaxCalc/TaxCalc.Services.Common/obj
+/TaxCalc/TaxCalc.UnitTests/bin/Debug/net6.0
+/TaxCalc/TaxCalc.UnitTests/obj

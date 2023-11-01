@@ -15,7 +15,7 @@ namespace TaxCalc.Domain.Calculate
             Rules = new List<ITaxRule>();
         }
 
-        public void LoadRules(TaxPayer taxPayer)
+        public void LoadRules()
         {
             // The taxation rules in the country of Imaginaria as of date are as follows:
             var listRules = new List<ITaxRule>() {
@@ -26,6 +26,7 @@ namespace TaxCalc.Domain.Calculate
                     _configuration.IncomeTaxMaxAmount, _configuration.IncomeTaxPercent),
                 new SocialTaxRangePercent(_configuration.SocialTaxMinAmount,
                     _configuration.SocialTaxMaxAmount, _configuration.SocialTaxPercent),
+                new TaxesComplete(),
             };
 
             Rules = listRules;

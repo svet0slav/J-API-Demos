@@ -8,6 +8,6 @@ namespace TaxCalc.Domain.Calculate
         IEnumerable<ITaxRule> Rules { get; }
 
         TaxesData Calculate(TaxPayer taxPayer);
-        void LoadRules(TaxPayer taxPayer);
+        void LoadRules();
     }
 }

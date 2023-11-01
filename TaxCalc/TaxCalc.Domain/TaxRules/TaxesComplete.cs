@@ -7,7 +7,7 @@ namespace TaxCalc.Domain.TaxRules
     /// </summary>
     internal class TaxesComplete : TaxRuleBase
     {
-        public TaxesComplete(TaxPayer taxPayer)
+        public TaxesComplete()
         : base()
         { }
 
@@ -15,6 +15,7 @@ namespace TaxCalc.Domain.TaxRules
         {
             var result = input;
             result.TotalTax = result.IncomeTax + result.SocialTax;
+            result.NetIncome = result.GrossIncome - result.TotalTax;
 
             return result;
         }
