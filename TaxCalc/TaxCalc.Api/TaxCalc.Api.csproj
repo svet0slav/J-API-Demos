@@ -12,15 +12,18 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.8.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TaxCalc.Domain.Common\TaxCalc.Domain.Common.csproj" />
     <ProjectReference Include="..\TaxCalc.Interfaces\TaxCalc.Interfaces.csproj" />
     <ProjectReference Include="..\TaxCalc.Services.Common\TaxCalc.Services.Common.csproj" />
+    <ProjectReference Include="..\TaxCalc.Service\TaxCalc.Service.csproj" />
   </ItemGroup>
 
 </Project>

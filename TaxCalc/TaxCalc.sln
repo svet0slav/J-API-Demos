@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalc.UnitTests", "TaxCal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalc.Api.UnitTests", "TaxCalc.Api.UnitTests\TaxCalc.Api.UnitTests.csproj", "{1CECFA90-4C9A-4BC5-A6D6-04A8A90B58C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalc.Domain.Common", "TaxCalc.Domain.Common\TaxCalc.Domain.Common.csproj", "{3E75B945-FB76-4936-91F3-E1D546E76411}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{1CECFA90-4C9A-4BC5-A6D6-04A8A90B58C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CECFA90-4C9A-4BC5-A6D6-04A8A90B58C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CECFA90-4C9A-4BC5-A6D6-04A8A90B58C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E75B945-FB76-4936-91F3-E1D546E76411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E75B945-FB76-4936-91F3-E1D546E76411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E75B945-FB76-4936-91F3-E1D546E76411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E75B945-FB76-4936-91F3-E1D546E76411}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

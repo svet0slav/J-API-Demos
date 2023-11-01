@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
-using System.IO.MemoryMappedFiles;
 using TaxCalc.Domain.Calculate;
+using TaxCalc.Domain.Common.Config;
 using TaxCalc.Domain.Data;
 using TaxCalc.Services.Common.Dtos;
 using TaxCalc.Services.Common.Interfaces;

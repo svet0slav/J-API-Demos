@@ -1,8 +1,7 @@
-﻿namespace TaxCalc.Domain.Data
+﻿namespace TaxCalc.Domain.Common.Config
 {
-    public interface ITaxJurisdictionConfiguration
+    public interface ITaxJurisdictionConfiguration: IJurisdictionConfiguration
     {
-        string Jusriction { get; }
         decimal CharityFreePercent { get; }
         decimal IncomeTaxMaxAmount { get; }
         decimal IncomeTaxMinAmount { get; }

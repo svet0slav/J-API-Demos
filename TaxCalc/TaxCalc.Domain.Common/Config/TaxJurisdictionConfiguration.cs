@@ -1,8 +1,7 @@
-﻿namespace TaxCalc.Domain.Data
+﻿namespace TaxCalc.Domain.Common.Config
 {
-    public class TaxJurisdictionConfiguration : ITaxJurisdictionConfiguration
+    public class TaxJurisdictionConfiguration : TaxJurisdictionConfigurationBase, ITaxJurisdictionConfiguration
     {
-        public string Jusriction { get; set; }
         public decimal NoTaxMinAmount { get; set; }
         public decimal IncomeTaxMinAmount { get; set; }
         public decimal IncomeTaxMaxAmount { get; set; }
@@ -12,8 +11,9 @@
         public decimal SocialTaxPercent { get; set; }
         public decimal CharityFreePercent { get; set; }
 
-        public TaxJurisdictionConfiguration() {
-            Jusriction = string.Empty;
+        public TaxJurisdictionConfiguration()
+        : base()
+        {
             NoTaxMinAmount = 0;
             IncomeTaxMinAmount = 0;
             IncomeTaxMaxAmount = decimal.MaxValue;

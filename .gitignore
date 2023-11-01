@@ -67,3 +67,5 @@
 /TaxCalc/TaxCalc.Api.UnitTests/bin/Debug/net6.0
 /TaxCalc/TaxCalc.Api.UnitTests/obj
 /TaxCalc/TaxCalc.Api.UnitTests/obj/Debug/net6.0/ref/TaxCalc.Api.UnitTests.dll
+/TaxCalc/TaxCalc.Domain.Common/bin/Debug/net6.0
+/TaxCalc/TaxCalc.Domain.Common/obj

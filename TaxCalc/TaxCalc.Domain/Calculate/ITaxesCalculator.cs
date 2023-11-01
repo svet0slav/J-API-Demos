@@ -1,4 +1,5 @@
-﻿using TaxCalc.Domain.Data;
+﻿using TaxCalc.Domain.Common.Config;
+using TaxCalc.Domain.Data;
 using TaxCalc.Domain.TaxRules;
 
 namespace TaxCalc.Domain.Calculate

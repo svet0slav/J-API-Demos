@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Moq;
 using TaxCalc.Domain.Calculate;
+using TaxCalc.Domain.Common.Config;
 using TaxCalc.Domain.Data;
 using TaxCalc.Service;
 using TaxCalc.Services.Common.Dtos;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace TaxCalc.Interfaces.Requests
 {
@@ -19,9 +14,9 @@ namespace TaxCalc.Interfaces.Requests
         public decimal GrossIncome { get; set; }
 
         [JsonPropertyName("charitySpent")]
-        public decimal CharitySpent { get; set; }
+        public decimal? CharitySpent { get; set; }
 
         [JsonPropertyName("dateOfBirth")]
-        public string DateOfBirth { get; set; }
+        public string? DateOfBirth { get; set; }
     }
 }
