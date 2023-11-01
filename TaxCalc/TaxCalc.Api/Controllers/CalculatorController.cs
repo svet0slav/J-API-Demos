@@ -6,7 +6,7 @@ using TaxCalc.Interfaces.Responses;
 using TaxCalc.Services.Common.Dtos;
 using TaxCalc.Services.Common.Interfaces;
 
-namespace TaxCalc.Controllers
+namespace TaxCalc.Api.Controllers
 {
     [ApiController]
     [ApiVersion("1")]
@@ -33,7 +33,7 @@ namespace TaxCalc.Controllers
         [ProducesResponseType(statusCode: 400, type: typeof(ErrorDetails))]
         [ProducesResponseType(statusCode: 404, type: typeof(ErrorDetails))]
         [ProducesResponseType(statusCode: 500, type: typeof(ErrorDetails))]
-        public async Task<ActionResult<TaxesResponse>> Calculate([FromBody] TaxPayerRequest request)
+        public async Task<ActionResult<TaxesResponse>> Calculate([FromBody] TaxPayerRequest request, CancellationToken cancellationToken)
         {
             //Validate the request
             //TODO
@@ -41,7 +41,7 @@ namespace TaxCalc.Controllers
             //Convert to Dto
             var requestDto = _mapper.Map<TaxPayerRequest, TaxPayerDto>(request);
 
-            var result = await _calculatorService.Calculate(requestDto);
+            var result = await _calculatorService.Calculate(requestDto, cancellationToken);
             if (result == null)
             {
                 return BadRequest();

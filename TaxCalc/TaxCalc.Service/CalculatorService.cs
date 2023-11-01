@@ -25,7 +25,7 @@ namespace TaxCalc.Service
             _logger = logger;
         }
 
-        public async Task<TaxesDto> Calculate(TaxPayerDto taxPayer)
+        public async Task<TaxesDto> Calculate(TaxPayerDto taxPayer, CancellationToken cancellationToken)
         {
             var payer = _mapper.Map<TaxPayerDto, TaxPayer>(taxPayer);
 
@@ -33,7 +33,7 @@ namespace TaxCalc.Service
 
             _taxCalculator.LoadRules(_jurisdictionConfiguration);
 
-            var taxesData = await _taxCalculator.Calculate(payer);
+            var taxesData = await _taxCalculator.Calculate(payer, cancellationToken);
 
             var result = _mapper.Map<TaxesData, TaxesDto>(taxesData);
 

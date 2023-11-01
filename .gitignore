@@ -64,3 +64,6 @@
 /TaxCalc/TaxCalc.Services.Common/obj
 /TaxCalc/TaxCalc.UnitTests/bin/Debug/net6.0
 /TaxCalc/TaxCalc.UnitTests/obj
+/TaxCalc/TaxCalc.Api.UnitTests/bin/Debug/net6.0
+/TaxCalc/TaxCalc.Api.UnitTests/obj
+/TaxCalc/TaxCalc.Api.UnitTests/obj/Debug/net6.0/ref/TaxCalc.Api.UnitTests.dll

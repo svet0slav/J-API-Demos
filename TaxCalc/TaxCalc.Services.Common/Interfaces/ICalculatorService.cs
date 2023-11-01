@@ -4,6 +4,6 @@ namespace TaxCalc.Services.Common.Interfaces
 {
     public interface ICalculatorService
     {
-        Task<TaxesDto> Calculate(TaxPayerDto taxPayer);
+        Task<TaxesDto> Calculate(TaxPayerDto taxPayer, CancellationToken cancellationToken);
     }
 }

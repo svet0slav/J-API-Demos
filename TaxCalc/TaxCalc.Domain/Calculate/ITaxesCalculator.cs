@@ -7,7 +7,7 @@ namespace TaxCalc.Domain.Calculate
     {
         IEnumerable<ITaxRule> Rules { get; }
 
-        Task<TaxesData> Calculate(TaxPayer taxPayer);
+        Task<TaxesData> Calculate(TaxPayer taxPayer, CancellationToken cancellationToken);
         void LoadRules(ITaxJurisdictionConfiguration configuration);
     }
 }

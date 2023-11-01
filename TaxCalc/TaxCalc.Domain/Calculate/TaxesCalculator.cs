@@ -38,7 +38,7 @@ namespace TaxCalc.Domain.Calculate
         /// </summary>
         /// <param name="taxPayer"></param>
         /// <returns></returns>
-        public async Task<TaxesData> Calculate(TaxPayer taxPayer)
+        public async Task<TaxesData> Calculate(TaxPayer taxPayer, CancellationToken cancellationToken)
         {
             var taxes = new TaxesData();
 
@@ -47,6 +47,10 @@ namespace TaxCalc.Domain.Calculate
             TaxesData output = taxes;
             foreach (var rule in Rules)
             {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return await Task.FromCanceled<TaxesData>(cancellationToken);
+                }
                 input = output;
                 output = rule.CalculateTax(taxPayer, input);
             }

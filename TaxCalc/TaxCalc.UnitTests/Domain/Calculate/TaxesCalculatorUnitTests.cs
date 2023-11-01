@@ -32,7 +32,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 GrossIncome = 980,
             };
 
-            var actual = await _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(0, actual.IncomeTax);
@@ -55,7 +55,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 GrossIncome = 3400m,
             };
 
-            var actual = await _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(240m, actual.IncomeTax);
@@ -78,7 +78,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 CharitySpent = 150,
             };
 
-            var actual = await _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(2350m, actual.WorkingTaxIncome);
@@ -104,7 +104,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 CharitySpent = 520,
             };
 
-            var actual = await _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(3240, actual.WorkingTaxIncome);
@@ -123,7 +123,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 CharitySpent = 0,
             };
 
-            var actual = await _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(0, actual.WorkingTaxIncome);
@@ -142,7 +142,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 CharitySpent = 10000m,
             };
 
-            var actual = await _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer, CancellationToken.None);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(45000m, actual.WorkingTaxIncome);
