@@ -17,22 +17,22 @@ namespace TaxCalc.UnitTests.Domain.Calculate
         public TaxesCalculatorUnitTests()
         {
             _configuration = GetConfiguration();
-            _calculator = new TaxesCalculator(_configuration);
-            _calculator.LoadRules();
+            _calculator = new TaxesCalculator();
+            _calculator.LoadRules(_configuration);
         }
 
         /// <summary>
         /// Example 1: George has a salary of 980 IDR.He would pay no taxes since this is below the taxation threshold and his net income is also 980.
         /// </summary>
         [TestMethod]
-        public void Example1_Ok()
+        public async Task Example1_Ok()
         {
             var payer = new TaxPayer()
             {
                 GrossIncome = 980,
             };
 
-            var actual = _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(0, actual.IncomeTax);
@@ -48,14 +48,14 @@ namespace TaxCalc.UnitTests.Domain.Calculate
         /// In total her tax is 540 and she gets to bring home 2860 IDR
         /// </summary>
         [TestMethod]
-        public void Example2_Ok()
+        public async Task Example2_Ok()
         {
             var payer = new TaxPayer()
             {
                 GrossIncome = 3400m,
             };
 
-            var actual = _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(240m, actual.IncomeTax);
@@ -70,7 +70,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
         /// His taxable gross income is 1500 – 150 = 1350 IDR owns income tax: 10% out of 1350 => 135. His Social contributions are 15% out of 1350 => 202.5. In total her tax is 337.5 and he gets to bring home 2162.5 IDR
         /// </summary>
         [TestMethod]
-        public void Example3_Ok()
+        public async Task Example3_Ok()
         {
             var payer = new TaxPayer()
             {
@@ -78,7 +78,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 CharitySpent = 150,
             };
 
-            var actual = _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(2350m, actual.WorkingTaxIncome);
@@ -96,7 +96,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
         /// His Social contributions are 15% out of 2000 => 300. In total her tax is 524 and she gets to bring home 3076 IDR.
         /// </summary>
         [TestMethod]
-        public void Example4_Ok()
+        public async Task Example4_Ok()
         {
             var payer = new TaxPayer()
             {
@@ -104,7 +104,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 CharitySpent = 520,
             };
 
-            var actual = _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(3240, actual.WorkingTaxIncome);
@@ -115,7 +115,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
         }
 
         [TestMethod]
-        public void Normal_ZeroIncome_Ok()
+        public async Task Normal_ZeroIncome_Ok()
         {
             var payer = new TaxPayer()
             {
@@ -123,7 +123,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 CharitySpent = 0,
             };
 
-            var actual = _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(0, actual.WorkingTaxIncome);
@@ -134,7 +134,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
         }
 
         [TestMethod]
-        public void Normal_LargeIncomeBorder_Ok()
+        public async Task Normal_LargeIncomeBorder_Ok()
         {
             var payer = new TaxPayer()
             {
@@ -142,7 +142,7 @@ namespace TaxCalc.UnitTests.Domain.Calculate
                 CharitySpent = 10000m,
             };
 
-            var actual = _calculator.Calculate(payer);
+            var actual = await _calculator.Calculate(payer);
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(45000m, actual.WorkingTaxIncome);

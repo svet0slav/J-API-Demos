@@ -1,22 +1,23 @@
-﻿using System.Threading.Tasks;
-using TaxCalc.Domain.Data;
+﻿using TaxCalc.Domain.Data;
 using TaxCalc.Domain.TaxRules;
 
 namespace TaxCalc.Domain.Calculate
 {
     public class TaxesCalculator : ITaxesCalculator
     {
-        private readonly ITaxJurisdictionConfiguration _configuration;
+        private ITaxJurisdictionConfiguration? _configuration;
         public IEnumerable<ITaxRule> Rules { get; protected set; }
 
-        public TaxesCalculator(ITaxJurisdictionConfiguration configuration)
+        public TaxesCalculator()
         {
-            _configuration = configuration;
+            _configuration = null;
             Rules = new List<ITaxRule>();
         }
 
-        public void LoadRules()
+        public void LoadRules(ITaxJurisdictionConfiguration configuration)
         {
+            _configuration = configuration;
+
             // The taxation rules in the country of Imaginaria as of date are as follows:
             var listRules = new List<ITaxRule>() {
                 new TaxesCreate(),
@@ -37,7 +38,7 @@ namespace TaxCalc.Domain.Calculate
         /// </summary>
         /// <param name="taxPayer"></param>
         /// <returns></returns>
-        public TaxesData Calculate(TaxPayer taxPayer)
+        public async Task<TaxesData> Calculate(TaxPayer taxPayer)
         {
             var taxes = new TaxesData();
 
@@ -50,7 +51,8 @@ namespace TaxCalc.Domain.Calculate
                 output = rule.CalculateTax(taxPayer, input);
             }
 
-            return output;
+            // TODO: In future improve for multi-threading
+            return await Task.FromResult(output);
         }
     }
 }

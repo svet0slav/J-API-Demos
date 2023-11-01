@@ -5,13 +5,15 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalc.Api", "TaxCalc.Api\TaxCalc.Api.csproj", "{5D1CEE62-0B4F-4136-A38E-727E3781B403}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalc.Domain", "TaxCalc.Domain\TaxCalc.Domain.csproj", "{E9904581-70B1-4926-B548-434AD2E77EE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalc.Domain", "TaxCalc.Domain\TaxCalc.Domain.csproj", "{E9904581-70B1-4926-B548-434AD2E77EE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalc.Interfaces", "TaxCalc.Interfaces\TaxCalc.Interfaces.csproj", "{6A573241-875F-47EF-A1ED-05B9E681E1F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalc.Interfaces", "TaxCalc.Interfaces\TaxCalc.Interfaces.csproj", "{6A573241-875F-47EF-A1ED-05B9E681E1F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalc.Service", "TaxCalc.Service\TaxCalc.Service.csproj", "{89D00403-B44E-46CE-B383-10AF9895F704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalc.Service", "TaxCalc.Service\TaxCalc.Service.csproj", "{89D00403-B44E-46CE-B383-10AF9895F704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalc.Services.Common", "TaxCalc.Services.Common\TaxCalc.Services.Common.csproj", "{A4DABEBC-7DA4-44B2-B429-39D7148CFC84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaxCalc.Services.Common", "TaxCalc.Services.Common\TaxCalc.Services.Common.csproj", "{A4DABEBC-7DA4-44B2-B429-39D7148CFC84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxCalc.UnitTests", "TaxCalc.UnitTests\TaxCalc.UnitTests.csproj", "{FF05CD2F-FAF5-4095-99F0-775938A774C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A4DABEBC-7DA4-44B2-B429-39D7148CFC84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4DABEBC-7DA4-44B2-B429-39D7148CFC84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4DABEBC-7DA4-44B2-B429-39D7148CFC84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF05CD2F-FAF5-4095-99F0-775938A774C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF05CD2F-FAF5-4095-99F0-775938A774C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF05CD2F-FAF5-4095-99F0-775938A774C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF05CD2F-FAF5-4095-99F0-775938A774C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

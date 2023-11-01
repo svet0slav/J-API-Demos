@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using TaxCalc.Services.Common.Dtos;
+﻿using TaxCalc.Services.Common.Dtos;
 
 namespace TaxCalc.Services.Common.Interfaces
 {
