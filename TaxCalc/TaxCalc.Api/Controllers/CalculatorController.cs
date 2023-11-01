@@ -35,8 +35,9 @@ namespace TaxCalc.Api.Controllers
         [ProducesResponseType(statusCode: 500, type: typeof(ErrorDetails))]
         public async Task<ActionResult<TaxesResponse>> Calculate([FromBody] TaxPayerRequest request, CancellationToken cancellationToken)
         {
-            //Validate the request
-            //TODO
+            _logger.LogInformation("Request received", request);
+
+            //Validate the request is automatic from FluentValidation.            
 
             //Convert to Dto
             var requestDto = _mapper.Map<TaxPayerRequest, TaxPayerDto>(request);
@@ -48,6 +49,7 @@ namespace TaxCalc.Api.Controllers
             }
             
             var response = _mapper.Map<TaxesDto, TaxesResponse>(result);
+            _logger.LogInformation("Request processed", response);
             return Ok(response);
         }
     }
