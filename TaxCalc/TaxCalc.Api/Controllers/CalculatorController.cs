@@ -7,7 +7,6 @@ using TaxCalc.Interfaces.Responses;
 using TaxCalc.Services.Common.Dtos;
 using TaxCalc.Services.Common.Interfaces;
 using Microsoft.Extensions.Logging;
-using IdempotentAPI.Filters;
 
 namespace TaxCalc.Api.Controllers
 {
